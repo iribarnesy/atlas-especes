@@ -18,6 +18,7 @@
 | Charme / Hêtre | charme, hetre | Mnémo « le Charme d'Adam c'est d'être à poil » : Charme = feuille **doublement dentée**, nervures marquées ; Hêtre = marge **ondulée à poils** (cils), non dentée. |
 | Ortie / Lamier blanc | ortie, lamier | Ortie : **pique** (poils urticants), fleurs verdâtres en grappes. Lamier blanc (« ortie blanche ») : **ne pique pas**, fleurs blanches en gueule. |
 | Rosettes velues : digitale toxique | consoude, digitale, bourrache | Avant floraison, rosettes proches. Digitale = **mortelle** (cœur) → fleurs tubulaires roses tachetées. Consoude/bourrache : poils rudes, fleurs en clochettes bleu-violet. |
+| Baies noires de haie : sureau / troène | sureau, troene | Sureau : feuilles **composées pennées**, baies en **ombelles pendantes** (comestibles cuites). Troène : feuilles **simples et opposées**, baies **dressées** en petites grappes — **TOXIQUES**. |
 | Argentés : argousier / chalef | argousier, chalef | Argousier : **épineux**, baies **orange** acides, feuilles étroites argentées. Chalef (olivier de Bohême) : peu ou pas épineux, petits fruits argentés. |
 | Fabacées jaunes de lande | genet, ajonc | Ajonc : **très épineux** (rameaux en épines), fleur toute l'année. Genêt à balais : **sans épines**, rameaux verts souples. |
 | Lande acide : myrtille / callune | myrtille, callune | Myrtille : feuilles caduques, **baies bleu-noir** comestibles. Callune (bruyère) : minuscules feuilles en écailles, fleurs roses, non comestible. |
