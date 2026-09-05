@@ -206,6 +206,7 @@ pire que pas de photo. `scripts/candidats.py` procède donc en deux temps — r�
 ```bash
 python3 scripts/candidats.py --lot lots/lot-1-confusions.txt   # → candidats/<stem>/
 python3 scripts/candidats.py --especes aneth --motcle flower   # combler un aspect manquant
+python3 scripts/candidats.py --especes groseillier --categorie "Ribes rubrum"
 # on ouvre les images, on écrit ses choix dans candidats/choix.tsv, puis :
 python3 scripts/candidats.py --promouvoir candidats/choix.tsv
 ```
@@ -214,6 +215,11 @@ Les candidats viennent de la **catégorie Commons** de l'espèce plutôt que d'u
 plein texte : le classement y est fait par des humains, et Commons n'héberge pas de licence
 non commerciale. `candidats/` n'est pas versionné ; seul ce qu'on promeut entre dans le
 dépôt, avec son crédit.
+
+Deux cas où la catégorie ne suit pas le nom latin de l'atlas : quand Commons range sous
+l'ancien nom, un `{{category redirect}}` est suivi automatiquement (*Acca sellowiana* →
+*Feijoa sellowiana*) ; quand l'entrée d'atlas nomme un genre (« Ribes sp. »), `--categorie`
+évite de ramener tout le genre.
 
 ⚠️ **État actuel : 566 des 647 images sont en `inconnu`.** Ce sont les anciennes,
 récupérées par `scripts/fetch_aspects.py` (Wikimedia Commons) et `scripts/fetch_photos.py`

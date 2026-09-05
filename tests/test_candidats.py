@@ -63,6 +63,9 @@ def test_un_titre_muet_reste_a_trier_a_l_oeil(cd, repo):
     "File:A bowl of dill seed.jpg",                                  # photo de cuisine
     "File:Chilean salad ingredients cilantro tomatoes.jpg",
     "File:Farmer's Market - Chervil.jpg",
+    "File:Erica tetralix - Pl0008 - FloraBatava-KB-v01.jpg",         # sans espace
+    "File:Edwards' botanical register ornamental flower-garden.jpg",
+    "File:Cyclopedia of American horticulture.jpg",
     "File:Anethum graveolens - Distribuzione.PNG",                   # carte
     "File:Anthriscus cerefolium distribution in Poland.svg",         # pas une photo
 ])
@@ -107,6 +110,18 @@ def test_une_categorie_pleine_n_est_pas_suivie(cd, monkeypatch):
                         lambda t: pytest.fail("ne devrait pas être appelée"))
     trouves, cat = cd.titres_categorie_suivie("Category:X")
     assert trouves == ["File:a.jpg"] and cat == "Category:X" and appels == ["Category:X"]
+
+
+def test_une_categorie_forcee_l_emporte_sur_le_nom_latin(cd, monkeypatch):
+    """Une entrée d'atlas au nom de genre (« Ribes sp. ») ramènerait tout le genre :
+    groseilliers américains et asiatiques compris. --categorie vise l'espèce."""
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie",
+                        lambda t: (vues.append(t), ([], t))[1])
+    monkeypatch.setattr(cd, "sous_categories", lambda t: [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("Ribes", 3, 1000, categorie="Ribes rubrum")
+    assert vues == ["Category:Ribes rubrum"]
 
 
 # ------------------------------------------------------- répartition des aspects
