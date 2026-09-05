@@ -9,6 +9,7 @@ Idempotent : saute les espèces qui ont déjà des extras. Relancer le générat
   python3 scripts/fetch_photos.py                        tout l'atlas
   python3 scripts/fetch_photos.py --lot lots/lot-1.txt   un lot (cf. #17)
   python3 scripts/fetch_photos.py --especes cigue,arum   quelques espèces
+  --largeur 900                                          borne le plus grand côté (déf. 1000)
 """
 import re, os, sys, json, time, glob, urllib.request, urllib.parse
 
@@ -67,7 +68,8 @@ def taxon_photos(latin):
     urls = []
     for tp in r2[0].get("taxon_photos", []):
         p = tp.get("photo", {})
-        u = p.get("medium_url") or p.get("url")
+        # medium_url plafonne à ~500 px : trop juste pour une fiche, qui montre l'original
+        u = p.get("original_url") or p.get("large_url") or p.get("medium_url") or p.get("url")
         if u:
             # le crédit accompagne l'URL : iNaturalist est surtout du CC-BY / CC-BY-NC
             urls.append((u, credits.credit_inaturalist(p)))
@@ -97,6 +99,7 @@ def choisir(sp, argv):
     return sorted([x for x in sp if x[0] in ordre], key=lambda x: ordre[x[0]])
 
 def main():
+    largeur = images.largeur_demandee(sys.argv[1:])
     sp = choisir(species_list(), sys.argv[1:])
     ok = skip = fail = 0
     for i, (stem, latin) in enumerate(sp):
@@ -108,7 +111,7 @@ def main():
             for j, (u, credit) in enumerate(urls, 1):
                 try:
                     dest = os.path.join(EXTRA, "%s-%d.jpg" % (stem, j))
-                    dl(u, dest); credits.noter(dest, **credit); n += 1
+                    dl(u, dest, largeur); credits.noter(dest, **credit); n += 1
                     time.sleep(0.5)
                 except Exception as e:
                     print("   img fail %s-%d: %s" % (stem, j, e))

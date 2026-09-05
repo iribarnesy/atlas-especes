@@ -10,6 +10,7 @@ Idempotent (saute un aspect déjà présent). Relancer generer_quiz.py ensuite.
   python3 scripts/fetch_aspects.py                        tout l'atlas
   python3 scripts/fetch_aspects.py --lot lots/lot-1.txt   un lot (cf. #17)
   python3 scripts/fetch_aspects.py --especes cigue,arum   quelques espèces
+  --largeur 900                                          borne le plus grand côté (déf. 1000)
 """
 import re, os, sys, json, time, glob, urllib.request, urllib.parse, urllib.error
 
@@ -51,11 +52,11 @@ def clean_latin(l):
     l = re.sub(r"\bsp\.?$", "", l).strip()
     return " ".join(l.split()[:2])
 
-def commons_photo(latin, kw):
+def commons_photo(latin, kw, largeur=images.LARGEUR):
     """(url de la photo, crédit) — extmetadata porte l'auteur et la licence, exigés par CC-BY."""
     q = urllib.parse.urlencode({"action": "query", "generator": "search",
         "gsrsearch": '%s %s' % (latin, kw), "gsrnamespace": "6", "gsrlimit": "8",
-        "prop": "imageinfo", "iiprop": "url|mime|extmetadata", "iiurlwidth": "700",
+        "prop": "imageinfo", "iiprop": "url|mime|extmetadata", "iiurlwidth": str(largeur),
         "format": "json"})
     req = urllib.request.Request("https://commons.wikimedia.org/w/api.php?" + q, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=30) as r:
@@ -105,6 +106,7 @@ def choisir(sp, argv):
     return sorted([x for x in sp if x[0] in ordre], key=lambda x: ordre[x[0]])
 
 def main():
+    largeur = images.largeur_demandee(sys.argv[1:])
     sp = choisir(species_all(), sys.argv[1:])
     print("%d espèces (ligneux + herbacées)" % len(sp))
     ok = 0
@@ -117,11 +119,11 @@ def main():
                 got.append(asp + "=déjà"); continue
             dest = os.path.join(EXTRA, "%s-%s-1.jpg" % (stem, asp))
             try:
-                trouve = with_retry(commons_photo, cl, kw)
+                trouve = with_retry(commons_photo, cl, kw, largeur)
                 if not trouve:
                     got.append(asp + "=∅"); time.sleep(2.5); continue
                 src, credit = trouve
-                dl(src, dest); credits.noter(dest, **credit)
+                dl(src, dest, largeur); credits.noter(dest, **credit)
                 got.append(asp + "=OK"); ok += 1
             except Exception:
                 got.append(asp + "=err")

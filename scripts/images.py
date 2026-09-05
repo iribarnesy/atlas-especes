@@ -18,8 +18,16 @@ import shutil
 import subprocess
 import tempfile
 
-LARGEUR = 420
-QUALITE = 70
+# Les fiches d'espèce affichent l'original en pleine résolution : à 420 px — l'ancienne
+# valeur, et le plus grand côté, donc ~315 px de large pour une photo en portrait — on ne
+# distingue ni une nervure ni un pétiole, alors que c'est ce qui sépare deux apiacées. Le
+# site fabrique ses propres vignettes de 320 px au build depuis #13 (scripts/derives.py) :
+# la grille de l'atlas ne paie donc pas cette résolution, seul le poids du dépôt la paie.
+# 1000 px pèse ~170 Ko par photo, contre ~245 Ko à 1200 px pour un gain de détail que
+# l'œil ne va pas chercher : +44 % de dépôt ne les valait pas. On reste sous le
+# « ≤ ~1500 px » de CONTRIBUTING.md §2, avec 5,7 fois plus de pixels qu'à 420.
+LARGEUR = 1000
+QUALITE = 72
 
 try:
     from PIL import Image
