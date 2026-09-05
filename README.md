@@ -180,6 +180,8 @@ scripts/couverture.py             (re)génère COUVERTURE.md
 scripts/verifier_atlas.py         validation des atlas et des photos (CI sur les PR)
 scripts/consolider_contributions.py  fait entrer les contributions dans les sources
 scripts/credits.py                crédits des images (rapport, --init, lecture des API)
+scripts/candidats.py              photos candidates à valider à l'œil, puis à promouvoir
+scripts/images.py                 réduction des photos téléchargées (Pillow, sinon `sips`)
 tests/                            tests pytest (CI sur les PR)
 ```
 
@@ -194,11 +196,30 @@ python3 scripts/credits.py          # combien d'images créditées, lesquelles m
 python3 scripts/credits.py --init   # ajoute une ligne « inconnu » par image sans crédit
 ```
 
-⚠️ **État actuel : les 570 images du dépôt sont en `inconnu`.** Elles ont été récupérées
-par `scripts/fetch_aspects.py` (Wikimedia Commons) et `scripts/fetch_photos.py`
-(iNaturalist), qui ne notaient pas l'auteur et recompressaient les fichiers : la provenance
-d'une image ancienne ne peut plus être retrouvée automatiquement, elle se complète à la
-main. Les nouvelles images, elles, sont créditées au téléchargement. Chaque contributeur
+### Compléter une espèce en photos
+
+`scripts/fetch_aspects.py` interroge Commons en plein texte et garde le premier résultat.
+Sur les apiacées et les astéracées il se trompe, et une photo de ciguë qui n'en est pas est
+pire que pas de photo. `scripts/candidats.py` procède donc en deux temps — récolter, puis
+**regarder** avant de verser :
+
+```bash
+python3 scripts/candidats.py --lot lots/lot-1-confusions.txt   # → candidats/<stem>/
+python3 scripts/candidats.py --especes aneth --motcle flower   # combler un aspect manquant
+# on ouvre les images, on écrit ses choix dans candidats/choix.tsv, puis :
+python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+```
+
+Les candidats viennent de la **catégorie Commons** de l'espèce plutôt que d'une recherche
+plein texte : le classement y est fait par des humains, et Commons n'héberge pas de licence
+non commerciale. `candidats/` n'est pas versionné ; seul ce qu'on promeut entre dans le
+dépôt, avec son crédit.
+
+⚠️ **État actuel : 566 des 647 images sont en `inconnu`.** Ce sont les anciennes,
+récupérées par `scripts/fetch_aspects.py` (Wikimedia Commons) et `scripts/fetch_photos.py`
+(iNaturalist) à une époque où ils ne notaient pas l'auteur, et qui recompressaient les
+fichiers : la provenance d'une image ancienne ne peut plus être retrouvée automatiquement,
+elle se complète à la main. Les nouvelles images, elles, sont créditées au téléchargement. Chaque contributeur
 reste responsable des droits des images qu'il ajoute (voir CONTRIBUTING).
 
 ## ⚖️ Licences

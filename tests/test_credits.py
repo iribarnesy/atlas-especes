@@ -231,3 +231,22 @@ def test_la_ci_avertit_sur_les_credits_manquants(repo, monkeypatch):
     assert errs == [], "avertissement seulement, tant que le rattrapage n'est pas fait"
     assert any("chene.jpg" in w for w in warns)
     assert any("disparue.jpg" in w for w in warns)
+
+def test_commons_sans_artist_attribue_au_verseur(cr):
+    """Des pages Commons exigent l'attribution sans porter de champ « Artist » : le compte
+    qui a versé le fichier est alors le seul nom attribuable, et sans lui la photo serait
+    écartée pour crédit incomplet."""
+    c = cr.credit_commons({
+        "user": "Kpjas",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:x.jpg",
+        "extmetadata": {"LicenseShortName": {"value": "CC BY-SA 3.0"}}})
+    assert c["auteur"] == "Kpjas"
+    assert cr.connu(c)
+
+
+def test_artist_reste_prioritaire_sur_le_verseur(cr):
+    c = cr.credit_commons({
+        "user": "Verseur",
+        "extmetadata": {"Artist": {"value": '<a href="/wiki/User:X">Alice Dupont</a>'},
+                        "LicenseShortName": {"value": "CC BY 4.0"}}})
+    assert c["auteur"] == "Alice Dupont"
