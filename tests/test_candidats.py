@@ -39,6 +39,17 @@ def test_les_mots_d_organe_sont_reconnus_en_plusieurs_langues(cd):
     assert cd.aspect_devine("File:Heracleum-sphondylium-habitus.jpg") == "port"
 
 
+def test_l_ecorce_est_reconnue_et_prime_sur_le_port(cd):
+    """L'aspect le plus déficitaire du dépôt : sans ces mots, toute écorce tombait dans
+    « divers » et la répartition ne la sortait jamais en tête."""
+    assert cd.aspect_devine("File:Carpinus betulus bark.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Olea europaea tronc.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Prunus avium Rinde.jpg") == "ecorce"
+    # « trunk » parle du tronc, pas de la silhouette, même quand « tree » suit
+    assert cd.aspect_devine("File:Ficus carica trunk of an old tree.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Ficus carica tree.jpg") == "port"
+
+
 def test_un_titre_muet_reste_a_trier_a_l_oeil(cd, repo):
     assert cd.aspect_devine("File:Autumn flowers 01.jpg") == "fleur"
     assert cd.aspect_devine("File:20170410Artemisia absinthium3.jpg") == repo.atlas_data.DIVERS
@@ -76,6 +87,13 @@ def test_la_repartition_alterne_les_aspects(cd):
                      "File:X leaf.jpg", "File:X fruit.jpg")
     pris = cd._repartir(titres, 4, cle=lambda t: t)
     assert sorted(a for a, _ in pris) == ["feuille", "fleur", "fleur", "fruit"]
+
+
+def test_l_ecorce_passe_avant_le_reste_dans_la_repartition(cd):
+    """Sur un lot de ligneux, une seule écorce disponible doit être prise au premier tour."""
+    titres = _titres(*["File:X flower %d.jpg" % i for i in range(5)], "File:X bark.jpg")
+    pris = cd._repartir(titres, 2, cle=lambda t: t)
+    assert pris[0][0] == "ecorce"
 
 
 def test_la_repartition_ne_reclame_pas_plus_que_disponible(cd):

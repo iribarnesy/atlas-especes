@@ -76,10 +76,16 @@ MOTS = {
                 "hoja", "foglia", "rosette", "rosett"),
     "fruit": ("fruit", "seed", "graine", "frucht", "mericarp", "achene", "akene",
               "samen", "owoc", "semilla", "capsule", "gousse"),
+    # L'écorce est l'aspect le plus déficitaire du dépôt et ne concerne que les ligneux.
+    # Elle passe avant « port » dans ORDRE : un titre qui dit « trunk » parle du tronc,
+    # pas de la silhouette, alors que les deux mots se croisent souvent.
+    "ecorce": ("bark", "écorce", "ecorce", "rinde", "corteza", "corteccia", "kora",
+               "trunk", "tronc", "stamm", "bole", "schors", "bast", "borke"),
     "port": ("habit", "plant", "port", "habitus", "whole", "pflanze", "stand",
-             "population", "growing", "stem", "tige", "stengel"),
+             "population", "growing", "stem", "tige", "stengel", "silhouette", "arbre",
+             "tree", "baum", "shrub", "strauch", "buisson"),
 }
-ORDRE = ("feuille", "fleur", "fruit", "port")
+ORDRE = ("ecorce", "feuille", "fleur", "fruit", "port")
 
 
 # ------------------------------------------------------------------- API Commons
