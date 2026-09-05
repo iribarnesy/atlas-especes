@@ -4,17 +4,18 @@
 Télécharge des photos par ASPECT depuis Wikimedia Commons pour LIGNEUX et HERBACÉES.
   ligneux   : écorce(bark), feuille(leaf), fruit(fruit)
   herbacées : feuille(leaf), fleur(flower), fruit(fruit)   (pas d'écorce)
-Fichiers : img/quiz-extra/<stem>-<aspect>-1.jpg (réduits sips 420px q70).
+Fichiers : img/quiz-extra/<stem>-<aspect>-1.jpg (réduits par scripts/images.py).
 Idempotent (saute un aspect déjà présent). Relancer generer_quiz.py ensuite.
 
   python3 scripts/fetch_aspects.py                        tout l'atlas
   python3 scripts/fetch_aspects.py --lot lots/lot-1.txt   un lot (cf. #17)
   python3 scripts/fetch_aspects.py --especes cigue,arum   quelques espèces
 """
-import re, os, sys, json, time, glob, subprocess, urllib.request, urllib.parse, urllib.error
+import re, os, sys, json, time, glob, urllib.request, urllib.parse, urllib.error
 
 import atlas_data
 import credits
+import images
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EXTRA = os.path.join(BASE, "img", "quiz-extra")
@@ -70,16 +71,13 @@ def commons_photo(latin, kw):
             return ii["thumburl"], credits.credit_commons(ii)
     return None
 
-def dl(url, dest):
+def dl(url, dest, largeur=images.LARGEUR):
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=30) as r:
         buf = r.read()
     if len(buf) < 1500:
         raise IOError("too small")
-    open(dest + ".orig", "wb").write(buf)
-    subprocess.run(["sips", "-Z", "420", "-s", "format", "jpeg", "-s", "formatOptions", "70",
-                    dest + ".orig", "--out", dest], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    os.remove(dest + ".orig")
+    images.reduire(buf, dest, largeur)
 
 def with_retry(fn, *a):
     for attempt in range(5):
