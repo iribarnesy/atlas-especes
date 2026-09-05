@@ -21,6 +21,7 @@ Commons n'héberge pas de licence non commerciale — donc pas de tri de licence
   python3 scripts/candidats.py --lot lots/lot-1-confusions.txt
   python3 scripts/candidats.py --especes cigue,berce --par-espece 8
   python3 scripts/candidats.py --especes aneth --motcle flower   combler un aspect manquant
+  python3 scripts/candidats.py --especes groseillier --categorie "Ribes rubrum"
   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
 
 Format de candidats/choix.tsv (tabulations, « # » en commentaire) :
@@ -56,7 +57,8 @@ REJET = (
     "specimen", "microscop", "epidermis", "chromosom", "map", "range", "distribution",
     "distribuzione", "distribución", "distribucion", "verbreitung", "répartition", "areal",
     "locator", "icon", "logo", "diagram", "chart", "signature", "stamp", "coin",
-    " art", "painting", "sketch", "botanicus", "flora batava", "flora danica", "flora von",
+    " art", "painting", "sketch", "botanicus", "flora batava", "florabatava", "flora danica", "floradanica",
+    "flora von", "flore des", "botanical register", "cyclopedia",
     "kohler", "köhler", "thome", "thomé", "sturm", "lindman", "masclef", "prof. dr",
     "bilder ur nordens flora", "text-book", "textbook", "traité", "economic botany",
     "pflanzendecke", "atlas des plantes",
@@ -76,10 +78,16 @@ MOTS = {
                 "hoja", "foglia", "rosette", "rosett"),
     "fruit": ("fruit", "seed", "graine", "frucht", "mericarp", "achene", "akene",
               "samen", "owoc", "semilla", "capsule", "gousse"),
+    # L'écorce est l'aspect le plus déficitaire du dépôt et ne concerne que les ligneux.
+    # Elle passe avant « port » dans ORDRE : un titre qui dit « trunk » parle du tronc,
+    # pas de la silhouette, alors que les deux mots se croisent souvent.
+    "ecorce": ("bark", "écorce", "ecorce", "rinde", "corteza", "corteccia", "kora",
+               "trunk", "tronc", "stamm", "bole", "schors", "bast", "borke"),
     "port": ("habit", "plant", "port", "habitus", "whole", "pflanze", "stand",
-             "population", "growing", "stem", "tige", "stengel"),
+             "population", "growing", "stem", "tige", "stengel", "silhouette", "arbre",
+             "tree", "baum", "shrub", "strauch", "buisson"),
 }
-ORDRE = ("feuille", "fleur", "fruit", "port")
+ORDRE = ("ecorce", "feuille", "fleur", "fruit", "port")
 
 
 # ------------------------------------------------------------------- API Commons
@@ -119,6 +127,45 @@ def titres_categorie(titre):
         if "continue" not in d:
             return titres
         cont = d["continue"]
+
+
+_REDIRECT = re.compile(r"\{\{\s*category redirect\s*\|\s*([^}|]+?)\s*\}\}", re.I)
+
+
+def redirection_categorie(titre):
+    """Cible d'un {{category redirect}} posé sur la catégorie, ou None."""
+    d = api(titles=titre, prop="revisions", rvprop="content", rvslots="main")
+    pages = list((d.get("query") or {}).get("pages", {}).values())
+    revs = (pages[0].get("revisions") if pages else None) or []
+    if not revs:
+        return None
+    txt = ((revs[0].get("slots") or {}).get("main") or {}).get("*") or ""
+    m = _REDIRECT.search(txt)
+    if not m:
+        return None
+    cible = m.group(1).strip()
+    return cible if cible.lower().startswith("category:") else "Category:" + cible
+
+
+def titres_categorie_suivie(titre):
+    """(titres, catégorie effective), en suivant les {{category redirect}}.
+
+    Une catégorie vide n'est souvent qu'un renvoi vers le synonyme sous lequel les
+    fichiers sont réellement classés — Acca sellowiana renvoie à Feijoa sellowiana,
+    Mespilus germanica à Crataegus germanica. Sans suivre le renvoi, l'espèce revient
+    sans le moindre candidat, et sans le moindre message.
+    """
+    vus = set()
+    for _ in range(3):
+        trouves = titres_categorie(titre)
+        if trouves or titre in vus:
+            return trouves, titre
+        vus.add(titre)
+        cible = redirection_categorie(titre)
+        if not cible:
+            return trouves, titre
+        titre = cible
+    return [], titre
 
 
 def sous_categories(titre):
@@ -182,10 +229,14 @@ def _repartir(pages, n, cle=lambda p: p["title"]):
     return retenus
 
 
-def candidats(latin, n, largeur, motcle=None, deja=()):
-    """n pages Commons de l'espèce, réparties entre aspects."""
-    titres = titres_categorie("Category:" + latin)
-    for sc in sous_categories("Category:" + latin)[:4]:
+def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None):
+    """n pages Commons de l'espèce, réparties entre aspects.
+
+    `categorie` force la catégorie de départ : une entrée d'atlas au nom de genre
+    (« Ribes sp. ») ramènerait sinon tout le genre, groseilliers américains compris.
+    """
+    titres, categorie = titres_categorie_suivie("Category:" + (categorie or latin))
+    for sc in sous_categories(categorie)[:4]:
         time.sleep(0.4)
         titres += titres_categorie(sc)
     vus = set(deja)
@@ -220,7 +271,7 @@ def telecharger(url, dest, largeur):
     images.reduire(buf, dest, largeur)
 
 
-def recolter(especes, n, largeur, motcle=None):
+def recolter(especes, n, largeur, motcle=None, categorie=None):
     """Complète candidats/<stem>/ sans rien écraser : la numérotation reprend où elle en
     est et candidats.tsv s'allonge. On peut donc revenir combler un aspect manquant
     (--motcle flower) sans perdre les choix déjà faits sur les candidats précédents."""
@@ -240,7 +291,7 @@ def recolter(especes, n, largeur, motcle=None):
         k = max(numeros) if numeros else 0
         lignes, ajoutes = [], 0
         try:
-            trouves = candidats(latin, n, largeur, motcle, deja)
+            trouves = candidats(latin, n, largeur, motcle, deja, categorie)
         except Exception as e:
             print("[%d/%d] %-12s ÉCHEC %s" % (i, len(especes), stem, e))
             continue
@@ -355,14 +406,16 @@ def main(argv=None):
     for i, a in enumerate(argv):
         if a == "--par-espece" and i + 1 < len(argv):
             n = int(argv[i + 1])
-    motcle = None
+    motcle = categorie = None
     for i, a in enumerate(argv):
         if a == "--motcle" and i + 1 < len(argv):
             motcle = argv[i + 1]
+        if a == "--categorie" and i + 1 < len(argv):
+            categorie = argv[i + 1]
     especes = [(s, latin_court(l)) for s, l in especes_du_lot(argv)]
     print("%d espèce(s), jusqu'à %d candidats chacune%s → candidats/"
           % (len(especes), n, (" (titres contenant « %s »)" % motcle) if motcle else ""))
-    recolter(especes, n, images.largeur_demandee(argv), motcle)
+    recolter(especes, n, images.largeur_demandee(argv), motcle, categorie)
 
 
 if __name__ == "__main__":

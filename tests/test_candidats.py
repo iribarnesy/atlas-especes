@@ -39,6 +39,17 @@ def test_les_mots_d_organe_sont_reconnus_en_plusieurs_langues(cd):
     assert cd.aspect_devine("File:Heracleum-sphondylium-habitus.jpg") == "port"
 
 
+def test_l_ecorce_est_reconnue_et_prime_sur_le_port(cd):
+    """L'aspect le plus déficitaire du dépôt : sans ces mots, toute écorce tombait dans
+    « divers » et la répartition ne la sortait jamais en tête."""
+    assert cd.aspect_devine("File:Carpinus betulus bark.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Olea europaea tronc.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Prunus avium Rinde.jpg") == "ecorce"
+    # « trunk » parle du tronc, pas de la silhouette, même quand « tree » suit
+    assert cd.aspect_devine("File:Ficus carica trunk of an old tree.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Ficus carica tree.jpg") == "port"
+
+
 def test_un_titre_muet_reste_a_trier_a_l_oeil(cd, repo):
     assert cd.aspect_devine("File:Autumn flowers 01.jpg") == "fleur"
     assert cd.aspect_devine("File:20170410Artemisia absinthium3.jpg") == repo.atlas_data.DIVERS
@@ -52,6 +63,9 @@ def test_un_titre_muet_reste_a_trier_a_l_oeil(cd, repo):
     "File:A bowl of dill seed.jpg",                                  # photo de cuisine
     "File:Chilean salad ingredients cilantro tomatoes.jpg",
     "File:Farmer's Market - Chervil.jpg",
+    "File:Erica tetralix - Pl0008 - FloraBatava-KB-v01.jpg",         # sans espace
+    "File:Edwards' botanical register ornamental flower-garden.jpg",
+    "File:Cyclopedia of American horticulture.jpg",
     "File:Anethum graveolens - Distribuzione.PNG",                   # carte
     "File:Anthriscus cerefolium distribution in Poland.svg",         # pas une photo
 ])
@@ -62,6 +76,52 @@ def test_titres_ecartes_avant_meme_le_telechargement(cd, titre):
 def test_une_photo_de_terrain_passe(cd):
     assert cd.titre_utilisable("File:Conium maculatum fruit (01).jpg")
     assert cd.titre_utilisable("File:Heracleum sphondylium flowering.JPEG")
+
+
+# ------------------------------------------------------ renvois de catégorie
+
+def test_le_renvoi_de_categorie_est_lu(cd):
+    """Commons range souvent sous l'ancien nom : Acca sellowiana renvoie à Feijoa
+    sellowiana. Sans suivre le renvoi, l'espèce revient sans candidat et sans message."""
+    assert cd.redirection_categorie.__doc__  # présente
+    txt = "{{Category redirect|Crataegus germanica}}"
+    import re
+    m = cd._REDIRECT.search(txt)
+    assert m and m.group(1).strip() == "Crataegus germanica"
+
+
+def test_le_renvoi_accepte_le_prefixe_explicite(cd, monkeypatch):
+    monkeypatch.setattr(cd, "api", lambda **kw: {"query": {"pages": {"1": {"revisions": [
+        {"slots": {"main": {"*": "{{category redirect|Category:Feijoa sellowiana}}"}}}]}}}})
+    assert cd.redirection_categorie("Category:Acca sellowiana") == "Category:Feijoa sellowiana"
+
+
+def test_sans_renvoi_on_ne_boucle_pas(cd, monkeypatch):
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: [])
+    monkeypatch.setattr(cd, "redirection_categorie", lambda t: None)
+    trouves, cat = cd.titres_categorie_suivie("Category:X")
+    assert trouves == [] and cat == "Category:X"
+
+
+def test_une_categorie_pleine_n_est_pas_suivie(cd, monkeypatch):
+    appels = []
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: (appels.append(t), ["File:a.jpg"])[1])
+    monkeypatch.setattr(cd, "redirection_categorie",
+                        lambda t: pytest.fail("ne devrait pas être appelée"))
+    trouves, cat = cd.titres_categorie_suivie("Category:X")
+    assert trouves == ["File:a.jpg"] and cat == "Category:X" and appels == ["Category:X"]
+
+
+def test_une_categorie_forcee_l_emporte_sur_le_nom_latin(cd, monkeypatch):
+    """Une entrée d'atlas au nom de genre (« Ribes sp. ») ramènerait tout le genre :
+    groseilliers américains et asiatiques compris. --categorie vise l'espèce."""
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie",
+                        lambda t: (vues.append(t), ([], t))[1])
+    monkeypatch.setattr(cd, "sous_categories", lambda t: [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("Ribes", 3, 1000, categorie="Ribes rubrum")
+    assert vues == ["Category:Ribes rubrum"]
 
 
 # ------------------------------------------------------- répartition des aspects
@@ -76,6 +136,13 @@ def test_la_repartition_alterne_les_aspects(cd):
                      "File:X leaf.jpg", "File:X fruit.jpg")
     pris = cd._repartir(titres, 4, cle=lambda t: t)
     assert sorted(a for a, _ in pris) == ["feuille", "fleur", "fleur", "fruit"]
+
+
+def test_l_ecorce_passe_avant_le_reste_dans_la_repartition(cd):
+    """Sur un lot de ligneux, une seule écorce disponible doit être prise au premier tour."""
+    titres = _titres(*["File:X flower %d.jpg" % i for i in range(5)], "File:X bark.jpg")
+    pris = cd._repartir(titres, 2, cle=lambda t: t)
+    assert pris[0][0] == "ecorce"
 
 
 def test_la_repartition_ne_reclame_pas_plus_que_disponible(cd):
