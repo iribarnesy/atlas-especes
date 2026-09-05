@@ -118,7 +118,13 @@ def nettoyer_auteur(valeur):
 
 
 def credit_commons(imageinfo):
-    """Crédit depuis un imageinfo de l'API Commons (iiprop=url|extmetadata)."""
+    """Crédit depuis un imageinfo de l'API Commons (iiprop=url|user|extmetadata).
+
+    Certaines pages n'ont pas de champ « Artist » tout en exigeant l'attribution : le seul
+    nom attribuable est alors celui du compte qui a versé le fichier (iiprop=user). Sans ce
+    repli, la photo arrive avec une licence mais sans auteur — donc inutilisable, puisque
+    connu() exige les deux.
+    """
     em = (imageinfo or {}).get("extmetadata") or {}
 
     def val(cle):
@@ -126,8 +132,11 @@ def credit_commons(imageinfo):
         return v.get("value") if isinstance(v, dict) else None
 
     licence = val("LicenseShortName") or val("License") or INCONNU
+    auteur = nettoyer_auteur(val("Artist") or val("Credit"))
+    if auteur == INCONNU and (imageinfo or {}).get("user"):
+        auteur = nettoyer_auteur(imageinfo["user"])
     return {"source": "wikimedia",
-            "auteur": nettoyer_auteur(val("Artist") or val("Credit")),
+            "auteur": auteur,
             "licence": nettoyer_auteur(licence),
             "url": (imageinfo or {}).get("descriptionurl") or val("DescriptionUrl") or INCONNU}
 
