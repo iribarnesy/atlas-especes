@@ -127,6 +127,45 @@ def titres_categorie(titre):
         cont = d["continue"]
 
 
+_REDIRECT = re.compile(r"\{\{\s*category redirect\s*\|\s*([^}|]+?)\s*\}\}", re.I)
+
+
+def redirection_categorie(titre):
+    """Cible d'un {{category redirect}} posé sur la catégorie, ou None."""
+    d = api(titles=titre, prop="revisions", rvprop="content", rvslots="main")
+    pages = list((d.get("query") or {}).get("pages", {}).values())
+    revs = (pages[0].get("revisions") if pages else None) or []
+    if not revs:
+        return None
+    txt = ((revs[0].get("slots") or {}).get("main") or {}).get("*") or ""
+    m = _REDIRECT.search(txt)
+    if not m:
+        return None
+    cible = m.group(1).strip()
+    return cible if cible.lower().startswith("category:") else "Category:" + cible
+
+
+def titres_categorie_suivie(titre):
+    """(titres, catégorie effective), en suivant les {{category redirect}}.
+
+    Une catégorie vide n'est souvent qu'un renvoi vers le synonyme sous lequel les
+    fichiers sont réellement classés — Acca sellowiana renvoie à Feijoa sellowiana,
+    Mespilus germanica à Crataegus germanica. Sans suivre le renvoi, l'espèce revient
+    sans le moindre candidat, et sans le moindre message.
+    """
+    vus = set()
+    for _ in range(3):
+        trouves = titres_categorie(titre)
+        if trouves or titre in vus:
+            return trouves, titre
+        vus.add(titre)
+        cible = redirection_categorie(titre)
+        if not cible:
+            return trouves, titre
+        titre = cible
+    return [], titre
+
+
 def sous_categories(titre):
     noms = [p["title"] for p in _pages(api(generator="categorymembers", gcmtitle=titre,
                                            gcmtype="subcat", gcmlimit="200"))]
@@ -190,8 +229,8 @@ def _repartir(pages, n, cle=lambda p: p["title"]):
 
 def candidats(latin, n, largeur, motcle=None, deja=()):
     """n pages Commons de l'espèce, réparties entre aspects."""
-    titres = titres_categorie("Category:" + latin)
-    for sc in sous_categories("Category:" + latin)[:4]:
+    titres, categorie = titres_categorie_suivie("Category:" + latin)
+    for sc in sous_categories(categorie)[:4]:
         time.sleep(0.4)
         titres += titres_categorie(sc)
     vus = set(deja)

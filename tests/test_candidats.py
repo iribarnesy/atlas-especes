@@ -75,6 +75,40 @@ def test_une_photo_de_terrain_passe(cd):
     assert cd.titre_utilisable("File:Heracleum sphondylium flowering.JPEG")
 
 
+# ------------------------------------------------------ renvois de catégorie
+
+def test_le_renvoi_de_categorie_est_lu(cd):
+    """Commons range souvent sous l'ancien nom : Acca sellowiana renvoie à Feijoa
+    sellowiana. Sans suivre le renvoi, l'espèce revient sans candidat et sans message."""
+    assert cd.redirection_categorie.__doc__  # présente
+    txt = "{{Category redirect|Crataegus germanica}}"
+    import re
+    m = cd._REDIRECT.search(txt)
+    assert m and m.group(1).strip() == "Crataegus germanica"
+
+
+def test_le_renvoi_accepte_le_prefixe_explicite(cd, monkeypatch):
+    monkeypatch.setattr(cd, "api", lambda **kw: {"query": {"pages": {"1": {"revisions": [
+        {"slots": {"main": {"*": "{{category redirect|Category:Feijoa sellowiana}}"}}}]}}}})
+    assert cd.redirection_categorie("Category:Acca sellowiana") == "Category:Feijoa sellowiana"
+
+
+def test_sans_renvoi_on_ne_boucle_pas(cd, monkeypatch):
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: [])
+    monkeypatch.setattr(cd, "redirection_categorie", lambda t: None)
+    trouves, cat = cd.titres_categorie_suivie("Category:X")
+    assert trouves == [] and cat == "Category:X"
+
+
+def test_une_categorie_pleine_n_est_pas_suivie(cd, monkeypatch):
+    appels = []
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: (appels.append(t), ["File:a.jpg"])[1])
+    monkeypatch.setattr(cd, "redirection_categorie",
+                        lambda t: pytest.fail("ne devrait pas être appelée"))
+    trouves, cat = cd.titres_categorie_suivie("Category:X")
+    assert trouves == ["File:a.jpg"] and cat == "Category:X" and appels == ["Category:X"]
+
+
 # ------------------------------------------------------- répartition des aspects
 
 def _titres(*noms):
