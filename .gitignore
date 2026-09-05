@@ -6,3 +6,4 @@ __pycache__/
 # gros fichiers générés en local (artifact / standalone), pas versionnés
 Quiz especes*.html
 candidats/
+.claude/
