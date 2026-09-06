@@ -23,6 +23,7 @@ Commons n'héberge pas de licence non commerciale — donc pas de tri de licence
   python3 scripts/candidats.py --especes aneth --motcle flower   combler un aspect manquant
   python3 scripts/candidats.py --especes groseillier --categorie "Ribes rubrum"
   python3 scripts/candidats.py --lot lots/lot-4-faune.txt --faune   varier larve/dégâts
+  python3 scripts/candidats.py --especes muguet --planches   garder les planches anciennes
   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
 
 Format de candidats/choix.tsv (tabulations, « # » en commentaire) :
@@ -52,22 +53,26 @@ PAR_ESPECE = 7
 
 # Ce qui n'est pas une photo de terrain exploitable pour un quiz : planches botaniques,
 # herbiers, coupes au microscope, cartes de répartition, œuvres d'art.
-REJET = (
-    # planches botaniques, herbiers, coupes, cartes, œuvres — pas des photos de terrain
+# Recueils de planches et d'illustrations anciennes. Elles sont écartées par défaut
+# — une gravure n'apprend pas à reconnaître une plante sur le terrain — mais ce sont de
+# belles pièces, souvent plus lisibles qu'une photo pour montrer tous les organes d'un
+# coup : --planches les garde (cf. #30).
+REJET_PLANCHES = (
     "herbari", "illustration", "drawing", "dessin", "plate", "(pl.", "engraving", "gravure",
-    "specimen", "microscop", "epidermis", "chromosom", "map", "range", "distribution",
-    "distribuzione", "distribución", "distribucion", "verbreitung", "répartition", "areal",
-    "locator", "icon", "logo", "diagram", "chart", "signature", "stamp", "coin",
-    " art", "painting", "sketch", "botanicus", "flora batava", "florabatava", "flora danica", "floradanica",
-    "flora von", "flore des", "botanical register", "cyclopedia",
-    # la littérature mycologique a ses propres recueils, que le vocabulaire botanique
-    # ci-dessus ne couvrait pas : ils sont arrivés en nombre dans le lot 3 (#25)
-    "wellcome", "bhl", "annual report", "flora agaricina", "giftpflanze", "bresadola",
-    "atlas des champignons", "planche", "tab.", "krombholz", "sowerby", "britzelmayr",
-    "iconograph",
+    "specimen", "botanicus", "flora batava", "florabatava", "flora danica", "floradanica",
+    "flora von", "flore des", "botanical register", "cyclopedia", "wellcome", "bhl",
+    "annual report", "flora agaricina", "giftpflanze", "bresadola", "atlas des champignons",
+    "planche", "tab.", "krombholz", "sowerby", "britzelmayr", "iconograph",
     "kohler", "köhler", "thome", "thomé", "sturm", "lindman", "masclef", "prof. dr",
     "bilder ur nordens flora", "text-book", "textbook", "traité", "economic botany",
     "pflanzendecke", "atlas des plantes",
+)
+
+# Ce qui n'est de toute façon pas une image d'espèce exploitable.
+REJET = (
+    "microscop", "epidermis", "chromosom", "map", "range", "distribu", "repartition",
+    "locator", "icon", "logo", "diagram", "chart", "signature", "stamp", "coin",
+    " art", "painting", "sketch",
     # photos de cuisine et d'étal : le sujet n'est plus la plante sur pied
     "bowl", "salad", "salade", "market", "spice", "recipe", "dish ", "soup", "grocery",
     "supermarket", "packet", "jar ", "chutney", "curry", "smoothie", "garnish",
@@ -222,14 +227,16 @@ def aspect_devine(titre, ordre=ORDRE, mots=MOTS):
     return atlas_data.DIVERS
 
 
-def titre_utilisable(titre):
+def titre_utilisable(titre, planches=False):
     """Ce qui se juge sur le seul nom du fichier, avant de payer une requête imageinfo."""
     t = titre.lower()
-    return t.endswith((".jpg", ".jpeg", ".png")) and not any(b in t for b in REJET)
+    if not t.endswith((".jpg", ".jpeg", ".png")) or any(b in t for b in REJET):
+        return False
+    return planches or not any(b in t for b in REJET_PLANCHES)
 
 
-def utilisable(page):
-    if not titre_utilisable(page.get("title", "")):
+def utilisable(page, planches=False):
+    if not titre_utilisable(page.get("title", ""), planches):
         return False
     ii = (page.get("imageinfo") or [{}])[0]
     if ii.get("mime") not in ("image/jpeg", "image/png"):
@@ -261,18 +268,25 @@ def _repartir(pages, n, cle=lambda p: p["title"], vocabulaire="plante"):
 
 
 def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
-              vocabulaire="plante"):
+              vocabulaire="plante", planches=False):
     """n pages Commons de l'espèce, réparties entre aspects.
 
     `categorie` force la catégorie de départ : une entrée d'atlas au nom de genre
     (« Ribes sp. ») ramènerait sinon tout le genre, groseilliers américains compris.
     """
     titres, categorie = titres_categorie_suivie("Category:" + (categorie or latin))
-    for sc in sous_categories(categorie)[:4]:
+    scs = sous_categories(categorie)
+    if planches:
+        # Commons range les gravures dans une sous-catégorie dédiée (« - botanical
+        # illustrations », « (illustrations) ») qui compte souvent des dizaines de pièces.
+        # Triée alphabétiquement elle arrive après (buds), (flowers), (fruit) et n'était
+        # donc jamais explorée : sans ce tri, --planches ne ramenait rien.
+        scs.sort(key=lambda c: 0 if "illustration" in c.lower() else 1)
+    for sc in scs[:4]:
         time.sleep(0.4)
         titres += titres_categorie(sc)
     vus = set(deja)
-    titres = [t for t in titres if titre_utilisable(t) and not (t in vus or vus.add(t))]
+    titres = [t for t in titres if titre_utilisable(t, planches) and not (t in vus or vus.add(t))]
     if motcle:
         titres = [t for t in titres if motcle.lower() in t.lower()]
 
@@ -287,7 +301,7 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
     # ensuite (image trop petite, mime inattendu), d'où la marge.
     presel = [t for _asp, t in _repartir(titres, n * 4, cle=lambda t: t,
                                          vocabulaire=vocabulaire)]
-    pages = [p for p in imageinfo_par_lots(presel, largeur) if utilisable(p)]
+    pages = [p for p in imageinfo_par_lots(presel, largeur) if utilisable(p, planches)]
     rang = {t: i for i, t in enumerate(presel)}
     pages.sort(key=lambda p: rang.get(p["title"], 999))
     return _repartir(pages, n, vocabulaire=vocabulaire)
@@ -304,7 +318,8 @@ def telecharger(url, dest, largeur):
     images.reduire(buf, dest, largeur)
 
 
-def recolter(especes, n, largeur, motcle=None, categorie=None, vocabulaire="plante"):
+def recolter(especes, n, largeur, motcle=None, categorie=None, vocabulaire="plante",
+             planches=False):
     """Complète candidats/<stem>/ sans rien écraser : la numérotation reprend où elle en
     est et candidats.tsv s'allonge. On peut donc revenir combler un aspect manquant
     (--motcle flower) sans perdre les choix déjà faits sur les candidats précédents."""
@@ -324,7 +339,8 @@ def recolter(especes, n, largeur, motcle=None, categorie=None, vocabulaire="plan
         k = max(numeros) if numeros else 0
         lignes, ajoutes = [], 0
         try:
-            trouves = candidats(latin, n, largeur, motcle, deja, categorie, vocabulaire)
+            trouves = candidats(latin, n, largeur, motcle, deja, categorie, vocabulaire,
+                                planches)
         except Exception as e:
             print("[%d/%d] %-12s ÉCHEC %s" % (i, len(especes), stem, e))
             continue
@@ -446,10 +462,12 @@ def main(argv=None):
         if a == "--categorie" and i + 1 < len(argv):
             categorie = argv[i + 1]
     vocabulaire = "faune" if "--faune" in argv else "plante"
+    planches = "--planches" in argv
     especes = [(s, latin_court(l)) for s, l in especes_du_lot(argv)]
     print("%d espèce(s), jusqu'à %d candidats chacune%s → candidats/"
           % (len(especes), n, (" (titres contenant « %s »)" % motcle) if motcle else ""))
-    recolter(especes, n, images.largeur_demandee(argv), motcle, categorie, vocabulaire)
+    recolter(especes, n, images.largeur_demandee(argv), motcle, categorie, vocabulaire,
+             planches)
 
 
 if __name__ == "__main__":

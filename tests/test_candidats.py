@@ -78,6 +78,37 @@ def test_une_photo_de_terrain_passe(cd):
     assert cd.titre_utilisable("File:Heracleum sphondylium flowering.JPEG")
 
 
+def test_les_planches_sont_ecartees_par_defaut_mais_gardables(cd):
+    """Une gravure n'apprend pas à reconnaître une plante sur le terrain, mais elle montre
+    tous les organes d'un coup : --planches la garde plutôt que de la jeter (cf. #30)."""
+    planche = "File:Convallaria majalis - Köhler-Medizinal-Pflanzen.jpg"
+    assert not cd.titre_utilisable(planche)
+    assert cd.titre_utilisable(planche, planches=True)
+
+
+def test_les_photos_d_etal_restent_ecartees_meme_avec_planches(cd):
+    """--planches ne rouvre QUE les recueils anciens : le sujet reste la plante."""
+    assert not cd.titre_utilisable("File:Garlic bowl at the market.jpg", planches=True)
+    assert not cd.titre_utilisable("File:Allium sativum distribution map.png", planches=True)
+
+
+def test_avec_planches_la_sous_categorie_des_gravures_passe_en_tete(cd, monkeypatch):
+    """Elle s'appelle « - botanical illustrations » : triée alphabétiquement elle arrive
+    après (buds), (flowers), (fruit) et n'entrait jamais dans les quatre explorées."""
+    scs = ["Category:X (buds)", "Category:X (flowers)", "Category:X (fruit)",
+           "Category:X (habitat)", "Category:X - botanical illustrations"]
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
+    monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("X", 3, 1000, planches=True)
+    assert "Category:X - botanical illustrations" in vues
+    vues.clear()
+    cd.candidats("X", 3, 1000, planches=False)
+    assert "Category:X - botanical illustrations" not in vues
+
+
 # ------------------------------------------------- vocabulaire de la faune
 
 def test_les_aspects_de_l_atlas_ne_disent_rien_d_un_animal(cd):
