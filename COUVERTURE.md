@@ -217,29 +217,29 @@ _Aspects non applicables (une photo « l'organisme »)._
 | Espèce | 📷 |
 |---|--:|
 | Amadouvier | 1 |
-| Amanite panthère | 1 |
-| Amanite phalloïde | 1 |
-| Amanite tue-mouches | 1 |
-| Amanite vireuse | 1 |
-| Bolet bai | 1 |
-| Bolet Satan | 1 |
-| Clitocybe blanc | 1 |
-| Cortinaire des montagnes | 1 |
-| Coulemelle (lépiote élevée) | 1 |
-| Cèpe de Bordeaux | 1 |
-| Entolome livide | 1 |
-| Galère marginée | 1 |
-| Girolle (chanterelle) | 1 |
+| Amanite panthère | 3 |
+| Amanite phalloïde | 4 |
+| Amanite tue-mouches | 3 |
+| Amanite vireuse | 4 |
+| Bolet bai | 3 |
+| Bolet Satan | 3 |
+| Clitocybe blanc | 3 |
+| Cortinaire des montagnes | 4 |
+| Coulemelle (lépiote élevée) | 3 |
+| Cèpe de Bordeaux | 3 |
+| Entolome livide | 3 |
+| Galère marginée | 4 |
+| Girolle (chanterelle) | 3 |
 | Lactaire délicieux | 1 |
-| Morille | 1 |
-| Pied-de-mouton | 1 |
-| Pleurote en huître | 1 |
+| Morille | 3 |
+| Pied-de-mouton | 3 |
+| Pleurote en huître | 3 |
 | Polypore soufré | 1 |
-| Rosé des prés | 1 |
-| Russule charbonnière | 1 |
-| Trompette de la mort | 1 |
+| Rosé des prés | 3 |
+| Russule charbonnière | 3 |
+| Trompette de la mort | 3 |
 | Truffe noire | 1 |
-| Vesse-de-loup perlée | 1 |
+| Vesse-de-loup perlée | 3 |
 
 ## Faune (24)
 
