@@ -1,0 +1,63 @@
+# Lot 4 — les 24 espèces de l'atlas faune, toutes à une seule photo.
+# Ce lot termine l'atlas faune : après lui, plus une seule espèce animale n'est réduite
+# à sa vignette.
+#
+#   python3 scripts/candidats.py --lot lots/lot-4-faune.txt --faune
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ Comme le lot 3, ce lot ne se tague pas : aucun aspect de l'atlas (feuille, écorce,
+# fruit, fleur, port, rameau) ne s'applique à un animal. Les photos entrent en
+# <stem>-N.jpg. L'option --faune ne change RIEN aux noms de fichiers : elle sert
+# uniquement à répartir les candidats, pour ne pas rapporter dix fois le même adulte.
+#
+# Ce qu'il faut viser, et qui est propre à la faune :
+#   - LA LARVE. Une larve de coccinelle ne ressemble en rien à une coccinelle, et c'est
+#     la première cause de destruction d'auxiliaires au jardin.
+#   - LES DÉGÂTS ou les traces. D'un scolyte on voit les galeries sous l'écorce ; d'une
+#     processionnaire, le nid soyeux ; d'un campagnol, les galeries.
+#   - LE SOSIE. Le syrphe imite la guêpe, l'osmie n'est pas une abeille domestique.
+#
+# ⚠ Pièges attendus, différents des trois lots précédents :
+#   - les catégories Commons d'insectes mélangent les espèces d'un même genre (Bombus,
+#     Aphis, Osmia comptent des dizaines d'espèces très proches) ;
+#   - beaucoup de photos sont des spécimens ÉPINGLÉS en boîte de collection ou des
+#     animaux morts : ni le vivant, ni le comportement, ni le milieu ;
+#   - les mammifères et oiseaux ont énormément de photos de parcs animaliers et de
+#     sujets captifs, reconnaissables à la mangeoire ou au grillage.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# pollinisateurs : le groupe où la confusion coûte le plus cher (on tue un auxiliaire)
+abeille                # Apis mellifera
+bourdon                # Bombus terrestris
+osmie                  # Osmia bicornis — abeille solitaire, pas une domestique
+syrphe                 # Syrphus ribesii — imite la guêpe, mais deux ailes et vol stationnaire
+papillon               # Papilio machaon
+
+# prédateurs et auxiliaires dont la LARVE est méconnaissable
+coccinelle             # la larve grise à points orange, détruite par ignorance
+chrysope               # larve mangeuse de pucerons
+carabe                 # Carabus auratus
+forficule              # Forficula auricularia
+araignee               # Araneus diadematus — la toile est le caractère
+
+# ravageurs : c'est souvent le dégât qu'on voit, pas l'animal
+puceron                # Aphis fabae
+doryphore              # larve rouge sur feuille de pomme de terre
+processionnaire        # le nid soyeux dans le pin
+scolyte                # Ips typographus — les galeries sous l'écorce
+limace                 # Arion rufus
+campagnol              # Microtus arvalis
+
+# décomposeurs du sol
+ver_de_terre           # Lumbricus terrestris — les turricules comptent
+cloporte               # Armadillidium vulgare
+
+# vertébrés
+herisson               # Erinaceus europaeus
+crapaud                # Bufo bufo
+chauve_souris          # Pipistrellus pipistrellus
+ecureuil               # Sciurus vulgaris
+geai                   # Garrulus glandarius — semeur de chênes
+mesange                # Parus major

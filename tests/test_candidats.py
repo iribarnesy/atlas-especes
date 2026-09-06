@@ -78,6 +78,39 @@ def test_une_photo_de_terrain_passe(cd):
     assert cd.titre_utilisable("File:Heracleum sphondylium flowering.JPEG")
 
 
+# ------------------------------------------------- vocabulaire de la faune
+
+def test_les_aspects_de_l_atlas_ne_disent_rien_d_un_animal(cd):
+    """Le constat qui motive un second vocabulaire : sans lui tout tombe dans « divers »
+    et la répartition ne diversifie plus rien."""
+    assert cd.aspect_devine("File:Coccinella septempunctata larva.jpg") == "divers"
+    assert cd.aspect_devine("File:Apis mellifera in flight.jpg") == "divers"
+
+
+def test_le_vocabulaire_faune_separe_larve_degats_et_detail(cd):
+    ordre, mots = cd.VOCABULAIRES["faune"]
+    devine = lambda t: cd.aspect_devine(t, ordre, mots)
+    assert devine("File:Coccinella septempunctata larva.jpg") == "jeune"
+    assert devine("File:Ips typographus galleries in bark.jpg") == "degats"
+    assert devine("File:Sciurus vulgaris head.jpg") == "detail"
+    assert devine("File:Apis mellifera in flight.jpg") == "action"
+    assert devine("File:Bombus terrestris.jpg") == "divers"
+
+
+def test_la_larve_et_les_degats_passent_devant(cd):
+    """Ce sont eux qu'on rencontre : d'un scolyte on voit les galeries avant l'insecte."""
+    titres = _titres(*["File:X %d.jpg" % i for i in range(6)],
+                     "File:X larva.jpg", "File:X galleries.jpg")
+    pris = cd._repartir(titres, 2, cle=lambda t: t, vocabulaire="faune")
+    assert [a for a, _ in pris] == ["jeune", "degats"]
+
+
+def test_le_vocabulaire_faune_n_est_pas_un_aspect_de_l_atlas(cd, atlas_data):
+    """Garde-fou : ces mots ne doivent jamais entrer dans les noms de fichiers."""
+    ordre, _ = cd.VOCABULAIRES["faune"]
+    assert not set(ordre) & set(atlas_data.ASPECTS_VALIDES)
+
+
 # ------------------------------------------------------ renvois de catégorie
 
 def test_le_renvoi_de_categorie_est_lu(cd):
