@@ -22,6 +22,7 @@ Commons n'héberge pas de licence non commerciale — donc pas de tri de licence
   python3 scripts/candidats.py --especes cigue,berce --par-espece 8
   python3 scripts/candidats.py --especes aneth --motcle flower   combler un aspect manquant
   python3 scripts/candidats.py --especes groseillier --categorie "Ribes rubrum"
+  python3 scripts/candidats.py --lot lots/lot-4-faune.txt --faune   varier larve/dégâts
   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
 
 Format de candidats/choix.tsv (tabulations, « # » en commentaire) :
@@ -93,6 +94,30 @@ MOTS = {
              "tree", "baum", "shrub", "strauch", "buisson"),
 }
 ORDRE = ("ecorce", "feuille", "fleur", "fruit", "port")
+
+# Vocabulaire de RÉPARTITION pour la faune. Ce ne sont PAS des aspects de l'atlas — aucun
+# des aspects (feuille, écorce…) ne s'applique à un animal, et les photos de faune entrent
+# sans aspect. Ces mots ne servent qu'à éviter de rapporter dix fois le même adulte de
+# trois quarts. « jeune » et « degats » passent devant parce que ce sont eux qu'on
+# rencontre vraiment : une larve de coccinelle ne ressemble pas à une coccinelle, et d'un
+# scolyte on voit les galeries bien avant l'insecte.
+MOTS_FAUNE = {
+    "jeune": ("larva", "larvae", "larve", "nymph", "nymphe", "caterpillar", "chenille",
+              "juvenile", "juvénile", "pupa", "chrysalide", "cocon", "instar", "immature",
+              "egg", "oeuf", "œuf", "ponte"),
+    "degats": ("damage", "dégât", "degat", "galer", "gallery", "galleries", "mine",
+               "infestation", "attack", "frass", "trace", "empreinte", "nid", "nest",
+               "toile", "web"),
+    "detail": ("head", "tête", "tete", "close-up", "closeup", "macro", "detail", "détail",
+               "wing", "aile", "elytra", "élytre", "antenna", "portrait"),
+    "action": ("flight", "flying", "vol ", "feeding", "mating", "accouplement", "pollen",
+               "foraging", "butin", "hunting", "swimming"),
+    "groupe": ("colony", "colonie", "group", "groupe", "swarm", "essaim", "cluster",
+               "aggregation", "several", "plusieurs"),
+}
+ORDRE_FAUNE = ("jeune", "degats", "detail", "action", "groupe")
+
+VOCABULAIRES = {"plante": (ORDRE, MOTS), "faune": (ORDRE_FAUNE, MOTS_FAUNE)}
 
 
 # ------------------------------------------------------------------- API Commons
@@ -189,10 +214,10 @@ def imageinfo_par_lots(titres, largeur):
     return pages
 
 
-def aspect_devine(titre):
+def aspect_devine(titre, ordre=ORDRE, mots=MOTS):
     t = titre.lower()
-    for asp in ORDRE:
-        if any(m in t for m in MOTS[asp]):
+    for asp in ordre:
+        if any(m in t for m in mots[asp]):
             return asp
     return atlas_data.DIVERS
 
@@ -215,15 +240,16 @@ def utilisable(page):
     return (ii.get("width") or ii.get("thumbwidth") or 0) >= 800
 
 
-def _repartir(pages, n, cle=lambda p: p["title"]):
-    """Round-robin entre aspects : on veut de la variété, pas dix fleurs de la même plante."""
+def _repartir(pages, n, cle=lambda p: p["title"], vocabulaire="plante"):
+    """Round-robin entre thèmes : on veut de la variété, pas dix fleurs de la même plante."""
+    ordre, mots = VOCABULAIRES[vocabulaire]
     par_aspect = {}
     for p in pages:
-        par_aspect.setdefault(aspect_devine(cle(p)), []).append(p)
+        par_aspect.setdefault(aspect_devine(cle(p), ordre, mots), []).append(p)
     retenus, tour = [], 0
     while len(retenus) < n:
         vide = True
-        for asp in ORDRE + (atlas_data.DIVERS,):
+        for asp in ordre + (atlas_data.DIVERS,):
             lot = par_aspect.get(asp) or []
             if tour < len(lot) and len(retenus) < n:
                 retenus.append((asp, lot[tour]))
@@ -234,7 +260,8 @@ def _repartir(pages, n, cle=lambda p: p["title"]):
     return retenus
 
 
-def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None):
+def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
+              vocabulaire="plante"):
     """n pages Commons de l'espèce, réparties entre aspects.
 
     `categorie` force la catégorie de départ : une entrée d'atlas au nom de genre
@@ -258,11 +285,12 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None):
 
     # On ne paie l'imageinfo que d'une présélection large : certaines seront écartées
     # ensuite (image trop petite, mime inattendu), d'où la marge.
-    presel = [t for _asp, t in _repartir(titres, n * 4, cle=lambda t: t)]
+    presel = [t for _asp, t in _repartir(titres, n * 4, cle=lambda t: t,
+                                         vocabulaire=vocabulaire)]
     pages = [p for p in imageinfo_par_lots(presel, largeur) if utilisable(p)]
     rang = {t: i for i, t in enumerate(presel)}
     pages.sort(key=lambda p: rang.get(p["title"], 999))
-    return _repartir(pages, n)
+    return _repartir(pages, n, vocabulaire=vocabulaire)
 
 
 # --------------------------------------------------------------- téléchargement
@@ -276,7 +304,7 @@ def telecharger(url, dest, largeur):
     images.reduire(buf, dest, largeur)
 
 
-def recolter(especes, n, largeur, motcle=None, categorie=None):
+def recolter(especes, n, largeur, motcle=None, categorie=None, vocabulaire="plante"):
     """Complète candidats/<stem>/ sans rien écraser : la numérotation reprend où elle en
     est et candidats.tsv s'allonge. On peut donc revenir combler un aspect manquant
     (--motcle flower) sans perdre les choix déjà faits sur les candidats précédents."""
@@ -296,7 +324,7 @@ def recolter(especes, n, largeur, motcle=None, categorie=None):
         k = max(numeros) if numeros else 0
         lignes, ajoutes = [], 0
         try:
-            trouves = candidats(latin, n, largeur, motcle, deja, categorie)
+            trouves = candidats(latin, n, largeur, motcle, deja, categorie, vocabulaire)
         except Exception as e:
             print("[%d/%d] %-12s ÉCHEC %s" % (i, len(especes), stem, e))
             continue
@@ -417,10 +445,11 @@ def main(argv=None):
             motcle = argv[i + 1]
         if a == "--categorie" and i + 1 < len(argv):
             categorie = argv[i + 1]
+    vocabulaire = "faune" if "--faune" in argv else "plante"
     especes = [(s, latin_court(l)) for s, l in especes_du_lot(argv)]
     print("%d espèce(s), jusqu'à %d candidats chacune%s → candidats/"
           % (len(especes), n, (" (titres contenant « %s »)" % motcle) if motcle else ""))
-    recolter(especes, n, images.largeur_demandee(argv), motcle, categorie)
+    recolter(especes, n, images.largeur_demandee(argv), motcle, categorie, vocabulaire)
 
 
 if __name__ == "__main__":

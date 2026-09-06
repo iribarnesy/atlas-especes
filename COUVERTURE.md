@@ -247,30 +247,30 @@ _Aspects non applicables (une photo « l'organisme »)._
 
 | Espèce | 📷 |
 |---|--:|
-| Abeille domestique | 1 |
-| Araignée (épeire) | 1 |
-| Bourdon terrestre | 1 |
-| Campagnol | 1 |
-| Carabe doré | 1 |
-| Chauve-souris (pipistrelle) | 1 |
-| Chrysope | 1 |
-| Cloporte | 1 |
-| Coccinelle à 7 points | 1 |
-| Crapaud commun | 1 |
-| Doryphore | 1 |
-| Forficule (perce-oreille) | 1 |
-| Geai des chênes | 1 |
-| Hérisson | 1 |
-| Limace rouge | 1 |
-| Machaon | 1 |
-| Mésange charbonnière | 1 |
-| Osmie (abeille sauvage) | 1 |
-| Processionnaire du pin | 1 |
-| Puceron | 1 |
-| Scolyte typographe | 1 |
-| Syrphe | 1 |
-| Ver de terre (lombric) | 1 |
-| Écureuil roux | 1 |
+| Abeille domestique | 3 |
+| Araignée (épeire) | 3 |
+| Bourdon terrestre | 3 |
+| Campagnol | 3 |
+| Carabe doré | 3 |
+| Chauve-souris (pipistrelle) | 3 |
+| Chrysope | 3 |
+| Cloporte | 3 |
+| Coccinelle à 7 points | 3 |
+| Crapaud commun | 3 |
+| Doryphore | 3 |
+| Forficule (perce-oreille) | 3 |
+| Geai des chênes | 3 |
+| Hérisson | 3 |
+| Limace rouge | 3 |
+| Machaon | 3 |
+| Mésange charbonnière | 3 |
+| Osmie (abeille sauvage) | 3 |
+| Processionnaire du pin | 3 |
+| Puceron | 3 |
+| Scolyte typographe | 4 |
+| Syrphe | 3 |
+| Ver de terre (lombric) | 3 |
+| Écureuil roux | 3 |
 
 ## Espèces diverses (16)
 
