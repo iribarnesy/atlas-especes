@@ -59,6 +59,11 @@ REJET = (
     "locator", "icon", "logo", "diagram", "chart", "signature", "stamp", "coin",
     " art", "painting", "sketch", "botanicus", "flora batava", "florabatava", "flora danica", "floradanica",
     "flora von", "flore des", "botanical register", "cyclopedia",
+    # la littérature mycologique a ses propres recueils, que le vocabulaire botanique
+    # ci-dessus ne couvrait pas : ils sont arrivés en nombre dans le lot 3 (#25)
+    "wellcome", "bhl", "annual report", "flora agaricina", "giftpflanze", "bresadola",
+    "atlas des champignons", "planche", "tab.", "krombholz", "sowerby", "britzelmayr",
+    "iconograph",
     "kohler", "köhler", "thome", "thomé", "sturm", "lindman", "masclef", "prof. dr",
     "bilder ur nordens flora", "text-book", "textbook", "traité", "economic botany",
     "pflanzendecke", "atlas des plantes",
