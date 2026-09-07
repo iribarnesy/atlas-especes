@@ -50,6 +50,7 @@ DEST = os.path.join(BASE, "candidats")
 UA = "ForestryQuiz/1.0 (personal educational use)"
 API = "https://commons.wikimedia.org/w/api.php?"
 PAR_ESPECE = 7
+SOUS_CATS = 6      # sous-catégories explorées par espèce
 
 # Ce qui n'est pas une photo de terrain exploitable pour un quiz : planches botaniques,
 # herbiers, coupes au microscope, cartes de répartition, œuvres d'art.
@@ -283,19 +284,25 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
     """
     titres, categorie = titres_categorie_suivie("Category:" + (categorie or latin))
     scs = sous_categories(categorie)
-    # Une sous-catégorie qui nomme un aspect (« (buds) », « (bark) », « in winter ») vaut
-    # mieux qu'une sous-catégorie générique : sans ce tri, « Famous Fraxinus excelsior »
-    # prenait une des quatre places explorées, et « (buds) » pouvait tomber en dehors.
+    # Priorité d'exploration. Une sous-catégorie qui nomme un aspect (« (buds) »,
+    # « (bark) ») vaut mieux qu'une générique (« Famous … », « by country »). Et quand
+    # --planches est posé, les gravures valent mieux qu'une générique aussi — mais PAS
+    # mieux qu'un aspect : sans ce rang commun, « - botanical illustrations » prenait la
+    # première place et éjectait « buds » des quatre explorées, ce qui a fait rentrer le
+    # lot 8 sans un seul rameau de charme.
     _ordre, _mots = VOCABULAIRES[vocabulaire]
     _kw = tuple(m for asp in _ordre for m in _mots[asp])
-    scs.sort(key=lambda c: 0 if any(m in c.lower() for m in _kw) else 1)
-    if planches:
-        # Commons range les gravures dans une sous-catégorie dédiée (« - botanical
-        # illustrations », « (illustrations) ») qui compte souvent des dizaines de pièces.
-        # Triée alphabétiquement elle arrive après (buds), (flowers), (fruit) et n'était
-        # donc jamais explorée : sans ce tri, --planches ne ramenait rien.
-        scs.sort(key=lambda c: 0 if "illustration" in c.lower() else 1)
-    for sc in scs[:4]:
+
+    def _rang(c):
+        bas = c.lower()
+        if any(m in bas for m in _kw):
+            return 0
+        if planches and "illustration" in bas:
+            return 1
+        return 2
+
+    scs.sort(key=_rang)
+    for sc in scs[:SOUS_CATS]:
         time.sleep(0.4)
         titres += titres_categorie(sc)
     vus = set(deja)

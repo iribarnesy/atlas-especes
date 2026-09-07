@@ -125,21 +125,40 @@ def test_les_sous_categories_qui_nomment_un_aspect_passent_devant(cd, monkeypatc
     assert vues[:2] == ["Category:X (bark)", "Category:X (buds)"]
 
 
-def test_avec_planches_la_sous_categorie_des_gravures_passe_en_tete(cd, monkeypatch):
-    """Elle s'appelle « - botanical illustrations » : triée alphabétiquement elle arrive
-    après (buds), (flowers), (fruit) et n'entrait jamais dans les quatre explorées."""
+def test_avec_planches_les_gravures_passent_devant_les_generiques(cd, monkeypatch):
+    """Commons range les gravures dans une sous-catégorie dédiée. Sans priorité elle
+    tombait derrière (buds), (flowers), (fruit)… et n'était jamais explorée."""
     scs = ["Category:X (buds)", "Category:X (flowers)", "Category:X (fruit)",
-           "Category:X (habitat)", "Category:X - botanical illustrations"]
+           "Category:X (habitat)", "Category:X - botanical illustrations",
+           "Category:X by country", "Category:X - Famous", "Category:X in music"]
     vues = []
     monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
     monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
     monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
     monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
     cd.candidats("X", 3, 1000, planches=True)
+    gravures = vues.index("Category:X - botanical illustrations")
+    assert all(vues.index(c) < gravures for c in vues if "(" in c), \
+        "les aspects passent d'abord"
+    assert gravures < vues.index("Category:X by country"), \
+        "mais les gravures passent avant les génériques"
+
+
+def test_les_planches_ne_passent_pas_devant_un_aspect(cd, monkeypatch):
+    """La régression qui a fait rentrer le lot 8 sans un seul rameau de charme :
+    « - botanical illustrations » prenait la première place et éjectait « buds »."""
+    scs = ["Category:X - botanical illustrations", "Category:X (bark)",
+           "Category:X (fruit)", "Category:X (leaves)", "Category:X buds",
+           "Category:X by country", "Category:X - Famous"]
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
+    monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("X", 3, 1000, planches=True)
+    assert "Category:X buds" in vues, "l'aspect visé doit être exploré"
     assert "Category:X - botanical illustrations" in vues
-    vues.clear()
-    cd.candidats("X", 3, 1000, planches=False)
-    assert "Category:X - botanical illustrations" not in vues
+    assert "Category:X - Famous" not in vues
 
 
 # ------------------------------------------------- vocabulaire de la faune
