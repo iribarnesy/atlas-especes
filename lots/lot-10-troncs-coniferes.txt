@@ -1,0 +1,57 @@
+# Lot 10 — les ÉCORCES qui manquent aux grands arbres, et les RAMEAUX des conifères.
+#
+# Le lot 9 s'est arrêté à mi-chemin parce qu'il visait des fruitiers de verger et des
+# espèces méridionales, que Commons photographie pour leurs fruits et jamais pour leur
+# tronc. Ce lot prend la leçon et va là où Commons est RICHE : les grands arbres
+# forestiers, dont tout le monde photographie l'écorce, et les conifères, dont le rameau
+# est le caractère qu'on montre toujours.
+#
+#   python3 scripts/candidats.py --lot lots/lot-10-troncs-coniferes.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ POUR LES CONIFÈRES, le rameau n'est pas un bourgeon d'hiver mais le RAMEAU FEUILLÉ :
+# c'est l'insertion des aiguilles qui détermine, et elle se voit toute l'année.
+#   - épicéa : aiguilles piquantes tout autour du rameau, sur un petit COUSSINET saillant
+#     qui reste quand on arrache l'aiguille ; cônes PENDANTS ;
+#   - sapin : aiguilles molles, à bout arrondi ou échancré, rangées de part et d'autre en
+#     PEIGNE, laissant une CICATRICE RONDE ; deux bandes blanches au revers ; cônes DRESSÉS ;
+#   - mélèze : aiguilles en TOUFFES sur des rameaux courts, et caduques ;
+#   - pin sylvestre : aiguilles par DEUX, courtes et vrillées ;
+#   - pin maritime : aiguilles par deux, mais longues et épaisses ;
+#   - if : aiguilles molles, vert sombre, en deux rangs, sans bande blanche nette ;
+#   - genévrier : aiguilles par TROIS, piquantes, une seule bande blanche dessus.
+# L'opposition sapin / épicéa est la plus utile du lot : c'est celle qu'on demande à tout
+# forestier débutant.
+#
+# ⚠ POUR LES ÉCORCES, préférer un sujet ADULTE : l'écorce d'un jeune tronc ne ressemble pas
+# à celle d'un vieux, et c'est justement le piège du frêne (lisse jeune, côtelée vieux) et
+# du chêne. Le buis et le houx sont là pour leur rameau, très reconnaissable.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# écorces manquantes — des arbres que tout le monde croise
+chene_pedoncule        # écorce crevassée en côtes verticales
+erable_sycomore        # écorce s'exfoliant en plaques
+frene                  # lisse et grise jeune, côtelée en réseau vieux
+noyer                  # gris clair, crevassée en losanges
+poirier                # petites plaques rectangulaires
+robinier               # profondément sillonnée, en cordes torses
+saule                  # crevassée, souvent en têtard
+sureau                 # verruqueuse, liégeuse
+tremble                # lisse et grise, marquée de losanges noirs
+troene                 # lisse, ponctuée de lenticelles
+prunellier             # noirâtre, l'origine du nom « épine noire »
+
+# rameaux des conifères — l'insertion des aiguilles est le caractère
+epicea                 # aiguilles tout autour, coussinet, cônes pendants
+sapin                  # aiguilles en peigne, cicatrice ronde, cônes dressés
+meleze                 # aiguilles en touffes, caduques
+pin_sylvestre          # aiguilles par deux, courtes et vrillées
+pin_maritime           # aiguilles par deux, longues et épaisses
+if                     # aiguilles molles en deux rangs (écorce aussi)
+genevrier              # aiguilles par trois, piquantes (écorce aussi)
+
+# rameaux de deux persistants très reconnaissables
+buis                   # feuilles opposées, coriaces, luisantes
+houx                   # feuilles alternes, ondulées, épineuses
