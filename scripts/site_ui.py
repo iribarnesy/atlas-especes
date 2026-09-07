@@ -819,7 +819,7 @@ class App{
       poolCount:this.pool().length,
       quizModeLine:this.label(this.CATS,cfg.cat)+' · '+(cfg.qtype==='photo'?('photo'+(cfg.aspect!=='tout'?' — '+this.label(this.ASP,cfg.aspect).toLowerCase():'')):'fiche')+' · '+this.label(this.DF,cfg.diff).toLowerCase(),
       isPhotoQ:!!q&&cfg.qtype==='photo',isFicheQ:!!q&&cfg.qtype==='fiche',
-      qImg:q?q.img.u:'',qW:q&&q.img.w?q.img.w:'',qH:q&&q.img.h?q.img.h:'',qAspect:q?(q.img.a.map(a=>this.label(this.ASP,a)).join(' · ')||'Divers'):'',
+      qImg:q?q.img.u:'',qW:q&&q.img.w?q.img.w:'',qH:q&&q.img.h?q.img.h:'',qAspect:q?(q.img.p?'Planche ancienne':(q.img.a.map(a=>this.label(this.ASP,a)).join(' · ')||'Divers')):'',
       // l'alternative textuelle ne doit pas donner la réponse avant validation
       qAlt:q?((answered?sp.name:'Espèce à identifier')+' — '+(q.img.a.map(a=>this.label(this.ASP,a)).join(', ')||'vue d’ensemble')):'',
       qCredit:(answered&&q&&q.img.c)?q.img.c:'',qCreditUrl:(answered&&q&&q.img.cu)?q.img.cu:'',
@@ -838,7 +838,7 @@ class App{
       fName:fiche?fiche.name:'',fLatin:fiche?fiche.latin:'',fCat:fiche?this.label(catList,fiche.cat):'',
       fImg:fcur?fcur.u:'',fW:fcur&&fcur.w?fcur.w:'',fH:fcur&&fcur.h?fcur.h:'',
       fAlt:fiche&&fcur?(fiche.name+' — '+(fcur.a.map(a=>this.label(this.ASP,a)).join(', ')||'vue d’ensemble')):'',
-      fImgAsp:fcur?('Cette photo montre : '+(fcur.a.map(a=>this.label(this.ASP,a)).join(', ')||'divers')):'',
+      fImgAsp:fcur?(fcur.p?'Planche ancienne — dessin idéalisé, pas une photo de terrain':('Cette photo montre : '+(fcur.a.map(a=>this.label(this.ASP,a)).join(', ')||'divers'))):'',
       fCredit:fcur&&fcur.c?fcur.c:'',fCreditUrl:fcur&&fcur.cu?fcur.cu:'',
       fThumbs:fimgs.map((im,i)=>({u:this.petite(im),border:i===S.fimg?'var(--fg-1)':'transparent',
         alt:(fiche?fiche.name:'')+((im.a&&im.a.length)?' — '+im.a.map(x=>this.label(this.ASP,x)).join(', ').toLowerCase():''),

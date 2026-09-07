@@ -38,9 +38,15 @@ def test_aucun_identifiant_ni_synonyme_en_double(atlas_data):
     assert len(mots) == len(set(mots))
 
 
-def test_le_vocabulaire_accepte_divers(atlas_data):
-    assert atlas_data.ASPECTS_VALIDES == set(atlas_data.ASPECT_IDS) | {atlas_data.DIVERS}
+def test_le_vocabulaire_accepte_divers_et_planche(atlas_data):
+    """_aspects.tsv accepte deux mots qui ne sont PAS des aspects : « divers » (photo sans
+    aspect annoncé) et « planche » (gravure ancienne — cf. #30). Ni l'un ni l'autre ne doit
+    se glisser dans ASPECT_IDS, sinon ils deviendraient une colonne de COUVERTURE.md et un
+    filtre du quiz."""
+    assert atlas_data.ASPECTS_VALIDES == (set(atlas_data.ASPECT_IDS)
+                                          | {atlas_data.DIVERS, atlas_data.PLANCHE})
     assert atlas_data.DIVERS not in atlas_data.ASPECT_IDS
+    assert atlas_data.PLANCHE not in atlas_data.ASPECT_IDS
 
 
 def test_chaque_aspect_est_complet(atlas_data):
