@@ -7,7 +7,7 @@
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
 - …dont **0** avec les 6 aspects, **3** sans aucun aspect taggé.
-- Manques par aspect : Feuille 21 · Écorce 149 · Fruit 85 · Fleur 35 · Port 108 · Rameau 190
+- Manques par aspect : Feuille 21 · Écorce 149 · Fruit 85 · Fleur 34 · Port 108 · Rameau 190
 
 ## Ligneux (77)
 
@@ -101,7 +101,7 @@
 | Ail des ours | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
 | Ail rocambole | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
 | Alliaire | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Amarante | 3 | ✓ | ✗ | ✗ | ✗ | ✓ | ✗ | Écorce, Fruit, Fleur, Rameau |
+| Amarante | 5 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
 | Aneth | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Artichaut / Cardon | 5 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
 | Arum tacheté (gouet) | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
