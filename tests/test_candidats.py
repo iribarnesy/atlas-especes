@@ -110,6 +110,21 @@ def test_les_photos_d_etal_restent_ecartees_meme_avec_planches(cd):
     assert not cd.titre_utilisable("File:Allium sativum distribution map.png", planches=True)
 
 
+def test_les_sous_categories_qui_nomment_un_aspect_passent_devant(cd, monkeypatch):
+    """« Famous Fraxinus excelsior » prenait une des quatre places explorées, et
+    « (buds) » pouvait tomber en dehors."""
+    scs = ["Category:X - Famous", "Category:X by country", "Category:X cultivars",
+           "Category:X (bark)", "Category:X (buds)"]
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
+    monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("X", 3, 1000)
+    # les places servent d'abord aux aspects ; les génériques ne prennent que le reste
+    assert vues[:2] == ["Category:X (bark)", "Category:X (buds)"]
+
+
 def test_avec_planches_la_sous_categorie_des_gravures_passe_en_tete(cd, monkeypatch):
     """Elle s'appelle « - botanical illustrations » : triée alphabétiquement elle arrive
     après (buds), (flowers), (fruit) et n'entrait jamais dans les quatre explorées."""

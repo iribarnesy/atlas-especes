@@ -283,6 +283,12 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
     """
     titres, categorie = titres_categorie_suivie("Category:" + (categorie or latin))
     scs = sous_categories(categorie)
+    # Une sous-catégorie qui nomme un aspect (« (buds) », « (bark) », « in winter ») vaut
+    # mieux qu'une sous-catégorie générique : sans ce tri, « Famous Fraxinus excelsior »
+    # prenait une des quatre places explorées, et « (buds) » pouvait tomber en dehors.
+    _ordre, _mots = VOCABULAIRES[vocabulaire]
+    _kw = tuple(m for asp in _ordre for m in _mots[asp])
+    scs.sort(key=lambda c: 0 if any(m in c.lower() for m in _kw) else 1)
     if planches:
         # Commons range les gravures dans une sous-catégorie dédiée (« - botanical
         # illustrations », « (illustrations) ») qui compte souvent des dizaines de pièces.
