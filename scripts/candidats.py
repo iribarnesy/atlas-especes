@@ -101,7 +101,9 @@ MOTS = {
     "fleur": ("flower", "fleur", "blüte", "blute", "bloem", "inflorescen", "umbel",
               "ombelle", "blomma", "kwiat", "flor", "fiore", "bloom", "capitul"),
     "feuille": ("leaf", "leaves", "feuille", "blatt", "blad", "foliage", "liść", "lisc",
-                "hoja", "foglia", "rosette", "rosett"),
+                "hoja", "foglia", "rosette", "rosett",
+                # chez un conifère, les aiguilles SONT les feuilles
+                "needle", "aiguille", "nadel", "acicula"),
     "fruit": ("fruit", "seed", "graine", "frucht", "mericarp", "achene", "akene",
               "samen", "owoc", "semilla", "capsule", "gousse"),
     # L'écorce est l'aspect le plus déficitaire du dépôt et ne concerne que les ligneux.
@@ -115,7 +117,9 @@ MOTS = {
     # répartition ne le sortait jamais. Il passe en tête, comme l'écorce au lot 2.
     "rameau": ("twig", "rameau", "ramille", "bourgeon", "knospe", "buds", " bud", "bud-",
                "winter shoot", "winterknospe", "leaf scar", "cicatrice", "moelle", "pith",
-               "dormant", "knop", "gemma", "yema", "hiver", "invierno", "winter twig"),
+               "dormant", "knop", "gemma", "yema", "hiver", "invierno", "winter twig",
+               # conifères : c'est le rameau et l'insertion des aiguilles qui déterminent
+               "shoot", "branchlet", "sprig", "rameaux", "zweig"),
     "port": ("habit", "plant", "port", "habitus", "whole", "pflanze", "stand",
              "population", "growing", "stem", "tige", "stengel", "silhouette", "arbre",
              "tree", "baum", "shrub", "strauch", "buisson"),
