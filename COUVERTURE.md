@@ -7,8 +7,8 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **22** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 8 · Écorce 35 · Fruit 84 · Fleur 28 · Port 89 · Rameau 57
+- …dont **24** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 8 · Écorce 30 · Fruit 84 · Fleur 28 · Port 89 · Rameau 49
 
 ## Ligneux (77)
 
@@ -23,7 +23,7 @@
 | Arbre de Judée | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Argousier | 6 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Aronia | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
-| Aubépine | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
+| Aubépine | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Aulne glutineux | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Bouleau verruqueux | 5 | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | Fruit |
 | Bruyère cendrée | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
@@ -37,20 +37,20 @@
 | Charme | 8 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
 | Châtaignier | 6 | ✓ | ✓ | ✓ | ✗ | ✗ | ✓ | Fleur, Port |
 | Chèvrefeuille comestible (camérisier) | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
-| Chêne pubescent | 2 | ✓ | ✗ | ✗ | ✗ | ✓ | ✗ | Écorce, Fruit, Fleur, Rameau |
+| Chêne pubescent | 4 | ✓ | ✓ | ✗ | ✗ | ✓ | ✓ | Fruit, Fleur |
 | Chêne pédonculé | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✓ | Écorce, Fleur |
 | Chêne sessile | 6 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
 | Chêne vert | 4 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Chêne-liège | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
-| Cognassier | 3 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Cormier | 3 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
+| Cognassier | 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
+| Cormier | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✓ | Écorce, Fleur |
 | Cornouiller mâle | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Feijoa (goyavier du Brésil) | 4 | ✗ | ✓ | ✗ | ✓ | ✓ | ✗ | Feuille, Fruit, Rameau |
 | Figuier | 5 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Framboisier | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
 | Frêne commun | 5 | ✓ | ✗ | ✓ | ✗ | ✗ | ✓ | Écorce, Fleur, Port |
 | Fusain d'Europe | 4 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Févier d'Amérique | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
+| Févier d'Amérique | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Genévrier commun | 3 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Genêt à balais | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Goji (lyciet) | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
@@ -61,8 +61,8 @@
 | Jujubier | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Kiwaï | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
 | Laurier-sauce | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Merisier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Micocoulier | 4 | ✓ | ✗ | ✓ | ✗ | ✗ | ✗ | Écorce, Fleur, Port, Rameau |
+| Merisier | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
+| Micocoulier | 5 | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ | Fleur, Port, Rameau |
 | Myrtille | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
 | Mélèze | 6 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Mûrier noir | 4 | ✓ | ✗ | ✓ | ✗ | ✗ | ✗ | Écorce, Fleur, Port, Rameau |
@@ -73,16 +73,16 @@
 | Pin maritime | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Pin sylvestre | 4 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Plaqueminier (kaki) | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
-| Poirier | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Pommier | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Prunellier | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
+| Poirier | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | Écorce, Port |
+| Pommier | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
+| Prunellier | 6 | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | Écorce |
 | Prunier | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
 | Pêcher | 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Robinier (faux-acacia) | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | Écorce, Port |
 | Ronce | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
 | Sapin pectiné | 5 | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ | Fleur, Port, Rameau |
 | Saule | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✓ | Écorce, Fruit, Port |
-| Sorbier des oiseleurs | 5 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
+| Sorbier des oiseleurs | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Sureau noir | 5 | ✓ | ✗ | ✗ | ✓ | ✓ | ✓ | Écorce, Fruit |
 | Tilleul à petites feuilles | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Tremble | 6 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | Écorce, Port |

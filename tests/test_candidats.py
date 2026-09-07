@@ -172,6 +172,17 @@ def test_les_planches_ne_passent_pas_devant_un_aspect(cd, monkeypatch):
     assert "Category:X - Famous" not in vues
 
 
+def test_on_demande_une_largeur_mise_en_cache_par_wikimedia(cd):
+    """Demander 1000 px force Wikimedia à rendre une vignette à chaque appel, et l'API
+    finit par répondre 429 en renvoyant à la liste des tailles servies depuis le cache.
+    On demande donc la première largeur standard au-dessus."""
+    assert cd.largeur_cachee(1000) == 1024
+    assert cd.largeur_cachee(420) == 640
+    assert cd.largeur_cachee(1024) == 1024
+    # au-delà de la plus grande, on ne demande pas plus
+    assert cd.largeur_cachee(9999) == 2560
+
+
 # ------------------------------------------------- vocabulaire de la faune
 
 def test_les_aspects_de_l_atlas_ne_disent_rien_d_un_animal(cd):

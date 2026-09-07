@@ -49,6 +49,20 @@ EXTRA = atlas_data.EXTRA
 DEST = os.path.join(BASE, "candidats")
 UA = "ForestryQuiz/1.0 (personal educational use)"
 API = "https://commons.wikimedia.org/w/api.php?"
+
+# Wikimedia ne met en cache qu'un petit nombre de largeurs de vignettes. Demander 1000 px
+# force un rendu à chaque appel, et l'API finit par répondre 429 en renvoyant justement à
+# la liste des tailles servies depuis le cache. On demande donc la première largeur
+# standard au-dessus de celle qu'on veut, et images.reduire() ramène au format voulu.
+LARGEURS_CACHE = (320, 640, 800, 1024, 1280, 1920, 2560)
+
+
+def largeur_cachee(largeur):
+    """Première largeur standard ≥ `largeur`, pour être servi depuis le cache Wikimedia."""
+    for w in LARGEURS_CACHE:
+        if w >= largeur:
+            return w
+    return LARGEURS_CACHE[-1]
 PAR_ESPECE = 7
 SOUS_CATS = 6      # sous-catégories explorées par espèce
 
@@ -229,7 +243,8 @@ def imageinfo_par_lots(titres, largeur):
     pages = []
     for i in range(0, len(titres), 50):
         pages += _pages(api(titles="|".join(titres[i:i + 50]), prop="imageinfo",
-                            iiprop="url|size|user|mime|extmetadata", iiurlwidth=str(largeur)))
+                            iiprop="url|size|user|mime|extmetadata",
+                            iiurlwidth=str(largeur_cachee(largeur))))
         time.sleep(0.3)
     return pages
 
@@ -339,10 +354,24 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
 # --------------------------------------------------------------- téléchargement
 
 def telecharger(url, dest, largeur):
+    """Télécharge et réduit, en réessayant : un 429 ou une panne de résolution passagère
+    ne doit pas faire perdre le candidat (dix espèces d'affilée ont été perdues ainsi)."""
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        buf = r.read()
-    if len(buf) < 1500:
+    buf = None
+    for essai in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                buf = r.read()
+            break
+        except urllib.error.HTTPError as e:
+            if e.code not in (429, 503) or essai == 3:
+                raise
+            time.sleep(10 + essai * 20)
+        except urllib.error.URLError:
+            if essai == 3:
+                raise
+            time.sleep(10 + essai * 20)
+    if buf is None or len(buf) < 1500:
         raise IOError("fichier trop petit")
     images.reduire(buf, dest, largeur)
 
