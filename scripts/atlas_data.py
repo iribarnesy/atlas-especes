@@ -62,9 +62,22 @@ PLANCHE_LABEL = "Planche ancienne"
 ASPECT_CATS = {"ecorce": ("ligneux",), "rameau": ("ligneux",)}
 
 
-def aspect_applicable(aspect, cat):
-    """L'aspect a-t-il un sens pour cette catégorie d'atlas ?"""
-    return cat in ASPECT_CATS.get(aspect, (cat,))
+# Même raisonnement un cran plus fin, à l'intérieur des ligneux : un SOUS-ARBRISSEAU
+# (bruyère, callune, myrtille) et une LIANE (vigne, kiwaï) n'ont ni tronc ni rameau d'hiver
+# au sens usuel. Reprocher une écorce à une callune n'a pas plus de sens qu'à une herbacée.
+# Le type vient de la colonne « Type » de l'atlas : la règle se dérive de la donnée, elle
+# n'est pas une liste d'espèces à tenir à jour.
+TYPES_SANS_TRONC = ("sous-arbrisseau", "liane")
+ASPECTS_DU_TRONC = ("ecorce", "rameau")
+
+
+def aspect_applicable(aspect, cat, type_=""):
+    """L'aspect a-t-il un sens pour cette espèce ? (catégorie d'atlas, puis type de ligneux)"""
+    if cat not in ASPECT_CATS.get(aspect, (cat,)):
+        return False
+    if aspect in ASPECTS_DU_TRONC and (type_ or "").strip().lower() in TYPES_SANS_TRONC:
+        return False
+    return True
 
 
 ASPECT_KW = {kw: a.id for a in ASPECTS for kw in (a.id,) + a.synonymes}

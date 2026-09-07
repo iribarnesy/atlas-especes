@@ -53,10 +53,14 @@ def main():
 
     # résumé rapide (plantes seulement)
     plants = [sp for c in PLANT_CATS for sp in by_cat.get(c, [])]
+    def applicable(aspect, sp):
+        """L'écorce et le rameau ne concernent que les ligneux — et parmi eux, ni les
+        sous-arbrisseaux ni les lianes."""
+        return atlas_data.aspect_applicable(aspect, sp["cat"],
+                                            (sp.get("fields") or {}).get("type", ""))
+
     def vises(sp):
-        """Aspects attendus pour cette espèce : l'écorce et le rameau ne concernent que
-        les ligneux."""
-        return {k for k, _ in aspects if atlas_data.aspect_applicable(k, sp["cat"])}
+        return {k for k, _ in aspects if applicable(k, sp)}
 
     full = sum(1 for sp in plants if vises(sp) <= aspects_present(sp))
     none = sum(1 for sp in plants if not aspects_present(sp))
@@ -66,7 +70,7 @@ def main():
               % (full, len(aspects), none),
               "- Manques par aspect : " + " · ".join(
                   "%s %d" % (lab, sum(1 for sp in plants
-                                      if atlas_data.aspect_applicable(k, sp["cat"])
+                                      if applicable(k, sp)
                                       and k not in aspects_present(sp)))
                   for k, lab in aspects),
               ""]
