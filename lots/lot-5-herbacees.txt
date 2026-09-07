@@ -1,0 +1,51 @@
+# Lot 5 — 20 herbacées sauvages, dont un mortel et trois partenaires de confusion que le
+# lot 1 avait laissés en plan.
+#
+#   python3 scripts/candidats.py --lot lots/lot-5-herbacees.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# Ici les aspects de l'atlas s'appliquent de nouveau (feuille, fleur, fruit, port) :
+# les noms suivent <stem>-<aspect>-<n>.jpg comme aux lots 1 et 2.
+#
+# --planches garde les gravures anciennes au lieu de les écarter. Elles ne remplacent pas
+# une photo de terrain, mais elles montrent tous les organes d'un coup et sont souvent
+# plus lisibles qu'un cliché — cf. #30 pour la question de leur reclassement.
+#
+# ⚠ Le piège de ce lot : trois de ces espèces complètent des groupes de confusion créés au
+# lot 1 mais restés à moitié illustrés. Sans elles, le critère qui tranche ne se joue pas.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# MORTEL — et le sosie le plus classique qui soit
+muguet                 # Convallaria majalis ; feuilles confondues avec l'ail des ours,
+                       # qui pousse au même endroit à la même saison. Sans odeur d'ail.
+
+# apiacée sauvage : le groupe du lot 1 la concerne directement
+egopode                # Aegopodium podagraria ; pétiole triangulaire, feuille en 3x3
+
+# sosie d'une espèce toxique
+stellaire              # Stellaria media ; à opposer au mouron rouge (Anagallis arvensis)
+
+# partenaires de confusion du lot 1, restés à une seule photo
+amarante               # groupe « Épinards sauvages », avec le chénopode
+estragon               # groupe « Astéracées amères », avec l'absinthe
+paquerette             # groupe « Astéracées à fleurs blanches », avec la camomille
+
+# sauvages comestibles et médicinales, très courantes
+lamier                 # Lamium album, l'« ortie blanche » : pas d'urtication
+plantain               # Plantago lanceolata
+mauve                  # Malva sylvestris
+pourpier               # Portulaca oleracea
+millepertuis           # Hypericum perforatum ; feuille perforée à contre-jour
+primevere              # Primula veris
+violette               # Viola odorata
+onagre                 # Oenothera biennis
+chicoree               # Cichorium intybus
+souci                  # Calendula officinalis
+valeriane              # Valeriana officinalis
+
+# fourragères des prairies, à distinguer entre elles
+lotier                 # Lotus corniculatus
+melilot                # Melilotus officinalis
+sainfoin               # Onobrychis viciifolia
