@@ -1,13 +1,14 @@
 # Couverture photo par espèce
 
 > Généré par `scripts/couverture.py` — **ne pas éditer à la main**.
-> ✓ = au moins une photo de cet aspect · ✗ = manquant. Pour ajouter une photo,
+> ✓ = au moins une photo de cet aspect · ✗ = manquant · · = sans objet
+> (l'écorce et le rameau ne concernent que les ligneux). Pour ajouter une photo,
 > voir [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **0** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 8 · Écorce 149 · Fruit 84 · Fleur 28 · Port 89 · Rameau 190
+- …dont **21** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 8 · Écorce 35 · Fruit 84 · Fleur 28 · Port 89 · Rameau 76
 
 ## Ligneux (77)
 
@@ -95,120 +96,120 @@
 
 | Espèce | 📷 | Feuille | Écorce | Fruit | Fleur | Port | Rameau | À compléter |
 |---|--:|:-:|:-:|:-:|:-:|:-:|:-:|---|
-| Absinthe (armoise amère) | 5 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Achillée millefeuille | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Ail | 3 | ✗ | ✗ | ✗ | ✓ | ✓ | ✗ | Feuille, Écorce, Fruit, Rameau |
-| Ail des ours | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Ail rocambole | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Alliaire | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Amarante | 5 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Aneth | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Artichaut / Cardon | 5 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Arum tacheté (gouet) | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Asperge | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Aspérule odorante | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Aubergine | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Avoine | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Bardane | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Basilic | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Berce commune | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Betterave / Épinard | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Blette (poirée) | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Bourrache | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Camomille (matricaire) | 5 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Capucine | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Cardamine des prés | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Carotte | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Cerfeuil | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Chicorée / Endive | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Chou | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Chou Daubenton | 6 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Chénopode blanc | 5 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Ciboulette | 5 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Claytone de Cuba | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Colchique | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Concombre / Cornichon | 3 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Consoude | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Coriandre | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Courge | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Courgette | 3 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Cresson de fontaine | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Crosne du Japon | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Céleri | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Digitale pourpre | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Estragon | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Fenouil | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Fraisier des bois | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Féverole / Fève | 3 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Grande ciguë | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Guimauve | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Haricot | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Hysope | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Laitue | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Lamier blanc | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Lavande | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Livèche | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Lotier corniculé | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Lupin | 6 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Luzerne | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Marjolaine | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Mauve | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Maïs | 3 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Menthe | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Millepertuis | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Moutarde blanche | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Muguet | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Mâche | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Mélilot | 3 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Mélisse | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Navet | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Oca du Pérou | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Oignon | 2 | ✓ | ✗ | ✗ | ✗ | ✓ | ✗ | Écorce, Fruit, Fleur, Rameau |
-| Onagre | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Origan | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Ortie | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Oseille | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Panais | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Patate douce | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Persil | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Phacélie | 3 | ✗ | ✗ | ✗ | ✓ | ✗ | ✗ | Feuille, Écorce, Fruit, Port, Rameau |
-| Pissenlit | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Plantain | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Poire de terre (yacon) | 3 | ✗ | ✗ | ✗ | ✓ | ✗ | ✗ | Feuille, Écorce, Fruit, Port, Rameau |
-| Poireau | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Poireau perpétuel | 3 | ✗ | ✗ | ✗ | ✓ | ✗ | ✗ | Feuille, Écorce, Fruit, Port, Rameau |
-| Pois | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Poivron / Piment | 3 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Pomme de terre | 5 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Pourpier | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Primevère | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Pâquerette | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Radis | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Raifort | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Rhubarbe | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Romarin | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Roquette | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Sainfoin | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Sarrasin (blé noir) | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Sarriette | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Sauge officinale | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Scorsonère | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Seigle | 3 | ✗ | ✗ | ✗ | ✓ | ✓ | ✗ | Feuille, Écorce, Fruit, Rameau |
-| Souci (calendula) | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Stellaire (mouron blanc) | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Tanaisie | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Thym | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Tomate | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Topinambour | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Trèfle blanc | 4 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Trèfle violet | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Valériane officinale | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Verveine citronnelle | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Vesce commune | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Violette odorante | 3 | ✓ | ✗ | ✗ | ✓ | ✗ | ✗ | Écorce, Fruit, Port, Rameau |
-| Échalote | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
-| Égopode (herbe aux goutteux) | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Épinard | 3 | ✓ | ✗ | ✗ | ✗ | ✓ | ✗ | Écorce, Fruit, Fleur, Rameau |
+| Absinthe (armoise amère) | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Achillée millefeuille | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Ail | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
+| Ail des ours | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Ail rocambole | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Alliaire | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Amarante | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Aneth | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Artichaut / Cardon | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Arum tacheté (gouet) | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Asperge | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Aspérule odorante | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Aubergine | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Avoine | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Bardane | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Basilic | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Berce commune | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Betterave / Épinard | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Blette (poirée) | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Bourrache | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Camomille (matricaire) | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Capucine | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Cardamine des prés | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Carotte | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Cerfeuil | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Chicorée / Endive | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Chou | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Chou Daubenton | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Chénopode blanc | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Ciboulette | 5 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Claytone de Cuba | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Colchique | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Concombre / Cornichon | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Consoude | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Coriandre | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Courge | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Courgette | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Cresson de fontaine | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Crosne du Japon | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Céleri | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Digitale pourpre | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Estragon | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Fenouil | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Fraisier des bois | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Féverole / Fève | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Grande ciguë | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Guimauve | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Haricot | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Hysope | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Laitue | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Lamier blanc | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Lavande | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Livèche | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Lotier corniculé | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Lupin | 6 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Luzerne | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Marjolaine | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Mauve | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Maïs | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Menthe | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Millepertuis | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Moutarde blanche | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Muguet | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Mâche | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Mélilot | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Mélisse | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Navet | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Oca du Pérou | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Oignon | 2 | ✓ | · | ✗ | ✗ | ✓ | · | Fruit, Fleur |
+| Onagre | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Origan | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Ortie | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Oseille | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Panais | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Patate douce | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Persil | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Phacélie | 3 | ✗ | · | ✗ | ✓ | ✗ | · | Feuille, Fruit, Port |
+| Pissenlit | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Plantain | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Poire de terre (yacon) | 3 | ✗ | · | ✗ | ✓ | ✗ | · | Feuille, Fruit, Port |
+| Poireau | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Poireau perpétuel | 3 | ✗ | · | ✗ | ✓ | ✗ | · | Feuille, Fruit, Port |
+| Pois | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Poivron / Piment | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Pomme de terre | 5 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Pourpier | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Primevère | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Pâquerette | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Radis | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Raifort | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Rhubarbe | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Romarin | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Roquette | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Sainfoin | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Sarrasin (blé noir) | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Sarriette | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Sauge officinale | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Scorsonère | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Seigle | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
+| Souci (calendula) | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Stellaire (mouron blanc) | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Tanaisie | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Thym | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Tomate | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Topinambour | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Trèfle blanc | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Trèfle violet | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Valériane officinale | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Verveine citronnelle | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Vesce commune | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Violette odorante | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Échalote | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Égopode (herbe aux goutteux) | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Épinard | 3 | ✓ | · | ✗ | ✗ | ✓ | · | Fruit, Fleur |
 
 ## Champignons (24)
 

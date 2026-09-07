@@ -39,6 +39,24 @@ def test_les_mots_d_organe_sont_reconnus_en_plusieurs_langues(cd):
     assert cd.aspect_devine("File:Heracleum-sphondylium-habitus.jpg") == "port"
 
 
+def test_le_rameau_est_reconnu_et_prime(cd):
+    """Dernier aspect qu'aucun lot n'avait visé : faute d'être dans MOTS, tout bourgeon
+    tombait dans « divers » et la répartition ne le sortait jamais en tête."""
+    assert cd.aspect_devine("File:Fraxinus excelsior winter twig.jpg") == "rameau"
+    assert cd.aspect_devine("File:Fagus sylvatica buds.jpg") == "rameau"
+    assert cd.aspect_devine("File:Acer campestre Knospen im Winter.jpg") == "rameau"
+    assert cd.aspect_devine("File:Sambucus nigra pith.jpg") == "rameau"
+    assert cd.aspect_devine("File:Quercus robur leaf scar detail.jpg") == "rameau"
+    # il passe devant l'écorce quand les deux mots sont là
+    assert cd.aspect_devine("File:Tilia cordata twig and bark.jpg") == "rameau"
+
+
+def test_bud_ne_capture_pas_budapest(cd):
+    """« bud » nu attraperait Budapest et Buddleja : les mots-clés sont bornés."""
+    assert cd.aspect_devine("File:Budapest tree.jpg") == "port"
+    assert cd.aspect_devine("File:Buddleja davidii flowers.jpg") == "fleur"
+
+
 def test_l_ecorce_est_reconnue_et_prime_sur_le_port(cd):
     """L'aspect le plus déficitaire du dépôt : sans ces mots, toute écorce tombait dans
     « divers » et la répartition ne la sortait jamais en tête."""

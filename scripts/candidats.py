@@ -94,11 +94,18 @@ MOTS = {
     # pas de la silhouette, alors que les deux mots se croisent souvent.
     "ecorce": ("bark", "écorce", "ecorce", "rinde", "corteza", "corteccia", "kora",
                "trunk", "tronc", "stamm", "bole", "schors", "bast", "borke"),
+    # Le rameau d'hiver — bourgeons, cicatrices foliaires, moelle — est la seule façon
+    # d'identifier un feuillu hors saison, et c'était le dernier aspect qu'aucun lot
+    # n'avait visé : faute d'être ici, tout bourgeon tombait dans « divers » et la
+    # répartition ne le sortait jamais. Il passe en tête, comme l'écorce au lot 2.
+    "rameau": ("twig", "rameau", "ramille", "bourgeon", "knospe", "buds", " bud", "bud-",
+               "winter shoot", "winterknospe", "leaf scar", "cicatrice", "moelle", "pith",
+               "dormant", "knop", "gemma", "yema", "hiver", "invierno", "winter twig"),
     "port": ("habit", "plant", "port", "habitus", "whole", "pflanze", "stand",
              "population", "growing", "stem", "tige", "stengel", "silhouette", "arbre",
              "tree", "baum", "shrub", "strauch", "buisson"),
 }
-ORDRE = ("ecorce", "feuille", "fleur", "fruit", "port")
+ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
 
 # Vocabulaire de RÉPARTITION pour la faune. Ce ne sont PAS des aspects de l'atlas — aucun
 # des aspects (feuille, écorce…) ne s'applique à un animal, et les photos de faune entrent

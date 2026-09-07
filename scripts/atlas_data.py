@@ -45,6 +45,19 @@ ASPECTS = [
 DIVERS = "divers"        # photo sans aspect annoncé
 DIVERS_LABEL = "Divers"
 
+# Aspects qui n'ont de sens que pour certaines catégories. Un rameau d'hiver ou une écorce
+# ne veulent rien dire pour une herbacée : sans cette restriction, COUVERTURE.md comptait
+# 190 manques de rameau et 149 d'écorce, dont 114 à chaque fois sur des plantes qui n'en
+# ont pas. Les vrais chiffres sont 76 et 35, tous des ligneux. Un aspect absent de ce
+# dictionnaire s'applique partout.
+ASPECT_CATS = {"ecorce": ("ligneux",), "rameau": ("ligneux",)}
+
+
+def aspect_applicable(aspect, cat):
+    """L'aspect a-t-il un sens pour cette catégorie d'atlas ?"""
+    return cat in ASPECT_CATS.get(aspect, (cat,))
+
+
 ASPECT_KW = {kw: a.id for a in ASPECTS for kw in (a.id,) + a.synonymes}
 ASPECT_LABEL = dict([(a.id, a.label) for a in ASPECTS] + [(DIVERS, DIVERS_LABEL)])
 ASPECT_IDS = tuple(a.id for a in ASPECTS)
