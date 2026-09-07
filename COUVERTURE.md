@@ -216,7 +216,7 @@ _Aspects non applicables (une photo « l'organisme »)._
 
 | Espèce | 📷 |
 |---|--:|
-| Amadouvier | 1 |
+| Amadouvier | 4 |
 | Amanite panthère | 3 |
 | Amanite phalloïde | 4 |
 | Amanite tue-mouches | 3 |
@@ -230,15 +230,15 @@ _Aspects non applicables (une photo « l'organisme »)._
 | Entolome livide | 3 |
 | Galère marginée | 4 |
 | Girolle (chanterelle) | 3 |
-| Lactaire délicieux | 1 |
+| Lactaire délicieux | 4 |
 | Morille | 3 |
 | Pied-de-mouton | 3 |
 | Pleurote en huître | 3 |
-| Polypore soufré | 1 |
+| Polypore soufré | 4 |
 | Rosé des prés | 3 |
 | Russule charbonnière | 3 |
 | Trompette de la mort | 3 |
-| Truffe noire | 1 |
+| Truffe noire | 3 |
 | Vesse-de-loup perlée | 3 |
 
 ## Faune (24)
@@ -278,19 +278,19 @@ _Aspects non applicables (une photo « l'organisme »)._
 
 | Espèce | 📷 |
 |---|--:|
-| Cladonie | 1 |
-| Dactyle aggloméré | 1 |
-| Fougère aigle | 1 |
-| Fétuque rouge | 1 |
-| Jonc diffus | 1 |
-| Molinie bleue | 1 |
-| Mousse (hypne) | 1 |
-| Osmonde royale | 1 |
-| Parmélie | 1 |
-| Polypode commun | 1 |
-| Polytric commun | 1 |
-| Roseau commun | 1 |
-| Scolopendre | 1 |
-| Sphaigne | 1 |
-| Usnée (barbe de Jupiter) | 1 |
-| Xanthorie (lichen jaune) | 1 |
+| Cladonie | 3 |
+| Dactyle aggloméré | 3 |
+| Fougère aigle | 3 |
+| Fétuque rouge | 3 |
+| Jonc diffus | 3 |
+| Molinie bleue | 3 |
+| Mousse (hypne) | 3 |
+| Osmonde royale | 3 |
+| Parmélie | 3 |
+| Polypode commun | 3 |
+| Polytric commun | 3 |
+| Roseau commun | 3 |
+| Scolopendre | 3 |
+| Sphaigne | 3 |
+| Usnée (barbe de Jupiter) | 3 |
+| Xanthorie (lichen jaune) | 3 |
