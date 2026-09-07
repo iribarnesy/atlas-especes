@@ -1,0 +1,66 @@
+# Lot 8 — le RAMEAU D'HIVER de 20 feuillus caducs.
+#
+# Premier lot à viser un aspect plutôt que des espèces sans photo. Le rameau est le
+# dernier aspect vraiment déficitaire du dépôt : 76 ligneux sur 77 n'en ont aucun.
+#
+#   python3 scripts/candidats.py --lot lots/lot-8-rameau.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ POURQUOI CET ASPECT COMPTE. Un feuillu se détermine six mois par an sans ses feuilles.
+# Le rameau d'hiver est alors le seul document : disposition des bourgeons (opposés ou
+# alternes), leur forme, leur couleur, leurs écailles, la cicatrice foliaire, la moelle,
+# les lenticelles. C'est la compétence de terrain la plus utile de tout l'atlas, et celle
+# que le quiz ne pouvait pas exercer.
+#
+# ⚠ CE QU'IL FAUT VISER, espèce par espèce, et qui doit être VISIBLE sur la photo :
+#   - le frêne : bourgeons NOIRS et opposés — le plus reconnaissable de tous ;
+#   - le hêtre : bourgeons fusiformes, longs, effilés, brun cuivré, alternes ;
+#   - les chênes : bourgeons GROUPÉS au sommet du rameau ;
+#   - les érables : bourgeons OPPOSÉS (verts et gros chez le sycomore, petits chez le
+#     champêtre, dont le rameau devient parfois subéreux) ;
+#   - le charme : bourgeons APPLIQUÉS contre le rameau, à opposer au hêtre ;
+#   - le tilleul : deux écailles inégales, rouges ;
+#   - le noyer : moelle CLOISONNÉE et cicatrice foliaire en « tête de singe » ;
+#   - le sureau : moelle blanche ÉPAISSE, bourgeons opposés ;
+#   - l'aulne : bourgeons PÉDONCULÉS violacés, cônes de l'an passé encore là ;
+#   - le saule : bourgeon à UNE SEULE écaille ;
+#   - le noisetier : chatons déjà formés en hiver ;
+#   - le cornouiller mâle : bourgeons floraux globuleux, distincts des foliaires ;
+#   - le fusain : rameau VERT à quatre angles ;
+#   - le robinier : ÉPINES stipulaires par paires, bourgeons cachés dessous.
+#
+# ⚠ LES PIÈGES, propres à cet aspect :
+#   - Commons a peu de rameaux d'hiver, et beaucoup sont des BOURGEONS QUI DÉBOURRENT au
+#     printemps — jolis, mais ce n'est plus l'état où l'on doit identifier l'arbre ;
+#   - les gros plans de bourgeon sans le rameau perdent la disposition (opposée/alterne),
+#     qui est le premier caractère qu'on regarde ;
+#   - « twig » désigne aussi des rameaux feuillés d'été : vérifier l'absence de feuilles ;
+#   - les planches anciennes montrent souvent le rameau d'hiver en médaillon, et elles
+#     sont ici précieuses (--planches).
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# les opposés — la disposition se voit d'un coup d'œil et divise l'atlas en deux
+frene                  # bourgeons noirs, LE repère
+erable_sycomore        # bourgeons verts, gros
+erable_champetre       # bourgeons petits, rameau parfois subéreux
+sureau                 # moelle blanche épaisse
+fusain                 # rameau vert à 4 angles
+troene                 # (a déjà un rameau, à compléter)
+cornouiller_male       # bourgeons floraux globuleux
+
+# les alternes à bourgeons caractéristiques
+hetre                  # fusiformes, longs, brun cuivré
+charme                 # appliqués contre le rameau
+chene_pedoncule        # groupés au sommet
+chene_sessile          # idem, à opposer au pédonculé
+tilleul                # deux écailles inégales, rouges
+noyer                  # moelle cloisonnée, cicatrice en tête de singe
+aulne_glutineux        # bourgeons pédonculés, cônes persistants
+noisetier              # chatons dès l'hiver
+saule                  # une seule écaille
+bouleau                # rameaux fins et retombants
+tremble                # bourgeons luisants
+chataignier            # rameau anguleux, bourgeons à 2-3 écailles
+robinier               # épines stipulaires par paires

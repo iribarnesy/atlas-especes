@@ -39,6 +39,35 @@ def test_les_mots_d_organe_sont_reconnus_en_plusieurs_langues(cd):
     assert cd.aspect_devine("File:Heracleum-sphondylium-habitus.jpg") == "port"
 
 
+def test_le_rameau_est_reconnu_et_prime(cd):
+    """Dernier aspect qu'aucun lot n'avait visé : faute d'être dans MOTS, tout bourgeon
+    tombait dans « divers » et la répartition ne le sortait jamais en tête."""
+    assert cd.aspect_devine("File:Fraxinus excelsior winter twig.jpg") == "rameau"
+    assert cd.aspect_devine("File:Fagus sylvatica buds.jpg") == "rameau"
+    assert cd.aspect_devine("File:Acer campestre Knospen im Winter.jpg") == "rameau"
+    assert cd.aspect_devine("File:Sambucus nigra pith.jpg") == "rameau"
+    assert cd.aspect_devine("File:Quercus robur leaf scar detail.jpg") == "rameau"
+    # il passe devant l'écorce quand les deux mots sont là
+    assert cd.aspect_devine("File:Tilia cordata twig and bark.jpg") == "rameau"
+
+
+def test_les_noms_de_lieux_ne_sont_pas_pris_pour_des_aspects(cd):
+    """Découvert dans le lot 8 : un sureau photographié à BUDAPEST passait pour un rameau
+    d'hiver (« bud »), et une vigne photographiée au PORTUGAL pour un port."""
+    assert cd.aspect_devine(
+        "File:Feketebodza (Sambucus nigra). - Budapest.JPG") == "divers"
+    assert cd.aspect_devine(
+        "File:Sambucus nigra leaves and bark, Ponte de Sor, Portugal.jpg") == "ecorce"
+    # le vrai mot-clé passe toujours
+    assert cd.aspect_devine("File:Sambucus nigra buds.jpg") == "rameau"
+
+
+def test_bud_ne_capture_pas_budapest(cd):
+    """« bud » nu attraperait Budapest et Buddleja : les mots-clés sont bornés."""
+    assert cd.aspect_devine("File:Budapest tree.jpg") == "port"
+    assert cd.aspect_devine("File:Buddleja davidii flowers.jpg") == "fleur"
+
+
 def test_l_ecorce_est_reconnue_et_prime_sur_le_port(cd):
     """L'aspect le plus déficitaire du dépôt : sans ces mots, toute écorce tombait dans
     « divers » et la répartition ne la sortait jamais en tête."""
@@ -92,21 +121,55 @@ def test_les_photos_d_etal_restent_ecartees_meme_avec_planches(cd):
     assert not cd.titre_utilisable("File:Allium sativum distribution map.png", planches=True)
 
 
-def test_avec_planches_la_sous_categorie_des_gravures_passe_en_tete(cd, monkeypatch):
-    """Elle s'appelle « - botanical illustrations » : triée alphabétiquement elle arrive
-    après (buds), (flowers), (fruit) et n'entrait jamais dans les quatre explorées."""
+def test_les_sous_categories_qui_nomment_un_aspect_passent_devant(cd, monkeypatch):
+    """« Famous Fraxinus excelsior » prenait une des quatre places explorées, et
+    « (buds) » pouvait tomber en dehors."""
+    scs = ["Category:X - Famous", "Category:X by country", "Category:X cultivars",
+           "Category:X (bark)", "Category:X (buds)"]
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
+    monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("X", 3, 1000)
+    # les places servent d'abord aux aspects ; les génériques ne prennent que le reste
+    assert vues[:2] == ["Category:X (bark)", "Category:X (buds)"]
+
+
+def test_avec_planches_les_gravures_passent_devant_les_generiques(cd, monkeypatch):
+    """Commons range les gravures dans une sous-catégorie dédiée. Sans priorité elle
+    tombait derrière (buds), (flowers), (fruit)… et n'était jamais explorée."""
     scs = ["Category:X (buds)", "Category:X (flowers)", "Category:X (fruit)",
-           "Category:X (habitat)", "Category:X - botanical illustrations"]
+           "Category:X (habitat)", "Category:X - botanical illustrations",
+           "Category:X by country", "Category:X - Famous", "Category:X in music"]
     vues = []
     monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
     monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
     monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
     monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
     cd.candidats("X", 3, 1000, planches=True)
+    gravures = vues.index("Category:X - botanical illustrations")
+    assert all(vues.index(c) < gravures for c in vues if "(" in c), \
+        "les aspects passent d'abord"
+    assert gravures < vues.index("Category:X by country"), \
+        "mais les gravures passent avant les génériques"
+
+
+def test_les_planches_ne_passent_pas_devant_un_aspect(cd, monkeypatch):
+    """La régression qui a fait rentrer le lot 8 sans un seul rameau de charme :
+    « - botanical illustrations » prenait la première place et éjectait « buds »."""
+    scs = ["Category:X - botanical illustrations", "Category:X (bark)",
+           "Category:X (fruit)", "Category:X (leaves)", "Category:X buds",
+           "Category:X by country", "Category:X - Famous"]
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
+    monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("X", 3, 1000, planches=True)
+    assert "Category:X buds" in vues, "l'aspect visé doit être exploré"
     assert "Category:X - botanical illustrations" in vues
-    vues.clear()
-    cd.candidats("X", 3, 1000, planches=False)
-    assert "Category:X - botanical illustrations" not in vues
+    assert "Category:X - Famous" not in vues
 
 
 # ------------------------------------------------- vocabulaire de la faune

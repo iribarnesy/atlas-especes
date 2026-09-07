@@ -50,6 +50,7 @@ DEST = os.path.join(BASE, "candidats")
 UA = "ForestryQuiz/1.0 (personal educational use)"
 API = "https://commons.wikimedia.org/w/api.php?"
 PAR_ESPECE = 7
+SOUS_CATS = 6      # sous-catégories explorées par espèce
 
 # Ce qui n'est pas une photo de terrain exploitable pour un quiz : planches botaniques,
 # herbiers, coupes au microscope, cartes de répartition, œuvres d'art.
@@ -94,11 +95,25 @@ MOTS = {
     # pas de la silhouette, alors que les deux mots se croisent souvent.
     "ecorce": ("bark", "écorce", "ecorce", "rinde", "corteza", "corteccia", "kora",
                "trunk", "tronc", "stamm", "bole", "schors", "bast", "borke"),
+    # Le rameau d'hiver — bourgeons, cicatrices foliaires, moelle — est la seule façon
+    # d'identifier un feuillu hors saison, et c'était le dernier aspect qu'aucun lot
+    # n'avait visé : faute d'être ici, tout bourgeon tombait dans « divers » et la
+    # répartition ne le sortait jamais. Il passe en tête, comme l'écorce au lot 2.
+    "rameau": ("twig", "rameau", "ramille", "bourgeon", "knospe", "buds", " bud", "bud-",
+               "winter shoot", "winterknospe", "leaf scar", "cicatrice", "moelle", "pith",
+               "dormant", "knop", "gemma", "yema", "hiver", "invierno", "winter twig"),
     "port": ("habit", "plant", "port", "habitus", "whole", "pflanze", "stand",
              "population", "growing", "stem", "tige", "stengel", "silhouette", "arbre",
              "tree", "baum", "shrub", "strauch", "buisson"),
 }
-ORDRE = ("ecorce", "feuille", "fleur", "fruit", "port")
+ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
+
+# Mots qui contiennent par accident un mot-clé d'aspect. « Budapest » contient « bud »,
+# « Portugal » contient « port » : sans les retirer d'abord, un sureau photographié à
+# Budapest passait pour un rameau d'hiver et une vigne photographiée au Portugal pour un
+# port. On les gomme du titre avant de chercher les mots-clés.
+FAUX_AMIS = ("budapest", "buddleja", "buddleia", "portugal", "porto", "portland",
+             "important", "portrait de", "leafless")
 
 # Vocabulaire de RÉPARTITION pour la faune. Ce ne sont PAS des aspects de l'atlas — aucun
 # des aspects (feuille, écorce…) ne s'applique à un animal, et les photos de faune entrent
@@ -221,6 +236,8 @@ def imageinfo_par_lots(titres, largeur):
 
 def aspect_devine(titre, ordre=ORDRE, mots=MOTS):
     t = titre.lower()
+    for faux in FAUX_AMIS:
+        t = t.replace(faux, " ")
     for asp in ordre:
         if any(m in t for m in mots[asp]):
             return asp
@@ -276,13 +293,25 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
     """
     titres, categorie = titres_categorie_suivie("Category:" + (categorie or latin))
     scs = sous_categories(categorie)
-    if planches:
-        # Commons range les gravures dans une sous-catégorie dédiée (« - botanical
-        # illustrations », « (illustrations) ») qui compte souvent des dizaines de pièces.
-        # Triée alphabétiquement elle arrive après (buds), (flowers), (fruit) et n'était
-        # donc jamais explorée : sans ce tri, --planches ne ramenait rien.
-        scs.sort(key=lambda c: 0 if "illustration" in c.lower() else 1)
-    for sc in scs[:4]:
+    # Priorité d'exploration. Une sous-catégorie qui nomme un aspect (« (buds) »,
+    # « (bark) ») vaut mieux qu'une générique (« Famous … », « by country »). Et quand
+    # --planches est posé, les gravures valent mieux qu'une générique aussi — mais PAS
+    # mieux qu'un aspect : sans ce rang commun, « - botanical illustrations » prenait la
+    # première place et éjectait « buds » des quatre explorées, ce qui a fait rentrer le
+    # lot 8 sans un seul rameau de charme.
+    _ordre, _mots = VOCABULAIRES[vocabulaire]
+    _kw = tuple(m for asp in _ordre for m in _mots[asp])
+
+    def _rang(c):
+        bas = c.lower()
+        if any(m in bas for m in _kw):
+            return 0
+        if planches and "illustration" in bas:
+            return 1
+        return 2
+
+    scs.sort(key=_rang)
+    for sc in scs[:SOUS_CATS]:
         time.sleep(0.4)
         titres += titres_categorie(sc)
     vus = set(deja)
