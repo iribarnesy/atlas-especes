@@ -108,6 +108,13 @@ MOTS = {
 }
 ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
 
+# Mots qui contiennent par accident un mot-clé d'aspect. « Budapest » contient « bud »,
+# « Portugal » contient « port » : sans les retirer d'abord, un sureau photographié à
+# Budapest passait pour un rameau d'hiver et une vigne photographiée au Portugal pour un
+# port. On les gomme du titre avant de chercher les mots-clés.
+FAUX_AMIS = ("budapest", "buddleja", "buddleia", "portugal", "porto", "portland",
+             "important", "portrait de", "leafless")
+
 # Vocabulaire de RÉPARTITION pour la faune. Ce ne sont PAS des aspects de l'atlas — aucun
 # des aspects (feuille, écorce…) ne s'applique à un animal, et les photos de faune entrent
 # sans aspect. Ces mots ne servent qu'à éviter de rapporter dix fois le même adulte de
@@ -229,6 +236,8 @@ def imageinfo_par_lots(titres, largeur):
 
 def aspect_devine(titre, ordre=ORDRE, mots=MOTS):
     t = titre.lower()
+    for faux in FAUX_AMIS:
+        t = t.replace(faux, " ")
     for asp in ordre:
         if any(m in t for m in mots[asp]):
             return asp

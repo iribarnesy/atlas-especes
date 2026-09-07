@@ -51,6 +51,17 @@ def test_le_rameau_est_reconnu_et_prime(cd):
     assert cd.aspect_devine("File:Tilia cordata twig and bark.jpg") == "rameau"
 
 
+def test_les_noms_de_lieux_ne_sont_pas_pris_pour_des_aspects(cd):
+    """Découvert dans le lot 8 : un sureau photographié à BUDAPEST passait pour un rameau
+    d'hiver (« bud »), et une vigne photographiée au PORTUGAL pour un port."""
+    assert cd.aspect_devine(
+        "File:Feketebodza (Sambucus nigra). - Budapest.JPG") == "divers"
+    assert cd.aspect_devine(
+        "File:Sambucus nigra leaves and bark, Ponte de Sor, Portugal.jpg") == "ecorce"
+    # le vrai mot-clé passe toujours
+    assert cd.aspect_devine("File:Sambucus nigra buds.jpg") == "rameau"
+
+
 def test_bud_ne_capture_pas_budapest(cd):
     """« bud » nu attraperait Budapest et Buddleja : les mots-clés sont bornés."""
     assert cd.aspect_devine("File:Budapest tree.jpg") == "port"
