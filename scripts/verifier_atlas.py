@@ -139,7 +139,8 @@ def verifier_photos_extra(stems):
         stem = max(owners, key=len)
         suffixe = os.path.splitext(name.lower())[0][len(stem):]
         inconnus = [t for t in re.split(r"[-_ ]+", suffixe)
-                    if t and not t.isdigit() and t not in atlas_data.ASPECT_KW]
+                    if t and not t.isdigit() and t not in atlas_data.ASPECT_KW
+                    and t not in atlas_data.PLANCHE_KW]
         if inconnus and name not in atlas_data.SIDE:
             warns.append("img/quiz-extra/%s : mot-clé d'aspect non reconnu (%s) — aspects "
                          "possibles : %s" % (name, ", ".join(inconnus), ASPECTS_NOMMES))

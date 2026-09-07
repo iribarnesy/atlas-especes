@@ -45,6 +45,15 @@ ASPECTS = [
 DIVERS = "divers"        # photo sans aspect annoncé
 DIVERS_LABEL = "Divers"
 
+# Marqueur des PLANCHES anciennes — gravures, flores illustrées, dessins d'identification.
+# Ce n'est pas un aspect : une planche montre souvent tous les organes d'un coup, mais elle
+# les montre IDÉALISÉS (port redressé, couleurs franches). On y reconnaît une plante qu'on
+# connaît déjà ; on n'y apprend pas ce qu'on verra dans un fossé au mois d'août. Elle compte
+# donc dans « Divers » et dans « Tout », jamais dans un filtre d'aspect (cf. #30).
+PLANCHE = "planche"
+PLANCHE_KW = (PLANCHE, "planches", "gravure")
+PLANCHE_LABEL = "Planche ancienne"
+
 # Aspects qui n'ont de sens que pour certaines catégories. Un rameau d'hiver ou une écorce
 # ne veulent rien dire pour une herbacée : sans cette restriction, COUVERTURE.md comptait
 # 190 manques de rameau et 149 d'écorce, dont 114 à chaque fois sur des plantes qui n'en
@@ -61,7 +70,7 @@ def aspect_applicable(aspect, cat):
 ASPECT_KW = {kw: a.id for a in ASPECTS for kw in (a.id,) + a.synonymes}
 ASPECT_LABEL = dict([(a.id, a.label) for a in ASPECTS] + [(DIVERS, DIVERS_LABEL)])
 ASPECT_IDS = tuple(a.id for a in ASPECTS)
-ASPECTS_VALIDES = frozenset(ASPECT_IDS) | {DIVERS}   # ce qu'on accepte dans _aspects.tsv
+ASPECTS_VALIDES = frozenset(ASPECT_IDS) | {DIVERS, PLANCHE}  # accepté dans _aspects.tsv
 
 def load_corrections():
     """Actions de contribution (depuis l'app ou à la main) : img/quiz-extra/_corrections.tsv
@@ -166,14 +175,34 @@ def hkey(h):
         return "latin"
     return h
 
-def aspect_of(path, stem):
+def _jetons(path, stem):
+    """Mots du nom de fichier après le stem : « muguet-feuille_fleur-2.jpg » → feuille, fleur, 2."""
+    fn = os.path.splitext(os.path.basename(path).lower())[0]
+    suffix = fn[len(stem):] if fn.startswith(stem) else fn
+    return re.split(r"[-_ ]+", suffix)
+
+
+def est_planche(path, stem=""):
+    """La photo est-elle une planche ancienne ? (jeton du nom, ou ligne de _aspects.tsv)"""
     base = os.path.basename(path)
     if base in SIDE:
-        return SIDE[base] or [DIVERS]
-    fn = os.path.splitext(base.lower())[0]
-    suffix = fn[len(stem):] if fn.startswith(stem) else fn
+        return PLANCHE in (SIDE[base] or [])
+    return any(tok in PLANCHE_KW for tok in _jetons(path, stem))
+
+
+def aspect_of(path, stem):
+    """Aspects d'une photo. Une PLANCHE n'en a aucun : elle va dans « Divers » (cf. #30)."""
+    base = os.path.basename(path)
+    if base in SIDE:
+        marques = [a for a in (SIDE[base] or []) if a != PLANCHE]
+        if PLANCHE in (SIDE[base] or []):
+            return [DIVERS]
+        return marques or [DIVERS]
+    jetons = _jetons(path, stem)
+    if any(tok in PLANCHE_KW for tok in jetons):
+        return [DIVERS]
     found = []
-    for tok in re.split(r"[-_ ]+", suffix):
+    for tok in jetons:
         if tok in ASPECT_KW and ASPECT_KW[tok] not in found:
             found.append(ASPECT_KW[tok])
     return found or [DIVERS]

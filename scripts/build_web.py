@@ -52,6 +52,10 @@ def to_web_data(species, deriveur=None):
         for p in s["paths"]:
             rel = enc_web(p)
             im = {"u": rel, "a": atlas_data.aspect_of(p, s["stem"])}
+            # une planche ancienne se dit : le lecteur doit savoir qu'il regarde un dessin
+            # idéalisé et non ce qu'il verra sur le terrain (cf. #30)
+            if atlas_data.est_planche(p, s["stem"]):
+                im["p"] = 1
             if deriveur is not None:
                 thumb = deriveur.thumb(p, rel)
                 if thumb != rel:

@@ -7,8 +7,8 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **24** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 8 · Écorce 30 · Fruit 84 · Fleur 28 · Port 89 · Rameau 49
+- …dont **23** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 11 · Écorce 30 · Fruit 87 · Fleur 28 · Port 89 · Rameau 51
 
 ## Ligneux (77)
 
@@ -37,13 +37,13 @@
 | Charme | 8 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
 | Châtaignier | 6 | ✓ | ✓ | ✓ | ✗ | ✗ | ✓ | Fleur, Port |
 | Chèvrefeuille comestible (camérisier) | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
-| Chêne pubescent | 4 | ✓ | ✓ | ✗ | ✗ | ✓ | ✓ | Fruit, Fleur |
+| Chêne pubescent | 4 | ✓ | ✓ | ✗ | ✗ | ✓ | ✗ | Fruit, Fleur, Rameau |
 | Chêne pédonculé | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✓ | Écorce, Fleur |
 | Chêne sessile | 6 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
 | Chêne vert | 4 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Chêne-liège | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Cognassier | 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Cormier | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✓ | Écorce, Fleur |
+| Cormier | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Cornouiller mâle | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Feijoa (goyavier du Brésil) | 4 | ✗ | ✓ | ✗ | ✓ | ✓ | ✗ | Feuille, Fruit, Rameau |
 | Figuier | 5 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
@@ -144,7 +144,7 @@
 | Grande ciguë | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Guimauve | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Haricot | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
-| Hysope | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Hysope | 3 | ✗ | · | ✗ | ✓ | ✗ | · | Feuille, Fruit, Port |
 | Laitue | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Lamier blanc | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Lavande | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
@@ -157,10 +157,10 @@
 | Maïs | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Menthe | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Millepertuis | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
-| Moutarde blanche | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Moutarde blanche | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Muguet | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Mâche | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
-| Mélilot | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Mélilot | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
 | Mélisse | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Navet | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Oca du Pérou | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
@@ -174,7 +174,7 @@
 | Persil | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Phacélie | 3 | ✗ | · | ✗ | ✓ | ✗ | · | Feuille, Fruit, Port |
 | Pissenlit | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
-| Plantain | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Plantain | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
 | Poire de terre (yacon) | 3 | ✗ | · | ✗ | ✓ | ✗ | · | Feuille, Fruit, Port |
 | Poireau | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Poireau perpétuel | 3 | ✗ | · | ✗ | ✓ | ✗ | · | Feuille, Fruit, Port |
@@ -208,7 +208,7 @@
 | Vesce commune | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Violette odorante | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Échalote | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Égopode (herbe aux goutteux) | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Égopode (herbe aux goutteux) | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Épinard | 3 | ✓ | · | ✗ | ✗ | ✓ | · | Fruit, Fleur |
 
 ## Champignons (24)
