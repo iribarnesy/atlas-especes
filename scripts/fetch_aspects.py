@@ -15,6 +15,7 @@ Idempotent (saute un aspect déjà présent). Relancer generer_quiz.py ensuite.
 import re, os, sys, json, time, glob, urllib.request, urllib.parse, urllib.error
 
 import atlas_data
+import candidats
 import credits
 import images
 
@@ -56,7 +57,8 @@ def commons_photo(latin, kw, largeur=images.LARGEUR):
     """(url de la photo, crédit) — extmetadata porte l'auteur et la licence, exigés par CC-BY."""
     q = urllib.parse.urlencode({"action": "query", "generator": "search",
         "gsrsearch": '%s %s' % (latin, kw), "gsrnamespace": "6", "gsrlimit": "8",
-        "prop": "imageinfo", "iiprop": "url|user|mime|extmetadata", "iiurlwidth": str(largeur),
+        "prop": "imageinfo", "iiprop": "url|user|mime|extmetadata",
+        "iiurlwidth": str(candidats.largeur_cachee(largeur)),
         "format": "json"})
     req = urllib.request.Request("https://commons.wikimedia.org/w/api.php?" + q, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=30) as r:

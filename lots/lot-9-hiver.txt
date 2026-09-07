@@ -1,0 +1,64 @@
+# Lot 9 — L'IDENTIFICATION HIVERNALE de 20 ligneux : écorce ET rameau.
+#
+# Le lot 8 a traité le rameau seul. Ici on prend les deux aspects sur les mêmes espèces,
+# parce que c'est ainsi qu'on détermine un arbre en hiver : on regarde le tronc, puis on
+# tire une branche à soi. Faire les deux d'un coup évite aussi de repasser deux fois sur
+# les mêmes catégories Commons.
+#
+#   python3 scripts/candidats.py --lot lots/lot-9-hiver.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ QUATORZE ESPÈCES N'ONT NI L'UN NI L'AUTRE (première section), SIX N'ONT QUE LE RAMEAU
+# À COMBLER (seconde section). Pour les premières, viser les deux aspects.
+#
+# ⚠ CE QU'IL FAUT VISER, et qui doit être visible :
+#   - LES ÉPINEUX forment un vrai groupe de confusion en hiver, et ce lot en réunit
+#     quatre : l'aubépine (épines VRAIES, courtes, sur le rameau), le prunellier (rameaux
+#     noirâtres très épineux), l'argousier (rameaux argentés épineux) et le févier
+#     (épines ÉNORMES et RAMIFIÉES sur le tronc — rien de comparable ailleurs).
+#     Le robinier, traité au lot 8, complète le groupe avec ses épines stipulaires
+#     par paires. C'est le caractère qui les sépare qu'il faut montrer.
+#   - LES SORBUS entre eux : gros bourgeons velus brun-violet du sorbier contre bourgeons
+#     verts et globuleux de l'alisier.
+#   - LE MICOCOULIER : écorce lisse et grise, presque sans relief, très reconnaissable.
+#   - LE FIGUIER : rameau épais, cicatrices foliaires larges et rondes, écorce lisse grise.
+#   - LE FÉVIER et LE MÛRIER : rameaux anguleux, gros bourgeons.
+#   - LES FRUITIERS (poirier, pommier, cognassier, néflier, merisier) : le poirier a des
+#     rameaux dressés à bourgeons pointus écartés, le pommier des bourgeons appliqués et
+#     duveteux. C'est la distinction la plus utile du verger en hiver.
+#
+# ⚠ LES PIÈGES, ceux du lot 8 plus un :
+#   - les bourgeons en DÉBOURREMENT ne comptent pas comme rameau d'hiver ;
+#   - un gros plan de bourgeon sans le rameau perd la disposition ;
+#   - ATTENTION AUX CULTIVARS pour les fruitiers : pommiers et poiriers de verger ont des
+#     centaines de variétés, et beaucoup de photos sont des sujets palissés ou greffés
+#     dont le port n'a plus rien de naturel ;
+#   - l'écorce d'un JEUNE tronc ne ressemble pas à celle d'un vieux : préférer un sujet
+#     adulte, ou le dire.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# ni écorce ni rameau — viser les deux
+amelanchier            # Amelanchier ovalis
+chene_pubescent        # Quercus pubescens — rameaux pubescents, bourgeons groupés
+cognassier             # Cydonia oblonga
+cormier                # Sorbus domestica
+fevier                 # Gleditsia triacanthos — épines énormes et ramifiées
+figuier                # Ficus carica — rameau épais, larges cicatrices
+jujubier               # Ziziphus jujuba
+micocoulier            # Celtis australis — écorce lisse et grise
+murier                 # Morus nigra
+neflier                # Mespilus germanica
+plaqueminier           # Diospyros kaki
+poirier                # Pyrus communis — bourgeons pointus et écartés
+pommier                # Malus domestica — bourgeons appliqués et duveteux
+prunellier             # Prunus spinosa — rameaux noirâtres très épineux
+
+# écorce déjà présente — ne manque que le rameau
+aubepine               # Crataegus monogyna — épines VRAIES sur le rameau
+argousier              # Hippophae rhamnoides — rameaux argentés épineux
+sorbier                # Sorbus aucuparia — gros bourgeons velus brun-violet
+alisier                # Sorbus torminalis — bourgeons verts globuleux
+merisier               # Prunus avium — bourgeons groupés à l'extrémité
+arbre_de_judee         # Cercis siliquastrum
