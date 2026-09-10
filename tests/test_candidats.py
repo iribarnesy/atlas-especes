@@ -216,6 +216,41 @@ def test_le_vocabulaire_faune_n_est_pas_un_aspect_de_l_atlas(cd, atlas_data):
     assert not set(ordre) & set(atlas_data.ASPECTS_VALIDES)
 
 
+def test_api_reessaie_apres_une_coupure_reseau(cd, monkeypatch):
+    """Une panne DNS de trente secondes a fait perdre 19 espèces sur 20 au lot 12 : chaque
+    espèce imprimait un « ÉCHEC » laconique et le lot continuait pour rien."""
+    import urllib.error
+    appels = []
+
+    def urlopen(req, timeout=None):
+        appels.append(1)
+        if len(appels) < 3:
+            raise urllib.error.URLError("nodename nor servname provided")
+        raise AssertionError("succès simulé")   # on vérifie juste qu'on a réessayé
+
+    monkeypatch.setattr(cd.time, "sleep", lambda s: None)
+    monkeypatch.setattr(cd.urllib.request, "urlopen", urlopen)
+    with pytest.raises(AssertionError, match="succès simulé"):
+        cd.api(action="query")
+    assert len(appels) == 3, "api() doit réessayer après une coupure réseau"
+
+
+def test_api_ne_reessaie_pas_une_vraie_erreur_http(cd, monkeypatch):
+    """Un 404 ou un 403 est définitif : réessayer quatre fois ne ferait que perdre du temps."""
+    import urllib.error
+    appels = []
+
+    def urlopen(req, timeout=None):
+        appels.append(1)
+        raise urllib.error.HTTPError("u", 404, "Not Found", {}, None)
+
+    monkeypatch.setattr(cd.time, "sleep", lambda s: None)
+    monkeypatch.setattr(cd.urllib.request, "urlopen", urlopen)
+    with pytest.raises(urllib.error.HTTPError):
+        cd.api(action="query")
+    assert len(appels) == 1
+
+
 # ------------------------------------------------------ renvois de catégorie
 
 def test_le_renvoi_de_categorie_est_lu(cd):
