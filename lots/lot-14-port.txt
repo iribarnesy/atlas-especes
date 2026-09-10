@@ -1,0 +1,56 @@
+# Lot 14 — LE PORT DE VINGT LIGNEUX. Reconnaître un arbre de loin, à sa silhouette.
+#
+#   python3 scripts/candidats.py --lot lots/lot-14-port.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# CHANGEMENT DE GISEMENT. Après les lots 12 et 13, il ne reste que neuf espèces qui
+# manquent à la fois du fruit et du port — mais cinquante-trois qui n'ont pas de port,
+# et pour l'essentiel des LIGNEUX. Or la silhouette d'un arbre est, avec son écorce, ce
+# que Commons photographie le plus. C'est le gisement le plus riche qui reste.
+#
+# ⚠ POURQUOI CET ASPECT COMPTE. Le port est le premier caractère qu'on lit, avant même
+# d'approcher : le dôme du hêtre, la colonne du peuplier, l'étalement du chêne, le cône
+# de l'épicéa. C'est la compétence du forestier qui traverse une vallée en voiture, et
+# aucune photo de feuille ne la donne.
+#
+# ⚠ LES PIÈGES, propres à cet aspect :
+#   - LES CULTIVARS D'ORNEMENT sont partout dans les parcs, et ce sont justement des
+#     PORTS déviants : 'Fastigiata' en colonne, 'Pendula' en pleureur, 'Globosa' en
+#     boule. Un charme fastigié n'apprend rien du charme. C'est le piège numéro un ;
+#   - UN ARBRE DE PARC ET UN ARBRE DE FORÊT n'ont pas la même silhouette : le premier
+#     s'étale, le second file droit sous la concurrence. Les deux sont légitimes, mais
+#     il faut savoir lequel on montre — préférer l'arbre isolé, plus lisible ;
+#   - LES PEUPLEMENTS où l'arbre visé se perd parmi dix autres n'apprennent rien ;
+#   - ATTENTION AUX FRUITIERS PALISSÉS ou greffés en gobelet : leur port est celui du
+#     sécateur, pas celui de l'espèce.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# grands feuillus forestiers — la silhouette est un caractère de terrain
+hetre                  # Fagus sylvatica — dôme dense, branches basses étalées
+frene                  # Fraxinus excelsior — port ouvert, ramure ascendante
+chataignier            # Castanea sativa — tronc court, houppier large
+aulne_glutineux        # Alnus glutinosa — conique, en bord d'eau
+noyer                  # Juglans regia — houppier arrondi, isolé le plus souvent
+erable_champetre       # Acer campestre — petit, souvent en haie
+noisetier              # Corylus avellana — cépée, jamais un tronc unique
+robinier               # Robinia pseudoacacia — port irrégulier, drageonnant
+micocoulier            # Celtis australis — houppier en dôme, arbre de place du Midi
+alisier                # Sorbus torminalis — pyramidal jeune, arrondi vieux
+
+# conifère
+epicea                 # Picea abies — cône régulier, branches retombantes
+
+# fruitiers — ⚠ éviter les sujets palissés ou taillés en gobelet
+poirier                # Pyrus communis — port dressé, pyramidal
+pommier                # Malus domestica — port étalé, plus bas que le poirier
+prunier                # Prunus domestica
+amandier               # Prunus dulcis — floraison précoce sur bois nu
+
+# arbustes
+arbousier              # Arbutus unedo
+aronia                 # Aronia melanocarpa
+cornouiller_male       # Cornus mas — floraison jaune avant les feuilles
+houx                   # Ilex aquifolium
+chevrefeuille_com      # Lonicera caerulea
