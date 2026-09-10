@@ -8,7 +8,7 @@
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
 - …dont **24** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 19 · Fruit 87 · Fleur 28 · Port 89 · Rameau 37
+- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 87 · Fleur 28 · Port 89 · Rameau 36
 
 ## Ligneux (77)
 
@@ -43,7 +43,7 @@
 | Chêne vert | 4 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Chêne-liège | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Cognassier | 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Cormier | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
+| Cormier | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Cornouiller mâle | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Feijoa (goyavier du Brésil) | 4 | ✗ | ✓ | ✗ | ✓ | ✓ | ✗ | Feuille, Fruit, Rameau |
 | Figuier | 5 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
@@ -57,18 +57,18 @@
 | Grenadier | 5 | ✗ | ✓ | ✓ | ✓ | ✓ | ✗ | Feuille, Rameau |
 | Houx | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Hêtre | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
-| If commun | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✓ | Écorce, Fleur |
+| If commun | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
 | Jujubier | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Kiwaï | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
-| Laurier-sauce | 3 | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ | Écorce, Fruit, Rameau |
+| Laurier-sauce | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✓ | Écorce, Fruit |
 | Merisier | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Micocoulier | 5 | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ | Fleur, Port, Rameau |
 | Myrtille | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | · | Port |
 | Mélèze | 7 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Mûrier noir | 4 | ✓ | ✗ | ✓ | ✗ | ✗ | ✗ | Écorce, Fleur, Port, Rameau |
+| Mûrier noir | 5 | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ | Fleur, Port, Rameau |
 | Noisetier | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Noyer commun | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
-| Néflier commun | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
+| Néflier commun | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Olivier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Pin maritime | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Pin sylvestre | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
