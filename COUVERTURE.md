@@ -7,8 +7,8 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **31** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 76 · Fleur 28 · Port 59 · Rameau 36
+- …dont **34** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 72 · Fleur 28 · Port 59 · Rameau 36
 
 ## Ligneux (77)
 
@@ -25,7 +25,7 @@
 | Aronia | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
 | Aubépine | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Aulne glutineux | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
-| Bouleau verruqueux | 5 | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | Fruit |
+| Bouleau verruqueux | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Bruyère cendrée | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Bruyère à quatre angles | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Buis | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
@@ -60,7 +60,7 @@
 | If commun | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
 | Jujubier | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Kiwaï | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
-| Laurier-sauce | 4 | ✓ | ✗ | ✗ | ✓ | ✓ | ✓ | Écorce, Fruit |
+| Laurier-sauce | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | Écorce |
 | Merisier | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Micocoulier | 5 | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ | Fleur, Port, Rameau |
 | Myrtille | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | · | Port |
@@ -83,7 +83,7 @@
 | Sapin pectiné | 6 | ✓ | ✓ | ✓ | ✗ | ✗ | ✓ | Fleur, Port |
 | Saule | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Sorbier des oiseleurs | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
-| Sureau noir | 6 | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | Fruit |
+| Sureau noir | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Tilleul à petites feuilles | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Tremble | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Troène commun | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | Écorce, Port |
@@ -116,7 +116,7 @@
 | Betterave / Épinard | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Blette (poirée) | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Bourrache | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
-| Camomille (matricaire) | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Camomille (matricaire) | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Capucine | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Cardamine des prés | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Carotte | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
