@@ -164,7 +164,7 @@ def api(**kw):
     kw.setdefault("format", "json")
     kw.setdefault("action", "query")
     req = urllib.request.Request(API + urllib.parse.urlencode(kw), headers={"User-Agent": UA})
-    for essai in range(4):
+    for essai in range(5):
         try:
             with urllib.request.urlopen(req, timeout=40) as r:
                 return json.load(r)
@@ -173,6 +173,14 @@ def api(**kw):
                 time.sleep(8 + essai * 8)
                 continue
             raise
+        except (urllib.error.URLError, TimeoutError, OSError):
+            # Coupure réseau, DNS qui bafouille, connexion coupée : c'est passager, mais
+            # sans ce filet un seul hoquet fait échouer toutes les espèces suivantes du
+            # lot, chacune avec un « ÉCHEC » laconique. telecharger() avait déjà son
+            # rattrapage ; api() ne l'avait pas, et c'est elle qu'on appelle en premier.
+            if essai == 4:
+                raise
+            time.sleep(3 + essai * 5)
     return {}
 
 
