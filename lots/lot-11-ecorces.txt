@@ -1,0 +1,58 @@
+# Lot 11 — LES DIX-NEUF DERNIÈRES ÉCORCES. Après lui, l'aspect « écorce » est terminé.
+#
+#   python3 scripts/candidats.py --lot lots/lot-11-ecorces.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# Quatorze d'entre elles manquent AUSSI de rameau : viser les deux quand c'est possible.
+#
+# ⚠ CINQ DE CES ESPÈCES N'ONT PAS DE TRONC, et le lot sert aussi à le prouver.
+# L'ajonc, le genêt, la ronce, le goji et le groseillier sont typés « arbuste » dans
+# l'atlas, comme l'aubépine ou le noisetier — mais ce sont des ronces, des cannes ou des
+# buissons de rameaux verts. Ils n'ont pas plus d'écorce qu'un sous-arbrisseau.
+# Si la récolte revient vide pour eux, c'est un argument pour corriger leur TYPE dans
+# l'atlas plutôt que de leur chercher indéfiniment un tronc : leurs manques sortiraient
+# alors du compte, comme ceux des bruyères et de la vigne l'ont fait.
+#
+# ⚠ CE QU'IL FAUT VISER :
+#   - le CHÊNE PÉDONCULÉ est le plus important du lot et le plus embarrassant à l'avoir
+#     manqué deux fois : écorce épaisse, crevassée en côtes verticales régulières. Le seul
+#     candidat trouvé jusqu'ici était une branche vue par-dessous à contre-jour ;
+#   - le MICOCOULIER-like : figuier, mûrier et plaqueminier ont une écorce lisse ou
+#     finement fissurée qu'on photographie peu — chercher dans la sous-catégorie (bark) ;
+#   - l'IF : écorce rouge-brun qui se détache en plaques, très reconnaissable ;
+#   - le GENÉVRIER : écorce grise se desquamant en longues lanières ;
+#   - le PRUNELLIER et le TROÈNE : ce sont des arbustes, donc des TIGES plutôt qu'un tronc.
+#     Une tige de prunellier est noirâtre — c'est l'origine du nom « épine noire ».
+#
+# ⚠ LES PIÈGES, ceux des lots précédents :
+#   - préférer un sujet ADULTE, l'écorce jeune ne ressemble pas à l'écorce vieille ;
+#   - refuser les branches à contre-jour et les photos de gemmage ou de blessure ;
+#   - refuser les cultivars, nombreux chez le poirier et le plaqueminier.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# arbres — écorce attendue sans réserve
+chene_pedoncule        # crevassée en côtes verticales ; manqué deux fois
+cormier                # Sorbus domestica ; écailleuse comme un vieux poirier
+figuier                # lisse et grise
+murier                 # Morus nigra ; fissurée, orangée dans les sillons
+plaqueminier           # Diospyros kaki ; en petits pavés rectangulaires
+poirier                # petites plaques rectangulaires
+jujubier               # Ziziphus jujuba
+laurier_sauce          # lisse, vert-noir
+if                     # rouge-brun, se détachant en plaques
+genevrier              # grise, en longues lanières
+
+# arbustes — une tige plutôt qu'un tronc
+amelanchier            # Amelanchier ovalis
+neflier                # Mespilus germanica
+prunellier             # tige NOIRÂTRE, l'origine d'« épine noire »
+troene                 # lisse, ponctuée de lenticelles
+
+# les cinq sans tronc — si la récolte est vide, c'est la réponse
+ajonc                  # Ulex europaeus ; buisson d'épines vertes
+genet                  # Cytisus scoparius ; rameaux verts anguleux
+ronce                  # Rubus fruticosus ; cannes bisannuelles
+goji                   # Lycium barbarum
+groseillier            # Ribes sp.
