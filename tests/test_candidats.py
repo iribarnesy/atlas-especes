@@ -51,6 +51,25 @@ def test_le_rameau_est_reconnu_et_prime(cd):
     assert cd.aspect_devine("File:Tilia cordata twig and bark.jpg") == "rameau"
 
 
+def test_le_chaton_et_le_cone_male_sont_des_fleurs(cd):
+    """Un arbre anémophile ne fleurit pas sous le mot « flower ». Sans ces mots-là, la
+    fleur du chêne ou du mélèze tombait dans « divers » et la répartition ne la sortait
+    jamais — d'où une part des 28 fleurs manquantes avant le lot 16."""
+    assert cd.aspect_devine("File:Quercus robur male catkins.jpg") == "fleur"
+    assert cd.aspect_devine("File:Corylus avellana Kätzchen.jpg") == "fleur"
+    assert cd.aspect_devine("File:Carpinus betulus amentum.jpg") == "fleur"
+    assert cd.aspect_devine("File:Salix caprea staminate flowers.jpg") == "fleur"
+    assert cd.aspect_devine("File:Pinus sylvestris pollen cones.jpg") == "fleur"
+    assert cd.aspect_devine("File:Picea abies männliche Blüten.jpg") == "fleur"
+
+
+def test_un_cone_mur_reste_un_fruit(cd):
+    """On n'a délibérément PAS mis « cone » nu dans les mots de la fleur : chez un
+    conifère le cône mûr est la fructification, et l'atlas le compte déjà comme fruit."""
+    assert cd.aspect_devine("File:Picea abies cone.jpg") != "fleur"
+    assert cd.aspect_devine("File:Larix decidua cones and seeds.jpg") == "fruit"
+
+
 def test_les_noms_de_lieux_ne_sont_pas_pris_pour_des_aspects(cd):
     """Découvert dans le lot 8 : un sureau photographié à BUDAPEST passait pour un rameau
     d'hiver (« bud »), et une vigne photographiée au PORTUGAL pour un port."""
