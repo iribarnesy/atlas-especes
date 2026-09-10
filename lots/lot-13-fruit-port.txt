@@ -1,0 +1,66 @@
+# Lot 13 — FRUIT et PORT, suite du lot 12. Vingt espèces qui manquent des DEUX.
+#
+#   python3 scripts/candidats.py --lot lots/lot-13-fruit-port.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# CINQ SONT DES SECONDES TENTATIVES du lot 12 : persil, égopode, pâquerette, roquette et
+# mélisse n'avaient rien donné. Pour elles, viser directement les mots-clés (--motcle
+# habit, plant, fruit, seed) plutôt que de refaire la récolte générale.
+#
+# LA MENTHE N'EST PAS DANS CE LOT, et c'est délibéré. L'atlas la note « Mentha sp. » : la
+# catégorie du genre ramène M. grandiflora (australienne), suaveolens, longifolia,
+# laxiflora et un balcon de Ramat Gan. Choisir QUELLE menthe représente l'entrée est une
+# décision sur la donnée, pas sur la récolte — elle attend un arbitrage, comme le type des
+# ronces et celui des espèces sans tronc.
+#
+# ⚠ RAPPEL DU PIÈGE PRINCIPAL, celui qui a le plus servi au lot 12 :
+# LE PORT D'UNE HERBACÉE, C'EST LA PLANTE ENTIÈRE EN PLACE. Un pot de pépinière, une
+# plante déterrée sur une table, un gros plan de feuille : aucun n'est un port. Le lot 12
+# a écarté du persil en barquette pour cette raison exacte.
+#
+# ⚠ CE QU'IL FAUT VISER, espèce par espèce :
+#   - SAULE : chatons cotonneux à maturité (le fruit), et le port en TÊTARD, silhouette
+#     la plus reconnaissable de nos bords de rivière ;
+#   - CAPUCINE : fruit en trois akènes soudés, très caractéristique ;
+#   - VIOLETTE : capsule à trois valves qui s'ouvre en barque ;
+#   - AIL ROCAMBOLE : bulbilles au sommet d'une tige qui fait une boucle — spectaculaire ;
+#   - CIBOULETTE et POIREAU PERPÉTUEL : ombelles sphériques puis capsules ;
+#   - LIVÈCHE : grande apiacée à ombelles jaunes, un port de 2 m ;
+#   - LES AROMATIQUES (hysope, lavande, origan, sarriette, verveine) : le port en touffe
+#     est facile ; le fruit est un akène minuscule. Le lamier a prouvé au lot 12 que ce
+#     n'est pas impossible — mais ne pas s'acharner, et le dire.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# secondes tentatives du lot 12
+persil                 # Petroselinum crispum — groupe de la ciguë
+egopode                # Aegopodium podagraria — idem
+paquerette             # Bellis perennis
+roquette               # Eruca sativa (⚠ catégorie sous Eruca vesicaria subsp. sativa)
+melisse                # Melissa officinalis — groupe des lamiacées odorantes
+
+# ligneux
+saule                  # Salix alba — chatons cotonneux, port en TÊTARD
+caragana               # Caragana arborescens — gousses
+
+# alliacées
+ail_rocambole          # Allium scorodoprasum — bulbilles au sommet, tige en boucle
+ciboulette             # Allium schoenoprasum
+poireau_perpetuel      # Allium ampeloprasum
+
+# apiacée
+liveche                # Levisticum officinale — ombelles jaunes, 2 m de haut
+
+# aromatiques — le port est facile, le fruit non
+hysope                 # Hyssopus officinalis
+lavande                # Lavandula angustifolia
+origan                 # Origanum vulgare
+sarriette              # Satureja hortensis
+verveine_citron        # Aloysia citriodora
+
+# les autres
+capucine               # Tropaeolum majus — trois akènes soudés
+violette               # Viola odorata — capsule à trois valves
+primevere              # Primula veris
+raifort                # Armoracia rusticana — grandes feuilles en touffe
