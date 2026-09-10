@@ -8,7 +8,7 @@
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
 - …dont **31** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 76 · Fleur 28 · Port 60 · Rameau 36
+- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 76 · Fleur 28 · Port 59 · Rameau 36
 
 ## Ligneux (77)
 
@@ -17,7 +17,7 @@
 | Abricotier | 5 | ✓ | ✓ | ✗ | ✓ | ✓ | ✗ | Fruit, Rameau |
 | Ajonc d'Europe | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Alisier torminal | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Amandier | 5 | ✗ | ✓ | ✓ | ✓ | ✗ | ✗ | Feuille, Port, Rameau |
+| Amandier | 6 | ✗ | ✓ | ✓ | ✓ | ✓ | ✗ | Feuille, Rameau |
 | Amélanchier | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Arbousier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Arbre de Judée | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
