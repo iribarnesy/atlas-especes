@@ -7,8 +7,8 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **34** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 72 · Fleur 28 · Port 59 · Rameau 36
+- …dont **42** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 58 · Rameau 36
 
 ## Ligneux (77)
 
@@ -21,7 +21,7 @@
 | Amélanchier | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Arbousier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Arbre de Judée | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Argousier | 6 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
+| Argousier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Aronia | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
 | Aubépine | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Aulne glutineux | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
@@ -34,22 +34,22 @@
 | Cassissier / Groseillier | 7 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Cerisier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Chalef / Olivier de Bohême | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Charme | 8 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Châtaignier | 6 | ✓ | ✓ | ✓ | ✗ | ✗ | ✓ | Fleur, Port |
+| Charme | 9 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
+| Châtaignier | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Chèvrefeuille comestible (camérisier) | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
-| Chêne pubescent | 4 | ✓ | ✓ | ✗ | ✗ | ✓ | ✗ | Fruit, Fleur, Rameau |
-| Chêne pédonculé | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✓ | Écorce, Fleur |
+| Chêne pubescent | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
+| Chêne pédonculé | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | Écorce |
 | Chêne sessile | 6 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Chêne vert | 4 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
+| Chêne vert | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Chêne-liège | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Cognassier | 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Cormier | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Cornouiller mâle | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Feijoa (goyavier du Brésil) | 4 | ✗ | ✓ | ✗ | ✓ | ✓ | ✗ | Feuille, Fruit, Rameau |
-| Figuier | 5 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
+| Figuier | 6 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Framboisier | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
-| Frêne commun | 7 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Fusain d'Europe | 4 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
+| Frêne commun | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
+| Fusain d'Europe | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Févier d'Amérique | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Genévrier commun | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✓ | Écorce, Fleur |
 | Genêt à balais | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
@@ -58,20 +58,20 @@
 | Houx | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Hêtre | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | If commun | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Jujubier | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
+| Jujubier | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Kiwaï | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Laurier-sauce | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | Écorce |
 | Merisier | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
-| Micocoulier | 5 | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ | Fleur, Port, Rameau |
+| Micocoulier | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
 | Myrtille | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | · | Port |
 | Mélèze | 7 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Mûrier noir | 5 | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ | Fleur, Port, Rameau |
+| Mûrier noir | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
 | Noisetier | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Noyer commun | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Néflier commun | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Olivier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Pin maritime | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
-| Pin sylvestre | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
+| Pin sylvestre | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Plaqueminier (kaki) | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Poirier | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | Écorce, Port |
 | Pommier | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
@@ -80,17 +80,17 @@
 | Pêcher | 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Robinier (faux-acacia) | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Ronce | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✗ | Écorce, Port, Rameau |
-| Sapin pectiné | 6 | ✓ | ✓ | ✓ | ✗ | ✗ | ✓ | Fleur, Port |
+| Sapin pectiné | 7 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
 | Saule | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Sorbier des oiseleurs | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Sureau noir | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Tilleul à petites feuilles | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Tremble | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Troène commun | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | Écorce, Port |
-| Vigne | 4 | ✓ | ✓ | ✓ | ✗ | ✓ | · | Fleur |
-| Épicéa | 7 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Érable champêtre | 6 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Érable sycomore | 7 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
+| Vigne | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
+| Épicéa | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
+| Érable champêtre | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
+| Érable sycomore | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 
 ## Herbacées (114)
 
@@ -164,7 +164,7 @@
 | Mélisse | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Navet | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Oca du Pérou | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Oignon | 2 | ✓ | · | ✗ | ✗ | ✓ | · | Fruit, Fleur |
+| Oignon | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Onagre | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Origan | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Ortie | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
@@ -209,7 +209,7 @@
 | Violette odorante | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Échalote | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Égopode (herbe aux goutteux) | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
-| Épinard | 3 | ✓ | · | ✗ | ✗ | ✓ | · | Fruit, Fleur |
+| Épinard | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 
 ## Champignons (24)
 
