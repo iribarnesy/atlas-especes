@@ -98,8 +98,16 @@ SOUS_CAT_REJET = ("herbarium", "art", "seedling", "animals", "by country", "cult
 # Mots d'organe dans les noms de fichiers Commons, toutes langues confondues : ils servent
 # à répartir les candidats entre aspects, pas à décider — le tri définitif se fait à l'œil.
 MOTS = {
+    # Les arbres anémophiles n'ont pas de « flower » dans leurs titres Commons : ils ont
+    # des CHATONS, et les gymnospermes des cônes MÂLES. Sans ces mots, la fleur du chêne,
+    # du charme ou du mélèze tombait dans « divers » et ne sortait jamais du round-robin —
+    # ce qui explique une bonne part des 28 fleurs manquantes. On ne prend pas « cone »
+    # nu : un cône mûr est le fruit, et il est déjà classé comme tel.
     "fleur": ("flower", "fleur", "blüte", "blute", "bloem", "inflorescen", "umbel",
-              "ombelle", "blomma", "kwiat", "flor", "fiore", "bloom", "capitul"),
+              "ombelle", "blomma", "kwiat", "flor", "fiore", "bloom", "capitul",
+              "catkin", "chaton", "kätzchen", "katzchen", "amentum", "staminate",
+              "pistillate", "anthesis", "anthèse", "pollen cone", "male cone",
+              "männliche", "mannliche"),
     "feuille": ("leaf", "leaves", "feuille", "blatt", "blad", "foliage", "liść", "lisc",
                 "hoja", "foglia", "rosette", "rosett",
                 # chez un conifère, les aiguilles SONT les feuilles
@@ -130,8 +138,13 @@ ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
 # « Portugal » contient « port » : sans les retirer d'abord, un sureau photographié à
 # Budapest passait pour un rameau d'hiver et une vigne photographiée au Portugal pour un
 # port. On les gomme du titre avant de chercher les mots-clés.
-FAUX_AMIS = ("budapest", "buddleja", "buddleia", "portugal", "porto", "portland",
-             "important", "portrait de", "leafless")
+# « female » d'abord : « female cones » CONTIENT « male cone », et un cône femelle est le
+# fruit, pas la fleur — c'est le genévrier du lot 16 qui l'a montré, ses galbules bleues
+# remontant en fleur. On neutralise le mot plutôt que de renoncer à « male cone », parce
+# que « female flowers » doit rester une fleur : une fois « female » effacé, il reste
+# « flowers ».
+FAUX_AMIS = ("female", "weibliche", "budapest", "buddleja", "buddleia", "portugal",
+             "porto", "portland", "important", "portrait de", "leafless")
 
 # Vocabulaire de RÉPARTITION pour la faune. Ce ne sont PAS des aspects de l'atlas — aucun
 # des aspects (feuille, écorce…) ne s'applique à un animal, et les photos de faune entrent

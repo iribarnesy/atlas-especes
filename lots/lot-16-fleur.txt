@@ -1,0 +1,99 @@
+# Lot 16 — LA FLEUR, et on ferme l'aspect. Les VINGT-HUIT espèces qui en manquent.
+#
+#   python3 scripts/candidats.py --lot lots/lot-16-fleur.txt --par-espece 5 --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# POURQUOI TOUT L'ASPECT D'UN COUP, alors que les lots précédents en prenaient vingt :
+# parce que les vingt-huit manques ont UNE SEULE CAUSE et que la couper en deux couperait
+# l'explication. Vingt-six sur vingt-huit sont des LIGNEUX, et la quasi-totalité sont des
+# arbres à pollinisation par le VENT ou des gymnospermes. Ces plantes fleurissent sans que
+# personne ne le remarque : pas de pétales, pas de couleur, pas de parfum, donc pas de
+# photo intitulée « flower ». Elles ont des chatons, des Kätzchen, des cônes mâles.
+#
+# ⚠ UNE PART DU MANQUE ÉTAIT LA NÔTRE. MOTS["fleur"] ne connaissait aucun de ces mots :
+# la floraison du chêne tombait dans « divers » et le round-robin ne la remontait jamais.
+# Corrigé juste avant ce lot, dans un commit séparé. C'est la première chose à vérifier
+# quand un aspect entier « n'existe pas sur Commons » : que ce n'est pas nous.
+#
+# CE QU'IL FAUT VOIR, espèce par espèce — la fleur d'un arbre anémophile n'est pas un
+# ornement, c'est souvent un critère :
+#   - CHATONS MÂLES PENDANTS, longs et jaunes, bien avant les feuilles : les cinq chênes,
+#     le charme. Sur le CHARME (groupe « Charme / Hêtre ») les chatons femelles portent
+#     des bractées à trois lobes qui deviendront l'involucre du fruit — rien d'équivalent
+#     chez le hêtre ;
+#   - CHÂTAIGNIER, l'exception : ses chatons sont DRESSÉS, crème, fortement odorants, en
+#     plein été — il est entomophile. Les fleurs femelles sont à la base des mêmes épis ;
+#   - FRÊNE : fleurs NOIR-POURPRE, sans pétales ni sépales, en bouquets serrés sur le bois
+#     nu. Personne ne les prend pour des fleurs, et c'est très reconnaissable ;
+#   - ÉRABLES (groupe champêtre / sycomore) : le champêtre en corymbes DRESSÉS verdâtres
+#     avec les feuilles, le sycomore en grappes PENDANTES. La différence se voit ;
+#   - MÉLÈZE : cônes femelles ROSE VIF au printemps, sur le rameau feuillé — l'image la
+#     plus spectaculaire du lot, et un caractère net ;
+#   - ÉPICÉA et SAPIN (groupe sapin / épicéa) : cônes mâles rouges chez l'épicéa ; chez le
+#     sapin, les cônes femelles DRESSÉS dès le départ. Cohérent avec le critère du groupe ;
+#   - IF : dioïque. Cônes mâles jaunes en boules sous le rameau, lâchant leur pollen en
+#     nuage. ⚠ ARBRE MORTEL, toute la plante sauf l'arille ;
+#   - ARGOUSIER (groupe « Argentés ») : DIOÏQUE aussi, fleurs minuscules avant les
+#     feuilles. C'est pour ça qu'il n'y en a pas : elles ne se photographient pas de loin ;
+#   - FIGUIER : cas limite assumé. La « fleur » est À L'INTÉRIEUR de la figue — le sycone
+#     est une inflorescence retournée. Une photo honnête est une figue EN COUPE. Si on
+#     n'en trouve pas, on note l'espèce non traitée plutôt que de faire passer une figue
+#     entière pour une fleur ;
+#   - VIGNE : à l'anthèse la corolle se détache d'un bloc par le HAUT, en capuchon
+#     (calyptre). C'est le caractère de la famille ;
+#   - OIGNON : ombelle sphérique sur hampe creuse renflée — la seule fleur facile du lot ;
+#   - ÉPINARD : dioïque, fleurs verdâtres insignifiantes en glomérules. Même problème que
+#     l'argousier.
+#
+# ⚠ LES PIÈGES DE CE LOT EN PARTICULIER :
+#   - UN CÔNE MÛR N'EST PAS UNE FLEUR. C'est le fruit, et l'atlas le compte déjà comme
+#     tel chez l'épicéa, le pin, le mélèze. On veut le cône MÂLE ou le cône femelle JEUNE,
+#     coloré, encore tendre. Dans le doute sur le stade, on jette ;
+#   - LES CHÊNES SE CONFONDENT ENTRE EUX et leurs catégories Commons sont poreuses. Cinq
+#     chênes dans le même lot, c'est cinq occasions de verser un chaton de l'un chez
+#     l'autre. Vérifier la feuille visible sur la photo, pas seulement la catégorie ;
+#   - LES FLEURS DE JARDINERIE : plaqueminier, jujubier et mûrier sont surtout
+#     photographiés en pépinière ou en pot, étiquette comprise ;
+#   - RÉFLEXE DES LOTS 14/15 : zéro candidat = presque toujours un problème de NOM DE
+#     CATÉGORIE, pas une absence de photos.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# les chatons : cinq chênes et le charme
+chene_pedoncule        # chatons mâles pendants ; groupe pédonculé / sessile
+chene_sessile          # idem, l'autre moitié du groupe
+chene_pubescent        # groupe pubescent / vert ; rameaux jeunes feutrés visibles
+chene_vert             # idem ; persistant, chatons sur feuillage coriace
+chene_liege            # idem famille ; l'écorce est reconnaissable sur la même photo
+charme                 # chatons femelles à bractées trilobées ; groupe charme / hêtre
+
+# les autres anémophiles, chacun avec son anomalie
+chataignier            # ⚠ chatons DRESSÉS, odorants, en été — manque aussi le port
+frene                  # fleurs noir-pourpre apétales sur bois nu
+micocoulier            # petites fleurs verdâtres à l'aisselle — manque aussi le port
+murier                 # chatons courts, dioïque ou monoïque — manque aussi le port
+argousier              # DIOÏQUE, fleurs minuscules avant les feuilles ; groupe « Argentés »
+
+# les gymnospermes : cônes mâles et cônes femelles jeunes
+meleze                 # cônes femelles ROSE VIF — la meilleure image possible du lot
+epicea                 # cônes mâles rouges ; groupe sapin / épicéa
+sapin                  # cônes femelles dressés — manque aussi le port
+pin_sylvestre          # cônes mâles jaunes en bouquet à la base de la pousse
+pin_maritime           # idem
+if                     # ⚠ MORTEL — dioïque, cônes mâles jaunes en boules
+genevrier              # dioïque, très discret
+
+# les entomophiles à petites fleurs, censément les plus faciles
+erable_champetre       # corymbes DRESSÉS ; groupe champêtre / sycomore
+erable_sycomore        # grappes PENDANTES ; l'autre moitié du groupe
+cormier                # corymbes blancs, à ne pas confondre avec le sorbier
+fusain                 # fleurs verdâtres à 4 pétales, minuscules
+jujubier               # ⚠ souvent photographié en pépinière
+plaqueminier           # ⚠ idem ; fleurs en clochette cireuse
+figuier                # ⚠ la fleur est DANS la figue — coupe, ou rien
+vigne                  # calyptre : la corolle tombe d'un bloc par le haut
+
+# les deux herbacées qui restent
+oignon                 # ombelle sphérique — la seule fleur évidente du lot
+epinard                # dioïque, glomérules verdâtres
