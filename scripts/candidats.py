@@ -143,8 +143,14 @@ ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
 # remontant en fleur. On neutralise le mot plutôt que de renoncer à « male cone », parce
 # que « female flowers » doit rester une fleur : une fois « female » effacé, il reste
 # « flowers ».
-FAUX_AMIS = ("female", "weibliche", "budapest", "buddleja", "buddleia", "portugal",
-             "porto", "portland", "important", "portrait de", "leafless")
+# « bud » est le mot le plus piégeux du vocabulaire : il est court, et il vit à
+# l'intérieur de noms propres (Budapest, Budaörs) comme de noms vernaculaires
+# (« redbud » = Cercis, le nom américain de l'arbre de Judée — pas un bourgeon). Le lot
+# 17 en a perdu deux créneaux sur vingt-quatre. On rallonge la liste, mais la vraie
+# correction serait de comparer sur des MOTS et non des sous-chaînes.
+FAUX_AMIS = ("female", "weibliche", "budapest", "budaörs", "budaors", "redbud",
+             "red bud", "buddleja", "buddleia", "portugal", "porto", "portland",
+             "important", "portrait de", "leafless")
 
 # Vocabulaire de RÉPARTITION pour la faune. Ce ne sont PAS des aspects de l'atlas — aucun
 # des aspects (feuille, écorce…) ne s'applique à un animal, et les photos de faune entrent
