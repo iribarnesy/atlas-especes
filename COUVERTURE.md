@@ -7,8 +7,8 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **42** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 58 · Rameau 36
+- …dont **43** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 58 · Rameau 34
 
 ## Ligneux (77)
 
@@ -17,7 +17,7 @@
 | Abricotier | 5 | ✓ | ✓ | ✗ | ✓ | ✓ | ✗ | Fruit, Rameau |
 | Ajonc d'Europe | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Alisier torminal | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Amandier | 6 | ✗ | ✓ | ✓ | ✓ | ✓ | ✗ | Feuille, Rameau |
+| Amandier | 7 | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | Feuille |
 | Amélanchier | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Arbousier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Arbre de Judée | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
@@ -32,7 +32,7 @@
 | Callune | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Caragana (arbre à pois) | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Cassissier / Groseillier | 7 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Cerisier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
+| Cerisier | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Chalef / Olivier de Bohême | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Charme | 9 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Châtaignier | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
