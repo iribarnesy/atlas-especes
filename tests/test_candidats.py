@@ -70,6 +70,17 @@ def test_un_cone_mur_reste_un_fruit(cd):
     assert cd.aspect_devine("File:Larix decidua cones and seeds.jpg") == "fruit"
 
 
+def test_un_cone_femelle_n_est_pas_un_cone_male(cd):
+    """« female cones » CONTIENT « male cone ». Sans neutraliser « female », les galbules
+    bleues du genévrier — son fruit — remontaient en fleur, et le mot-clé censé combler
+    l'aspect le remplissait de fructifications."""
+    assert cd.aspect_devine("File:Juniperus communis female cones.jpg") != "fleur"
+    assert cd.aspect_devine("File:Abies alba weibliche Zapfen.jpg") != "fleur"
+    # mais on ne jette pas le bébé : une fois « female » effacé, « flowers » reste
+    assert cd.aspect_devine("File:Morus nigra female flowers.jpg") == "fleur"
+    assert cd.aspect_devine("File:Pinus sylvestris male cones.jpg") == "fleur"
+
+
 def test_les_noms_de_lieux_ne_sont_pas_pris_pour_des_aspects(cd):
     """Découvert dans le lot 8 : un sureau photographié à BUDAPEST passait pour un rameau
     d'hiver (« bud »), et une vigne photographiée au PORTUGAL pour un port."""

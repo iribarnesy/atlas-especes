@@ -138,8 +138,13 @@ ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
 # « Portugal » contient « port » : sans les retirer d'abord, un sureau photographié à
 # Budapest passait pour un rameau d'hiver et une vigne photographiée au Portugal pour un
 # port. On les gomme du titre avant de chercher les mots-clés.
-FAUX_AMIS = ("budapest", "buddleja", "buddleia", "portugal", "porto", "portland",
-             "important", "portrait de", "leafless")
+# « female » d'abord : « female cones » CONTIENT « male cone », et un cône femelle est le
+# fruit, pas la fleur — c'est le genévrier du lot 16 qui l'a montré, ses galbules bleues
+# remontant en fleur. On neutralise le mot plutôt que de renoncer à « male cone », parce
+# que « female flowers » doit rester une fleur : une fois « female » effacé, il reste
+# « flowers ».
+FAUX_AMIS = ("female", "weibliche", "budapest", "buddleja", "buddleia", "portugal",
+             "porto", "portland", "important", "portrait de", "leafless")
 
 # Vocabulaire de RÉPARTITION pour la faune. Ce ne sont PAS des aspects de l'atlas — aucun
 # des aspects (feuille, écorce…) ne s'applique à un animal, et les photos de faune entrent
