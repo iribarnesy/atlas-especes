@@ -7,8 +7,8 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **43** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 58 · Rameau 34
+- …dont **46** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 58 · Rameau 28
 
 ## Ligneux (77)
 
@@ -19,7 +19,7 @@
 | Alisier torminal | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Amandier | 7 | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | Feuille |
 | Amélanchier | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Arbousier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
+| Arbousier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
 | Arbre de Judée | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Argousier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Aronia | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
@@ -40,12 +40,12 @@
 | Chêne pubescent | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Chêne pédonculé | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | Écorce |
 | Chêne sessile | 6 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Chêne vert | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Chêne-liège | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
+| Chêne vert | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
+| Chêne-liège | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | · | Fleur |
 | Cognassier | 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Cormier | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Cornouiller mâle | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
-| Feijoa (goyavier du Brésil) | 4 | ✗ | ✓ | ✗ | ✓ | ✓ | ✗ | Feuille, Fruit, Rameau |
+| Feijoa (goyavier du Brésil) | 4 | ✗ | ✓ | ✗ | ✓ | ✓ | · | Feuille, Fruit |
 | Figuier | 6 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Framboisier | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
 | Frêne commun | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
@@ -69,8 +69,8 @@
 | Noisetier | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Noyer commun | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Néflier commun | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Olivier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Pin maritime | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
+| Olivier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
+| Pin maritime | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | · | Fleur |
 | Pin sylvestre | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Plaqueminier (kaki) | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Poirier | 5 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | Écorce, Port |

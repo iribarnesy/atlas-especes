@@ -39,6 +39,32 @@ def test_les_autres_aspects_s_appliquent_partout(atlas_data):
         assert atlas_data.aspect_applicable(asp, "herbace")
 
 
+def test_un_persistant_n_a_pas_de_rameau_d_hiver(atlas_data):
+    """Le rameau est défini comme l'état où l'on identifie un ligneux SANS ses feuilles.
+    Un olivier ou un chêne vert n'est jamais dans cet état : l'aspect n'a pas d'objet, et
+    le lot 17 a cherché ces rameaux nus en vain parce qu'il n'y a rien à photographier."""
+    for stem in ("olivier", "chene_vert", "chene_liege", "arbousier", "feijoa", "houx",
+                 "pin_maritime", "epicea", "if"):
+        assert not atlas_data.aspect_applicable("rameau", "ligneux", "arbre", stem)
+        # l'écorce, elle, existe toujours
+        assert atlas_data.aspect_applicable("ecorce", "ligneux", "arbre", stem)
+
+
+def test_les_exclusions_volontaires_de_la_regle_des_persistants(atlas_data):
+    """Trois cas qui ressemblent à des persistants sans en être, et gardent leur rameau :
+    le mélèze est un conifère CADUC ; l'ajonc et le genêt perdent leurs feuilles et ce
+    sont justement leurs rameaux verts qu'on regarde en hiver ; le troène est
+    semi-persistant, donc nu par hiver froid."""
+    for stem in ("meleze", "ajonc", "genet", "troene"):
+        assert atlas_data.aspect_applicable("rameau", "ligneux", "arbuste", stem)
+
+
+def test_la_regle_des_persistants_ne_touche_que_le_rameau(atlas_data):
+    """On n'enlève pas la feuille à un olivier : c'est même par elle qu'on le reconnaît."""
+    for asp in ("feuille", "fleur", "fruit", "port", "ecorce"):
+        assert atlas_data.aspect_applicable(asp, "ligneux", "arbre", "olivier")
+
+
 def test_une_herbacee_sans_ecorce_n_est_pas_comptee_comme_incomplete(repo):
     """Le cas qui faussait le compte : une herbacée avec feuille, fleur, fruit et port
     est complète, même sans écorce ni rameau."""
