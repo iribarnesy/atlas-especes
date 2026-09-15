@@ -81,6 +81,16 @@ def test_un_cone_femelle_n_est_pas_un_cone_male(cd):
     assert cd.aspect_devine("File:Pinus sylvestris male cones.jpg") == "fleur"
 
 
+def test_bud_dans_un_nom_propre_ou_vernaculaire_n_est_pas_un_bourgeon(cd):
+    """Suite du lot 17 : « bud » est court et vit dans des noms. « Red bud » est le nom
+    américain du Cercis, pas un bourgeon, et Budaörs est une ville hongroise — les deux
+    fichiers étaient des arbres entiers, l'un en fleur, l'autre en feuilles."""
+    assert cd.aspect_devine("File:Red bud 2009.jpg") != "rameau"
+    assert cd.aspect_devine("File:Downy oak, Tűzkő Hill trail, Budaörs.jpg") != "rameau"
+    # le vrai bourgeon reste reconnu
+    assert cd.aspect_devine("File:Prunus avium flowerbuds.jpg") == "rameau"
+
+
 def test_les_noms_de_lieux_ne_sont_pas_pris_pour_des_aspects(cd):
     """Découvert dans le lot 8 : un sureau photographié à BUDAPEST passait pour un rameau
     d'hiver (« bud »), et une vigne photographiée au PORTUGAL pour un port."""
