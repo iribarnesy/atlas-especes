@@ -24,6 +24,7 @@ Commons n'héberge pas de licence non commerciale — donc pas de tri de licence
   python3 scripts/candidats.py --especes groseillier --categorie "Ribes rubrum"
   python3 scripts/candidats.py --lot lots/lot-4-faune.txt --faune   varier larve/dégâts
   python3 scripts/candidats.py --especes muguet --planches   garder les planches anciennes
+  python3 scripts/candidats.py --lot lots/lot-18-port.txt --aspect port   servir le port d'abord
   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
 
 Format de candidats/choix.tsv (tabulations, « # » en commentaire) :
@@ -310,9 +311,28 @@ def utilisable(page, planches=False):
     return (ii.get("width") or ii.get("thumbwidth") or 0) >= 800
 
 
-def _repartir(pages, n, cle=lambda p: p["title"], vocabulaire="plante"):
-    """Round-robin entre thèmes : on veut de la variété, pas dix fleurs de la même plante."""
+def priorise(vocabulaire, aspect=None):
+    """(ordre, mots) du vocabulaire, l'aspect visé passé en tête s'il y en a un.
+
+    Le round-robin de _repartir sert un candidat par aspect et par tour, DANS L'ORDRE.
+    Un lot qui vise un seul aspect dépense donc ses premiers créneaux sur cinq aspects
+    qu'il ne cherche pas, et le dernier de la liste — le port — n'en obtient qu'un sur
+    sept au réglage par défaut, aucun en dessous de six. Le lot 14 a visé le port de
+    vingt ligneux et en a manqué onze ; le lot 18 a montré que ce n'était pas seulement
+    Commons qui était pauvre, c'était nous qui ne regardions presque pas.
+    """
     ordre, mots = VOCABULAIRES[vocabulaire]
+    if not aspect:
+        return ordre, mots
+    if aspect not in ordre:
+        raise SystemExit("aspect inconnu pour ce vocabulaire : %s (connus : %s)"
+                         % (aspect, ", ".join(ordre)))
+    return (aspect,) + tuple(a for a in ordre if a != aspect), mots
+
+
+def _repartir(pages, n, cle=lambda p: p["title"], vocabulaire="plante", aspect=None):
+    """Round-robin entre thèmes : on veut de la variété, pas dix fleurs de la même plante."""
+    ordre, mots = priorise(vocabulaire, aspect)
     par_aspect = {}
     for p in pages:
         par_aspect.setdefault(aspect_devine(cle(p), ordre, mots), []).append(p)
@@ -331,7 +351,7 @@ def _repartir(pages, n, cle=lambda p: p["title"], vocabulaire="plante"):
 
 
 def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
-              vocabulaire="plante", planches=False):
+              vocabulaire="plante", planches=False, aspect=None):
     """n pages Commons de l'espèce, réparties entre aspects.
 
     `categorie` force la catégorie de départ : une entrée d'atlas au nom de genre
@@ -345,7 +365,7 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
     # mieux qu'un aspect : sans ce rang commun, « - botanical illustrations » prenait la
     # première place et éjectait « buds » des quatre explorées, ce qui a fait rentrer le
     # lot 8 sans un seul rameau de charme.
-    _ordre, _mots = VOCABULAIRES[vocabulaire]
+    _ordre, _mots = priorise(vocabulaire, aspect)
     _kw = tuple(m for asp in _ordre for m in _mots[asp])
 
     def _rang(c):
@@ -375,11 +395,11 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
     # On ne paie l'imageinfo que d'une présélection large : certaines seront écartées
     # ensuite (image trop petite, mime inattendu), d'où la marge.
     presel = [t for _asp, t in _repartir(titres, n * 4, cle=lambda t: t,
-                                         vocabulaire=vocabulaire)]
+                                         vocabulaire=vocabulaire, aspect=aspect)]
     pages = [p for p in imageinfo_par_lots(presel, largeur) if utilisable(p, planches)]
     rang = {t: i for i, t in enumerate(presel)}
     pages.sort(key=lambda p: rang.get(p["title"], 999))
-    return _repartir(pages, n, vocabulaire=vocabulaire)
+    return _repartir(pages, n, vocabulaire=vocabulaire, aspect=aspect)
 
 
 # --------------------------------------------------------------- téléchargement
@@ -408,7 +428,7 @@ def telecharger(url, dest, largeur):
 
 
 def recolter(especes, n, largeur, motcle=None, categorie=None, vocabulaire="plante",
-             planches=False):
+             planches=False, aspect=None):
     """Complète candidats/<stem>/ sans rien écraser : la numérotation reprend où elle en
     est et candidats.tsv s'allonge. On peut donc revenir combler un aspect manquant
     (--motcle flower) sans perdre les choix déjà faits sur les candidats précédents."""
@@ -429,7 +449,7 @@ def recolter(especes, n, largeur, motcle=None, categorie=None, vocabulaire="plan
         lignes, ajoutes = [], 0
         try:
             trouves = candidats(latin, n, largeur, motcle, deja, categorie, vocabulaire,
-                                planches)
+                                planches, aspect)
         except Exception as e:
             print("[%d/%d] %-12s ÉCHEC %s" % (i, len(especes), stem, e))
             continue
@@ -551,12 +571,17 @@ def main(argv=None):
         if a == "--categorie" and i + 1 < len(argv):
             categorie = argv[i + 1]
     vocabulaire = "faune" if "--faune" in argv else "plante"
+    aspect = None
+    for i, a in enumerate(argv):
+        if a == "--aspect" and i + 1 < len(argv):
+            aspect = argv[i + 1]
     planches = "--planches" in argv
     especes = [(s, latin_court(l)) for s, l in especes_du_lot(argv)]
-    print("%d espèce(s), jusqu'à %d candidats chacune%s → candidats/"
-          % (len(especes), n, (" (titres contenant « %s »)" % motcle) if motcle else ""))
+    print("%d espèce(s), jusqu'à %d candidats chacune%s%s → candidats/"
+          % (len(especes), n, (" (titres contenant « %s »)" % motcle) if motcle else "",
+             (" (aspect « %s » prioritaire)" % aspect) if aspect else ""))
     recolter(especes, n, images.largeur_demandee(argv), motcle, categorie, vocabulaire,
-             planches)
+             planches, aspect)
 
 
 if __name__ == "__main__":

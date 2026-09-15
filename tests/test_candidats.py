@@ -81,6 +81,36 @@ def test_un_cone_femelle_n_est_pas_un_cone_male(cd):
     assert cd.aspect_devine("File:Pinus sylvestris male cones.jpg") == "fleur"
 
 
+def test_le_port_est_affame_par_le_round_robin(cd):
+    """Diagnostic du lot 18. _repartir sert un candidat par aspect et par tour, DANS
+    L'ORDRE, et le port est dernier. À cinq candidats par espèce il n'en obtient aucun ;
+    au réglage par défaut (sept) il en obtient un sur sept. Un lot qui vise le port
+    dépensait donc ses créneaux sur cinq aspects qu'il ne cherchait pas."""
+    titres = ["File:X twig.jpg", "File:X bark.jpg", "File:X leaf.jpg",
+              "File:X flower.jpg", "File:X fruit.jpg", "File:X habit.jpg"]
+    assert "port" not in [a for a, _ in cd._repartir(titres, 5, cle=lambda t: t)]
+    assert "port" in [a for a, _ in cd._repartir(titres, 6, cle=lambda t: t)]
+
+
+def test_aspect_prioritaire_sert_l_aspect_vise_en_premier(cd):
+    """--aspect remet l'aspect visé en tête de l'ordre : le lot le voit dès le premier
+    créneau, au lieu de ne jamais le voir."""
+    titres = ["File:X twig.jpg", "File:X bark.jpg", "File:X leaf.jpg",
+              "File:X flower.jpg", "File:X fruit.jpg", "File:X habit.jpg"]
+    aspects = [a for a, _ in cd._repartir(titres, 5, cle=lambda t: t, aspect="port")]
+    assert aspects[0] == "port"
+    # et on n'a pas perdu les autres, seulement changé l'ordre
+    assert set(cd.priorise("plante", "port")[0]) == set(cd.priorise("plante")[0])
+
+
+def test_aspect_inconnu_est_refuse(cd):
+    """Une faute de frappe sur --aspect doit arrêter la récolte, pas la fausser en
+    silence."""
+    import pytest as _pt
+    with _pt.raises(SystemExit):
+        cd.priorise("plante", "ecorse")
+
+
 def test_bud_dans_un_nom_propre_ou_vernaculaire_n_est_pas_un_bourgeon(cd):
     """Suite du lot 17 : « bud » est court et vit dans des noms. « Red bud » est le nom
     américain du Cercis, pas un bourgeon, et Budaörs est une ville hongroise — les deux
