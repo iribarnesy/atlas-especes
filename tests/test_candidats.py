@@ -134,6 +134,21 @@ def test_un_mot_marque_ne_compte_que_comme_mot_entier(cd):
     assert cd.aspect_devine("File:Quercus robur port.jpg") == "port"
 
 
+def test_le_port_ne_se_laisse_plus_prendre_par_plantation(cd):
+    """Le port est l'aspect le plus exposé aux sous-chaînes, et le lot 18 y a perdu
+    quatre créneaux : « plant » habite plantation, Plantentuin et Aroniaplantage — trois
+    rangs d'arbustes, pas une silhouette — et « stem » habite « root system »."""
+    assert cd.aspect_devine("File:Aroniaplantage.jpg") != "port"
+    assert cd.aspect_devine("File:Juglans regia Meise Plantentuin.jpg") != "port"
+    assert cd.aspect_devine("File:Robinia pseudoacacia root system.JPG") != "port"
+    # « habit » reste un préfixe : la sous-catégorie « (habitat) » est un bon gisement
+    assert cd.aspect_devine("File:Prunus habitat in Provence.jpg") == "port"
+    # ce qu'on veut vraiment reste pris, singulier comme pluriel
+    assert cd.aspect_devine("File:Malus domestica whole plant.jpg") == "port"
+    assert cd.aspect_devine("File:Young plants of Corylus.jpg") == "port"
+    assert cd.aspect_devine("File:Sorbus domestica tree habit.jpg") == "port"
+
+
 def test_les_racines_botaniques_restent_des_prefixes(cd):
     """On ne passe PAS tout le vocabulaire en mot entier : « flor » doit attraper flores
     et floración, « inflorescen » ses variantes, « rosett » rosette. C'est la raison pour

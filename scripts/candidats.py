@@ -129,9 +129,16 @@ MOTS = {
                "dormant", "knop", "gemma", "yema", "hiver", "invierno", "winter twig",
                # conifères : c'est le rameau et l'insertion des aiguilles qui déterminent
                "shoot", "branchlet", "sprig", "rameaux", "zweig"),
-    "port": ("habit", "plant", "=port", "habitus", "whole", "pflanze", "stand",
-             "population", "growing", "stem", "tige", "stengel", "silhouette", "arbre",
-             "tree", "baum", "shrub", "strauch", "buisson"),
+    # Le port est l'aspect le plus exposé aux sous-chaînes : « plant » habite plantation,
+    # Plantentuin et Aroniaplantage — trois rangs d'arbustes, pas une silhouette — et
+    # « stem » habite « root system ». Quatre mots passent donc en mot entier ; le lot 18
+    # y a perdu quatre créneaux avant qu'on s'en aperçoive.
+    # « habit » reste un PRÉFIXE volontairement : il attrape « habitat », et la
+    # sous-catégorie Commons « X (habitat) » est l'un des meilleurs gisements de
+    # silhouettes. Le tri à l'œil fera le reste.
+    "port": ("habit", "=plant", "=plants", "=port", "habitus", "whole", "pflanze",
+             "stand", "population", "growing", "=stem", "=tige", "stengel", "silhouette",
+             "arbre", "tree", "baum", "shrub", "strauch", "buisson"),
 }
 ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
 
