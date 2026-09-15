@@ -52,7 +52,12 @@ DIVERS_LABEL = "Divers"
 # donc dans « Divers » et dans « Tout », jamais dans un filtre d'aspect (cf. #30).
 PLANCHE = "planche"
 PLANCHE_KW = (PLANCHE, "planches", "gravure")
-PLANCHE_LABEL = "Planche ancienne"
+# « ancienne » a été retiré : Commons héberge aussi des illustrations botaniques
+# MODERNES, et elles couvrent précisément des organes que la photo ne documente pas — les
+# bourgeons d'hiver du cormier ou du chêne pubescent, cherchés en vain au lot 17. Ce qui
+# doit être dit au lecteur n'est pas l'âge du document mais sa nature : c'est un dessin,
+# donc une synthèse idéalisée, pas un individu photographié sur le terrain.
+PLANCHE_LABEL = "Planche"
 
 # Aspects qui n'ont de sens que pour certaines catégories. Un rameau d'hiver ou une écorce
 # ne veulent rien dire pour une herbacée : sans cette restriction, COUVERTURE.md comptait
