@@ -121,6 +121,28 @@ def test_bud_dans_un_nom_propre_ou_vernaculaire_n_est_pas_un_bourgeon(cd):
     assert cd.aspect_devine("File:Prunus avium flowerbuds.jpg") == "rameau"
 
 
+def test_un_mot_marque_ne_compte_que_comme_mot_entier(cd):
+    """La règle qui a permis de RETIRER neuf noms propres de FAUX_AMIS au lieu d'en
+    ajouter : « =bud » et « =port » ne se trouvent plus à l'intérieur d'un autre mot."""
+    assert cd.aspect_devine("File:Sambucus nigra à Budapest.jpg") != "rameau"
+    assert cd.aspect_devine("File:Buddleja davidii.jpg") != "rameau"
+    assert cd.aspect_devine("File:Vue de Porto.jpg") != "port"
+    assert cd.aspect_devine("File:Portrait de Linné.jpg") != "port"
+    assert cd.aspect_devine("File:Important plant habit.jpg") == "port"
+    # et les mots entiers, eux, comptent toujours
+    assert cd.aspect_devine("File:Tilia bud scale.jpg") == "rameau"
+    assert cd.aspect_devine("File:Quercus robur port.jpg") == "port"
+
+
+def test_les_racines_botaniques_restent_des_prefixes(cd):
+    """On ne passe PAS tout le vocabulaire en mot entier : « flor » doit attraper flores
+    et floración, « inflorescen » ses variantes, « rosett » rosette. C'est la raison pour
+    laquelle la frontière de mot est demandée mot par mot, avec « = »."""
+    assert cd.aspect_devine("File:Prunus flores.jpg") == "fleur"
+    assert cd.aspect_devine("File:Daucus inflorescencia.jpg") == "fleur"
+    assert cd.aspect_devine("File:Taraxacum rosette.jpg") == "feuille"
+
+
 def test_les_noms_de_lieux_ne_sont_pas_pris_pour_des_aspects(cd):
     """Découvert dans le lot 8 : un sureau photographié à BUDAPEST passait pour un rameau
     d'hiver (« bud »), et une vigne photographiée au PORTUGAL pour un port."""

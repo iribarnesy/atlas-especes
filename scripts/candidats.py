@@ -124,34 +124,35 @@ MOTS = {
     # d'identifier un feuillu hors saison, et c'était le dernier aspect qu'aucun lot
     # n'avait visé : faute d'être ici, tout bourgeon tombait dans « divers » et la
     # répartition ne le sortait jamais. Il passe en tête, comme l'écorce au lot 2.
-    "rameau": ("twig", "rameau", "ramille", "bourgeon", "knospe", "buds", " bud", "bud-",
+    "rameau": ("twig", "rameau", "ramille", "bourgeon", "knospe", "buds", "=bud",
                "winter shoot", "winterknospe", "leaf scar", "cicatrice", "moelle", "pith",
                "dormant", "knop", "gemma", "yema", "hiver", "invierno", "winter twig",
                # conifères : c'est le rameau et l'insertion des aiguilles qui déterminent
                "shoot", "branchlet", "sprig", "rameaux", "zweig"),
-    "port": ("habit", "plant", "port", "habitus", "whole", "pflanze", "stand",
+    "port": ("habit", "plant", "=port", "habitus", "whole", "pflanze", "stand",
              "population", "growing", "stem", "tige", "stengel", "silhouette", "arbre",
              "tree", "baum", "shrub", "strauch", "buisson"),
 }
 ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
 
-# Mots qui contiennent par accident un mot-clé d'aspect. « Budapest » contient « bud »,
-# « Portugal » contient « port » : sans les retirer d'abord, un sureau photographié à
-# Budapest passait pour un rameau d'hiver et une vigne photographiée au Portugal pour un
-# port. On les gomme du titre avant de chercher les mots-clés.
-# « female » d'abord : « female cones » CONTIENT « male cone », et un cône femelle est le
-# fruit, pas la fleur — c'est le genévrier du lot 16 qui l'a montré, ses galbules bleues
-# remontant en fleur. On neutralise le mot plutôt que de renoncer à « male cone », parce
-# que « female flowers » doit rester une fleur : une fois « female » effacé, il reste
-# « flowers ».
-# « bud » est le mot le plus piégeux du vocabulaire : il est court, et il vit à
-# l'intérieur de noms propres (Budapest, Budaörs) comme de noms vernaculaires
-# (« redbud » = Cercis, le nom américain de l'arbre de Judée — pas un bourgeon). Le lot
-# 17 en a perdu deux créneaux sur vingt-quatre. On rallonge la liste, mais la vraie
-# correction serait de comparer sur des MOTS et non des sous-chaînes.
-FAUX_AMIS = ("female", "weibliche", "budapest", "budaörs", "budaors", "redbud",
-             "red bud", "buddleja", "buddleia", "portugal", "porto", "portland",
-             "important", "portrait de", "leafless")
+# La plupart des mots d'organe se comparent en SOUS-CHAÎNE, et c'est voulu : « flor » doit
+# attraper flores et floración, « inflorescen » inflorescence et inflorescencia, « rosett »
+# rosette et Rosette. Mais deux mots sont courts et vivent à l'intérieur d'autres mots —
+# « bud » dans Budapest et Budaörs, « port » dans Portugal et portrait — et ils ont coûté
+# des créneaux aux lots 8 et 17. Le préfixe « = » demande une comparaison sur le MOT
+# ENTIER. Ça remplace neuf noms propres qu'on a pu retirer de FAUX_AMIS : on ne rattrape
+# plus les exceptions une par une, on corrige la règle.
+MOT_ENTIER = "="
+
+# Ce qui reste ici ne peut PAS se régler par une frontière de mot :
+#   - « female cones » contient le mot entier « male cone » sans être une fleur — c'est le
+#     genévrier du lot 16, dont les galbules bleues remontaient en fleur. On gomme
+#     « female », et « female flowers » reste une fleur : il y reste « flowers » ;
+#   - « leafless » contient bien le préfixe « leaf » mais dit justement l'ABSENCE de
+#     feuilles ;
+#   - « Red bud » est le nom américain du Cercis : le mot « bud » y est entier, et
+#     pourtant ce n'est pas un bourgeon (lot 17).
+FAUX_AMIS = ("female", "weibliche", "redbud", "red bud", "leafless")
 
 # Vocabulaire de RÉPARTITION pour la faune. Ce ne sont PAS des aspects de l'atlas — aucun
 # des aspects (feuille, écorce…) ne s'applique à un animal, et les photos de faune entrent
@@ -281,12 +282,20 @@ def imageinfo_par_lots(titres, largeur):
     return pages
 
 
+def _present(mot, texte):
+    """Un mot préfixé de « = » ne compte que comme MOT ENTIER ; les autres en
+    sous-chaîne, pour attraper les pluriels et les langues voisines."""
+    if mot.startswith(MOT_ENTIER):
+        return re.search(r"(?<!\w)%s(?!\w)" % re.escape(mot[1:]), texte) is not None
+    return mot in texte
+
+
 def aspect_devine(titre, ordre=ORDRE, mots=MOTS):
     t = titre.lower()
     for faux in FAUX_AMIS:
         t = t.replace(faux, " ")
     for asp in ordre:
-        if any(m in t for m in mots[asp]):
+        if any(_present(m, t) for m in mots[asp]):
             return asp
     return atlas_data.DIVERS
 
