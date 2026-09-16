@@ -118,8 +118,14 @@ MOTS = {
     # L'écorce est l'aspect le plus déficitaire du dépôt et ne concerne que les ligneux.
     # Elle passe avant « port » dans ORDRE : un titre qui dit « trunk » parle du tronc,
     # pas de la silhouette, alors que les deux mots se croisent souvent.
-    "ecorce": ("bark", "écorce", "ecorce", "rinde", "corteza", "corteccia", "kora",
-               "trunk", "tronc", "stamm", "bole", "schors", "bast", "borke"),
+        # Quatre mots de l'écorce sont courts et habitent d'autres mots. Le plus coûteux est
+    # « bole » : il vit dans BOLETUS, si bien qu'un cèpe passait pour un tronc dans toute
+    # récolte de champignons. Puis « bast » dans Sebastian et Bastia, « kora » dans
+    # Korallen, et « borke » dans Borken — une ville allemande qui a fait remonter au lot
+    # 21 une haie de prunelliers en fleurs — comme dans Borkenkäfer, le scolyte, qui est
+    # un insecte et non une écorce. Les quatre passent en mot entier.
+    "ecorce": ("bark", "écorce", "ecorce", "rinde", "corteza", "corteccia", "=kora",
+               "trunk", "tronc", "stamm", "=bole", "schors", "=bast", "=borke"),
     # Le rameau d'hiver — bourgeons, cicatrices foliaires, moelle — est la seule façon
     # d'identifier un feuillu hors saison, et c'était le dernier aspect qu'aucun lot
     # n'avait visé : faute d'être ici, tout bourgeon tombait dans « divers » et la

@@ -155,6 +155,21 @@ def test_le_port_ne_se_laisse_plus_prendre_par_plantation(cd):
     assert cd.aspect_devine("File:Sorbus domestica tree habit.jpg") == "port"
 
 
+def test_bole_ne_transforme_pas_un_cepe_en_tronc(cd):
+    """Le plus coûteux des faux amis trouvés, découvert au lot 21 : « bole » vit dans
+    BOLETUS, si bien qu'un cèpe passait pour une écorce dans toute récolte de champignons.
+    Et « borke » vit dans Borken, une ville allemande qui a fait remonter une haie de
+    prunelliers en fleurs, comme dans Borkenkäfer — le scolyte, un insecte."""
+    assert cd.aspect_devine("File:Boletus edulis.jpg") != "ecorce"
+    assert cd.aspect_devine("File:Burlo-Vardingholter Venn, Borken.jpg") != "ecorce"
+    assert cd.aspect_devine("File:Borkenkäfer damage on spruce.jpg") != "ecorce"
+    assert cd.aspect_devine("File:Sebastian garden.jpg") != "ecorce"
+    # les vrais mots restent pris
+    assert cd.aspect_devine("File:Tilia cordata bole.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Fagus Borke Detail.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Quercus robur bark.jpg") == "ecorce"
+
+
 def test_les_racines_botaniques_restent_des_prefixes(cd):
     """On ne passe PAS tout le vocabulaire en mot entier : « flor » doit attraper flores
     et floración, « inflorescen » ses variantes, « rosett » rosette. C'est la raison pour
