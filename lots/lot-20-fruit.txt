@@ -1,0 +1,141 @@
+# Lot 20 — LE FRUIT, en entier : les soixante et onze qui manquent.
+#
+#   python3 scripts/candidats.py --lot lots/lot-20-fruit.txt --aspect fruit --par-espece 4 --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ TROISIÈME REPRISE AVEC --aspect, ET LA PLUS GROSSE. Le fruit est de loin le premier
+# manque du dépôt, et c'est le seul aspect majeur jamais repris depuis que le drapeau
+# existe : les lots 12, 13 et 15 l'ont visé SANS lui. Le lot 15 avait conclu que Commons
+# était pauvre en fruits d'herbacées — conclusion honnête à l'époque, mais tirée avec un
+# récolteur qui donnait au fruit l'avant-dernier créneau de sa répartition. Les lots 18 et
+# 19 ont montré deux fois de suite que ce genre de conclusion doit être revérifié.
+#
+# SOIXANTE-SEPT DES SOIXANTE ET ONZE SONT DES HERBACÉES. C'est donc le constat du lot 15
+# qu'on met à l'épreuve, pas celui des ligneux.
+#
+# ⚠ CEUX OÙ LE FRUIT EST LE CRITÈRE D'UN GROUPE DE CONFUSION :
+#   - DIGITALE (⚠ MORTELLE) et CONSOUDE, groupe « Rosettes velues » : capsules ovoïdes en
+#     épi d'un côté, quatre akènes luisants de l'autre ;
+#   - MAUVE et GUIMAUVE, groupe « Malvacées » : les « fromageons », ces méricarpes
+#     disposés en rosette comme les parts d'un fromage. C'est LE caractère de la famille ;
+#   - CHÉNOPODE et AMARANTE, groupe « Épinards sauvages » ;
+#   - ARMOISE/ABSINTHE et ESTRAGON, groupe « Astéracées amères » ;
+#   - CÉLERI, LIVÈCHE, PERSIL, ÉGOPODE, apiacées : le schizocarpe, qui se sépare en deux
+#     méricarpes. Tout ce qui range une apiacée à côté de la ciguë mérite son fruit ;
+#   - STELLAIRE, groupe « mouron » : capsule s'ouvrant par SIX dents ;
+#   - ASPERGE : baies ROUGES, TOXIQUES, sur le plumet d'été. Cherché en vain au lot 15.
+#
+# ⚠ CEUX QUI VALENT LE DÉTOUR POUR EUX-MÊMES :
+#   - SAINFOIN : gousse en CRÊTE dentée, indéhiscente — rien d'autre ne lui ressemble ;
+#   - SARRASIN : akène TRIANGULAIRE. C'est exactement le grain qu'on mange ;
+#   - AIL ROCAMBOLE : bulbilles aériennes au sommet d'une tige TORDUE en boucle ;
+#   - AIL, OIGNON, POIREAU, CIBOULETTE, ÉCHALOTE : capsules s'ouvrant sur des graines
+#     noires et anguleuses ;
+#   - OSEILLE : valves membraneuses portant chacune un granule ;
+#   - PLANTAIN : épi de capsules s'ouvrant par un couvercle ;
+#   - ASPÉRULE : fruits couverts de CROCHETS, le caractère du genre Galium ;
+#   - ARTICHAUT : capitule sec ouvert, aigrettes soyeuses ;
+#   - RHUBARBE : panicule d'akènes ailés, très haute.
+#
+# ⚠ LES PIÈGES, ceux du lot 15 plus un nouveau et important :
+#   - LES GRAINES EN SACHET sur fond neutre. Le lot 15 en a trouvé pour l'amarante, le
+#     céleri, la guimauve et l'artichaut. Ce n'est un fruit que lorsque l'organe ne se
+#     photographie pas autrement — et alors on l'assume, comme les akènes de tanaisie ;
+#   - LES PLANTULES : le mot « seed » attrape « seedlings ». Vérifié sur le chénopode et
+#     l'estragon au lot 15 ;
+#   - LES PHOTOS DE CUISINE ET DE RÉCOLTE : le fruit doit être SUR LA PLANTE ;
+#   - ⚠ NOUVEAU, ET IL CONCERNE UNE DIZAINE D'ESPÈCES ICI : LE LÉGUME N'EST PAS LE FRUIT.
+#     Pour le NAVET, le RADIS, la BETTERAVE, le RAIFORT, la PATATE DOUCE, l'OCA, le
+#     CROSNE, le POIREAU, l'ÉCHALOTE et la POIRE DE TERRE, on mange une racine, un
+#     tubercule ou un bulbe. Leur fruit est une silique ou une capsule que presque
+#     personne ne photographie, et toute la catégorie Commons montre l'organe récolté.
+#     Si la récolte ne donne que des légumes, c'est un résultat : on l'écrit.
+#   - RÉFLEXE DES LOTS 14/16/19 : zéro candidat = d'abord un problème de NOM DE CATÉGORIE.
+#     Connus : la ROQUETTE est sous « Eruca vesicaria », la MENTHE et le LUPIN sont des
+#     entrées de GENRE. ⚠ LA MENTHE reste bloquée tant que « quelle menthe représente
+#     Mentha sp. ? » n'est pas tranché.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# le fruit comme critère de confusion
+digitale               # ⚠ MORTELLE — capsules ovoïdes en épi ; groupe « Rosettes velues »
+consoude               # quatre akènes luisants ; l'autre moitié du groupe
+mauve                  # « fromageons » en rosette ; groupe Malvacées
+guimauve               # idem
+chenopode              # groupe « Épinards sauvages »
+amarante               # idem
+armoise                # akène minuscule — le lot 15 a déjà échoué, ne pas s'acharner
+estragon               # idem
+celeri                 # schizocarpe d'apiacée
+liveche                # méricarpes ailés, très gros pour une apiacée
+persil                 # schizocarpe
+egopode                # idem
+stellaire              # capsule à SIX dents ; groupe « mouron »
+asperge                # baies ROUGES TOXIQUES sur le plumet d'été
+achillee               # akènes
+paquerette             # akènes
+
+# les fruits remarquables
+sainfoin               # gousse en CRÊTE dentée
+sarrasin               # akène TRIANGULAIRE = le grain
+ail_rocambole          # bulbilles aériennes sur tige TORDUE
+ail                    # capsule à graines noires
+oignon                 # idem
+poireau                # idem
+poireau_perpetuel      # idem
+ciboulette             # idem
+echalote               # ⚠ légume-bulbe : le fruit est une capsule
+oseille                # valves à granule
+plantain               # épi de capsules à couvercle
+asperule               # fruits à CROCHETS, caractère du genre Galium
+artichaut              # capitule sec, aigrettes soyeuses
+rhubarbe               # panicule d'akènes ailés
+melilot                # gousse ridée
+trefle_blanc           # gousse dans le calice persistant
+trefle_violet          # idem
+avoine                 # épillets pendants à longue arête
+seigle                 # épi barbu
+moutarde               # siliques dressées
+primevere              # capsule
+violette               # capsule à trois valves
+pourpier               # capsule à COUVERCLE (pyxide)
+claytone               # capsule ; feuilles perfoliées visibles
+
+# les aromatiques — akènes minuscules, on n'espère pas grand-chose
+basilic
+hysope
+lavande
+marjolaine
+melisse
+menthe                 # ⚠ entrée de GENRE, question non tranchée
+origan
+romarin
+sarriette
+sauge
+thym
+verveine_citron
+
+# les légumes-racines et légumes-feuilles — ⚠ le légume N'EST PAS le fruit
+navet                  # ⚠ silique, pas la racine
+radis                  # ⚠ silique renflée
+betterave              # ⚠ glomérule
+raifort                # ⚠ silicule
+patate_douce           # ⚠ capsule
+oca                    # ⚠ capsule
+crosne                 # ⚠ akènes
+poire_de_terre         # ⚠ akènes
+laitue                 # akènes à aigrette
+mache                  # akène
+roquette               # ⚠ catégorie « Eruca vesicaria » ; silique à bec
+chicoree               # akènes
+epinard                # glomérules
+blette                 # idem
+aubergine              # baie — mais c'est le légume, donc il existe
+artichaut              # (déjà plus haut)
+
+# les quatre ligneux
+abricotier             # ⚠ sur l'arbre, pas en cageot ; un pêcher a déjà été refusé deux fois
+feijoa                 # ⚠ sur l'arbuste, pas coupé en deux
+bruyere_cendree        # capsules minuscules
+bruyere_quatre_angles  # idem
