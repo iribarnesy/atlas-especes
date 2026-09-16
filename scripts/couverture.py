@@ -55,9 +55,10 @@ def main():
     plants = [sp for c in PLANT_CATS for sp in by_cat.get(c, [])]
     def applicable(aspect, sp):
         """L'écorce et le rameau ne concernent que les ligneux — et parmi eux, ni les
-        sous-arbrisseaux ni les lianes."""
+        sous-arbrisseaux ni les lianes ; le rameau d'hiver, pas non plus les persistants."""
         return atlas_data.aspect_applicable(aspect, sp["cat"],
-                                            (sp.get("fields") or {}).get("type", ""))
+                                            (sp.get("fields") or {}).get("type", ""),
+                                            sp["stem"])
 
     def vises(sp):
         return {k for k, _ in aspects if applicable(k, sp)}

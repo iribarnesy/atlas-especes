@@ -81,6 +81,36 @@ def test_un_cone_femelle_n_est_pas_un_cone_male(cd):
     assert cd.aspect_devine("File:Pinus sylvestris male cones.jpg") == "fleur"
 
 
+def test_le_port_est_affame_par_le_round_robin(cd):
+    """Diagnostic du lot 18. _repartir sert un candidat par aspect et par tour, DANS
+    L'ORDRE, et le port est dernier. À cinq candidats par espèce il n'en obtient aucun ;
+    au réglage par défaut (sept) il en obtient un sur sept. Un lot qui vise le port
+    dépensait donc ses créneaux sur cinq aspects qu'il ne cherchait pas."""
+    titres = ["File:X twig.jpg", "File:X bark.jpg", "File:X leaf.jpg",
+              "File:X flower.jpg", "File:X fruit.jpg", "File:X habit.jpg"]
+    assert "port" not in [a for a, _ in cd._repartir(titres, 5, cle=lambda t: t)]
+    assert "port" in [a for a, _ in cd._repartir(titres, 6, cle=lambda t: t)]
+
+
+def test_aspect_prioritaire_sert_l_aspect_vise_en_premier(cd):
+    """--aspect remet l'aspect visé en tête de l'ordre : le lot le voit dès le premier
+    créneau, au lieu de ne jamais le voir."""
+    titres = ["File:X twig.jpg", "File:X bark.jpg", "File:X leaf.jpg",
+              "File:X flower.jpg", "File:X fruit.jpg", "File:X habit.jpg"]
+    aspects = [a for a, _ in cd._repartir(titres, 5, cle=lambda t: t, aspect="port")]
+    assert aspects[0] == "port"
+    # et on n'a pas perdu les autres, seulement changé l'ordre
+    assert set(cd.priorise("plante", "port")[0]) == set(cd.priorise("plante")[0])
+
+
+def test_aspect_inconnu_est_refuse(cd):
+    """Une faute de frappe sur --aspect doit arrêter la récolte, pas la fausser en
+    silence."""
+    import pytest as _pt
+    with _pt.raises(SystemExit):
+        cd.priorise("plante", "ecorse")
+
+
 def test_bud_dans_un_nom_propre_ou_vernaculaire_n_est_pas_un_bourgeon(cd):
     """Suite du lot 17 : « bud » est court et vit dans des noms. « Red bud » est le nom
     américain du Cercis, pas un bourgeon, et Budaörs est une ville hongroise — les deux
@@ -89,6 +119,43 @@ def test_bud_dans_un_nom_propre_ou_vernaculaire_n_est_pas_un_bourgeon(cd):
     assert cd.aspect_devine("File:Downy oak, Tűzkő Hill trail, Budaörs.jpg") != "rameau"
     # le vrai bourgeon reste reconnu
     assert cd.aspect_devine("File:Prunus avium flowerbuds.jpg") == "rameau"
+
+
+def test_un_mot_marque_ne_compte_que_comme_mot_entier(cd):
+    """La règle qui a permis de RETIRER neuf noms propres de FAUX_AMIS au lieu d'en
+    ajouter : « =bud » et « =port » ne se trouvent plus à l'intérieur d'un autre mot."""
+    assert cd.aspect_devine("File:Sambucus nigra à Budapest.jpg") != "rameau"
+    assert cd.aspect_devine("File:Buddleja davidii.jpg") != "rameau"
+    assert cd.aspect_devine("File:Vue de Porto.jpg") != "port"
+    assert cd.aspect_devine("File:Portrait de Linné.jpg") != "port"
+    assert cd.aspect_devine("File:Important plant habit.jpg") == "port"
+    # et les mots entiers, eux, comptent toujours
+    assert cd.aspect_devine("File:Tilia bud scale.jpg") == "rameau"
+    assert cd.aspect_devine("File:Quercus robur port.jpg") == "port"
+
+
+def test_le_port_ne_se_laisse_plus_prendre_par_plantation(cd):
+    """Le port est l'aspect le plus exposé aux sous-chaînes, et le lot 18 y a perdu
+    quatre créneaux : « plant » habite plantation, Plantentuin et Aroniaplantage — trois
+    rangs d'arbustes, pas une silhouette — et « stem » habite « root system »."""
+    assert cd.aspect_devine("File:Aroniaplantage.jpg") != "port"
+    assert cd.aspect_devine("File:Juglans regia Meise Plantentuin.jpg") != "port"
+    assert cd.aspect_devine("File:Robinia pseudoacacia root system.JPG") != "port"
+    # « habit » reste un préfixe : la sous-catégorie « (habitat) » est un bon gisement
+    assert cd.aspect_devine("File:Prunus habitat in Provence.jpg") == "port"
+    # ce qu'on veut vraiment reste pris, singulier comme pluriel
+    assert cd.aspect_devine("File:Malus domestica whole plant.jpg") == "port"
+    assert cd.aspect_devine("File:Young plants of Corylus.jpg") == "port"
+    assert cd.aspect_devine("File:Sorbus domestica tree habit.jpg") == "port"
+
+
+def test_les_racines_botaniques_restent_des_prefixes(cd):
+    """On ne passe PAS tout le vocabulaire en mot entier : « flor » doit attraper flores
+    et floración, « inflorescen » ses variantes, « rosett » rosette. C'est la raison pour
+    laquelle la frontière de mot est demandée mot par mot, avec « = »."""
+    assert cd.aspect_devine("File:Prunus flores.jpg") == "fleur"
+    assert cd.aspect_devine("File:Daucus inflorescencia.jpg") == "fleur"
+    assert cd.aspect_devine("File:Taraxacum rosette.jpg") == "feuille"
 
 
 def test_les_noms_de_lieux_ne_sont_pas_pris_pour_des_aspects(cd):

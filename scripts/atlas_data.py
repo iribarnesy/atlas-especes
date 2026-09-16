@@ -52,7 +52,12 @@ DIVERS_LABEL = "Divers"
 # donc dans « Divers » et dans « Tout », jamais dans un filtre d'aspect (cf. #30).
 PLANCHE = "planche"
 PLANCHE_KW = (PLANCHE, "planches", "gravure")
-PLANCHE_LABEL = "Planche ancienne"
+# « ancienne » a été retiré : Commons héberge aussi des illustrations botaniques
+# MODERNES, et elles couvrent précisément des organes que la photo ne documente pas — les
+# bourgeons d'hiver du cormier ou du chêne pubescent, cherchés en vain au lot 17. Ce qui
+# doit être dit au lecteur n'est pas l'âge du document mais sa nature : c'est un dessin,
+# donc une synthèse idéalisée, pas un individu photographié sur le terrain.
+PLANCHE_LABEL = "Planche"
 
 # Aspects qui n'ont de sens que pour certaines catégories. Un rameau d'hiver ou une écorce
 # ne veulent rien dire pour une herbacée : sans cette restriction, COUVERTURE.md comptait
@@ -71,11 +76,40 @@ TYPES_SANS_TRONC = ("sous-arbrisseau", "liane")
 ASPECTS_DU_TRONC = ("ecorce", "rameau")
 
 
-def aspect_applicable(aspect, cat, type_=""):
-    """L'aspect a-t-il un sens pour cette espèce ? (catégorie d'atlas, puis type de ligneux)"""
+# Un cran plus fin encore, et pour le seul RAMEAU. L'aspect est défini comme le rameau
+# d'hiver : l'état où l'on identifie un ligneux SANS ses feuilles. Un arbre à feuillage
+# PERSISTANT n'est jamais dans cet état — on le reconnaît à son feuillage douze mois par
+# an, et c'est l'aspect « feuille » qui le dit. Le lot 17 a cherché en vain le rameau nu
+# du chêne vert, du chêne-liège, de l'olivier, de l'arbousier et du feijoa : Commons n'en
+# a pas parce qu'il n'y a rien à photographier.
+#
+# La liste est ÉCRITE plutôt que dérivée, parce que l'atlas ne porte pas la donnée : la
+# colonne « Notes » dit « persistant » pour le buis et le houx mais pas pour l'épicéa, et
+# une règle qui lirait ces notes changerait la couverture au premier mot réécrit.
+#
+# Deux exclusions volontaires, contre l'intuition :
+#   - le MÉLÈZE est un conifère CADUC — il perd ses aiguilles, son rameau d'hiver existe ;
+#   - l'AJONC et le GENÊT perdent leurs feuilles, et ce sont justement leurs rameaux verts
+#     — épineux chez l'un, anguleux chez l'autre — qu'on regarde en hiver ;
+#   - le TROÈNE est semi-persistant : il est nu par hiver froid, l'aspect garde un objet.
+PERSISTANTS = ("arbousier", "buis", "chene_liege", "chene_vert", "epicea", "feijoa",
+               "genevrier", "houx", "if", "laurier_sauce", "olivier", "pin_maritime",
+               "pin_sylvestre", "sapin")
+ASPECTS_SANS_OBJET_SI_PERSISTANT = ("rameau",)
+
+
+def aspect_applicable(aspect, cat, type_="", stem=""):
+    """L'aspect a-t-il un sens pour cette espèce ?
+
+    Trois filtres, du plus large au plus fin : la catégorie d'atlas (pas d'écorce sur une
+    herbacée), le type de ligneux (pas de tronc sur une callune), puis le feuillage
+    persistant (pas de rameau d'hiver sur un olivier).
+    """
     if cat not in ASPECT_CATS.get(aspect, (cat,)):
         return False
     if aspect in ASPECTS_DU_TRONC and (type_ or "").strip().lower() in TYPES_SANS_TRONC:
+        return False
+    if aspect in ASPECTS_SANS_OBJET_SI_PERSISTANT and stem in PERSISTANTS:
         return False
     return True
 

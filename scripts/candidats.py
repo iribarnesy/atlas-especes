@@ -24,6 +24,7 @@ Commons n'héberge pas de licence non commerciale — donc pas de tri de licence
   python3 scripts/candidats.py --especes groseillier --categorie "Ribes rubrum"
   python3 scripts/candidats.py --lot lots/lot-4-faune.txt --faune   varier larve/dégâts
   python3 scripts/candidats.py --especes muguet --planches   garder les planches anciennes
+  python3 scripts/candidats.py --lot lots/lot-18-port.txt --aspect port   servir le port d'abord
   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
 
 Format de candidats/choix.tsv (tabulations, « # » en commentaire) :
@@ -123,34 +124,42 @@ MOTS = {
     # d'identifier un feuillu hors saison, et c'était le dernier aspect qu'aucun lot
     # n'avait visé : faute d'être ici, tout bourgeon tombait dans « divers » et la
     # répartition ne le sortait jamais. Il passe en tête, comme l'écorce au lot 2.
-    "rameau": ("twig", "rameau", "ramille", "bourgeon", "knospe", "buds", " bud", "bud-",
+    "rameau": ("twig", "rameau", "ramille", "bourgeon", "knospe", "buds", "=bud",
                "winter shoot", "winterknospe", "leaf scar", "cicatrice", "moelle", "pith",
                "dormant", "knop", "gemma", "yema", "hiver", "invierno", "winter twig",
                # conifères : c'est le rameau et l'insertion des aiguilles qui déterminent
                "shoot", "branchlet", "sprig", "rameaux", "zweig"),
-    "port": ("habit", "plant", "port", "habitus", "whole", "pflanze", "stand",
-             "population", "growing", "stem", "tige", "stengel", "silhouette", "arbre",
-             "tree", "baum", "shrub", "strauch", "buisson"),
+    # Le port est l'aspect le plus exposé aux sous-chaînes : « plant » habite plantation,
+    # Plantentuin et Aroniaplantage — trois rangs d'arbustes, pas une silhouette — et
+    # « stem » habite « root system ». Quatre mots passent donc en mot entier ; le lot 18
+    # y a perdu quatre créneaux avant qu'on s'en aperçoive.
+    # « habit » reste un PRÉFIXE volontairement : il attrape « habitat », et la
+    # sous-catégorie Commons « X (habitat) » est l'un des meilleurs gisements de
+    # silhouettes. Le tri à l'œil fera le reste.
+    "port": ("habit", "=plant", "=plants", "=port", "habitus", "whole", "pflanze",
+             "stand", "population", "growing", "=stem", "=tige", "stengel", "silhouette",
+             "arbre", "tree", "baum", "shrub", "strauch", "buisson"),
 }
 ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
 
-# Mots qui contiennent par accident un mot-clé d'aspect. « Budapest » contient « bud »,
-# « Portugal » contient « port » : sans les retirer d'abord, un sureau photographié à
-# Budapest passait pour un rameau d'hiver et une vigne photographiée au Portugal pour un
-# port. On les gomme du titre avant de chercher les mots-clés.
-# « female » d'abord : « female cones » CONTIENT « male cone », et un cône femelle est le
-# fruit, pas la fleur — c'est le genévrier du lot 16 qui l'a montré, ses galbules bleues
-# remontant en fleur. On neutralise le mot plutôt que de renoncer à « male cone », parce
-# que « female flowers » doit rester une fleur : une fois « female » effacé, il reste
-# « flowers ».
-# « bud » est le mot le plus piégeux du vocabulaire : il est court, et il vit à
-# l'intérieur de noms propres (Budapest, Budaörs) comme de noms vernaculaires
-# (« redbud » = Cercis, le nom américain de l'arbre de Judée — pas un bourgeon). Le lot
-# 17 en a perdu deux créneaux sur vingt-quatre. On rallonge la liste, mais la vraie
-# correction serait de comparer sur des MOTS et non des sous-chaînes.
-FAUX_AMIS = ("female", "weibliche", "budapest", "budaörs", "budaors", "redbud",
-             "red bud", "buddleja", "buddleia", "portugal", "porto", "portland",
-             "important", "portrait de", "leafless")
+# La plupart des mots d'organe se comparent en SOUS-CHAÎNE, et c'est voulu : « flor » doit
+# attraper flores et floración, « inflorescen » inflorescence et inflorescencia, « rosett »
+# rosette et Rosette. Mais deux mots sont courts et vivent à l'intérieur d'autres mots —
+# « bud » dans Budapest et Budaörs, « port » dans Portugal et portrait — et ils ont coûté
+# des créneaux aux lots 8 et 17. Le préfixe « = » demande une comparaison sur le MOT
+# ENTIER. Ça remplace neuf noms propres qu'on a pu retirer de FAUX_AMIS : on ne rattrape
+# plus les exceptions une par une, on corrige la règle.
+MOT_ENTIER = "="
+
+# Ce qui reste ici ne peut PAS se régler par une frontière de mot :
+#   - « female cones » contient le mot entier « male cone » sans être une fleur — c'est le
+#     genévrier du lot 16, dont les galbules bleues remontaient en fleur. On gomme
+#     « female », et « female flowers » reste une fleur : il y reste « flowers » ;
+#   - « leafless » contient bien le préfixe « leaf » mais dit justement l'ABSENCE de
+#     feuilles ;
+#   - « Red bud » est le nom américain du Cercis : le mot « bud » y est entier, et
+#     pourtant ce n'est pas un bourgeon (lot 17).
+FAUX_AMIS = ("female", "weibliche", "redbud", "red bud", "leafless")
 
 # Vocabulaire de RÉPARTITION pour la faune. Ce ne sont PAS des aspects de l'atlas — aucun
 # des aspects (feuille, écorce…) ne s'applique à un animal, et les photos de faune entrent
@@ -280,12 +289,20 @@ def imageinfo_par_lots(titres, largeur):
     return pages
 
 
+def _present(mot, texte):
+    """Un mot préfixé de « = » ne compte que comme MOT ENTIER ; les autres en
+    sous-chaîne, pour attraper les pluriels et les langues voisines."""
+    if mot.startswith(MOT_ENTIER):
+        return re.search(r"(?<!\w)%s(?!\w)" % re.escape(mot[1:]), texte) is not None
+    return mot in texte
+
+
 def aspect_devine(titre, ordre=ORDRE, mots=MOTS):
     t = titre.lower()
     for faux in FAUX_AMIS:
         t = t.replace(faux, " ")
     for asp in ordre:
-        if any(m in t for m in mots[asp]):
+        if any(_present(m, t) for m in mots[asp]):
             return asp
     return atlas_data.DIVERS
 
@@ -310,9 +327,28 @@ def utilisable(page, planches=False):
     return (ii.get("width") or ii.get("thumbwidth") or 0) >= 800
 
 
-def _repartir(pages, n, cle=lambda p: p["title"], vocabulaire="plante"):
-    """Round-robin entre thèmes : on veut de la variété, pas dix fleurs de la même plante."""
+def priorise(vocabulaire, aspect=None):
+    """(ordre, mots) du vocabulaire, l'aspect visé passé en tête s'il y en a un.
+
+    Le round-robin de _repartir sert un candidat par aspect et par tour, DANS L'ORDRE.
+    Un lot qui vise un seul aspect dépense donc ses premiers créneaux sur cinq aspects
+    qu'il ne cherche pas, et le dernier de la liste — le port — n'en obtient qu'un sur
+    sept au réglage par défaut, aucun en dessous de six. Le lot 14 a visé le port de
+    vingt ligneux et en a manqué onze ; le lot 18 a montré que ce n'était pas seulement
+    Commons qui était pauvre, c'était nous qui ne regardions presque pas.
+    """
     ordre, mots = VOCABULAIRES[vocabulaire]
+    if not aspect:
+        return ordre, mots
+    if aspect not in ordre:
+        raise SystemExit("aspect inconnu pour ce vocabulaire : %s (connus : %s)"
+                         % (aspect, ", ".join(ordre)))
+    return (aspect,) + tuple(a for a in ordre if a != aspect), mots
+
+
+def _repartir(pages, n, cle=lambda p: p["title"], vocabulaire="plante", aspect=None):
+    """Round-robin entre thèmes : on veut de la variété, pas dix fleurs de la même plante."""
+    ordre, mots = priorise(vocabulaire, aspect)
     par_aspect = {}
     for p in pages:
         par_aspect.setdefault(aspect_devine(cle(p), ordre, mots), []).append(p)
@@ -331,7 +367,7 @@ def _repartir(pages, n, cle=lambda p: p["title"], vocabulaire="plante"):
 
 
 def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
-              vocabulaire="plante", planches=False):
+              vocabulaire="plante", planches=False, aspect=None):
     """n pages Commons de l'espèce, réparties entre aspects.
 
     `categorie` force la catégorie de départ : une entrée d'atlas au nom de genre
@@ -345,7 +381,7 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
     # mieux qu'un aspect : sans ce rang commun, « - botanical illustrations » prenait la
     # première place et éjectait « buds » des quatre explorées, ce qui a fait rentrer le
     # lot 8 sans un seul rameau de charme.
-    _ordre, _mots = VOCABULAIRES[vocabulaire]
+    _ordre, _mots = priorise(vocabulaire, aspect)
     _kw = tuple(m for asp in _ordre for m in _mots[asp])
 
     def _rang(c):
@@ -375,11 +411,11 @@ def candidats(latin, n, largeur, motcle=None, deja=(), categorie=None,
     # On ne paie l'imageinfo que d'une présélection large : certaines seront écartées
     # ensuite (image trop petite, mime inattendu), d'où la marge.
     presel = [t for _asp, t in _repartir(titres, n * 4, cle=lambda t: t,
-                                         vocabulaire=vocabulaire)]
+                                         vocabulaire=vocabulaire, aspect=aspect)]
     pages = [p for p in imageinfo_par_lots(presel, largeur) if utilisable(p, planches)]
     rang = {t: i for i, t in enumerate(presel)}
     pages.sort(key=lambda p: rang.get(p["title"], 999))
-    return _repartir(pages, n, vocabulaire=vocabulaire)
+    return _repartir(pages, n, vocabulaire=vocabulaire, aspect=aspect)
 
 
 # --------------------------------------------------------------- téléchargement
@@ -408,7 +444,7 @@ def telecharger(url, dest, largeur):
 
 
 def recolter(especes, n, largeur, motcle=None, categorie=None, vocabulaire="plante",
-             planches=False):
+             planches=False, aspect=None):
     """Complète candidats/<stem>/ sans rien écraser : la numérotation reprend où elle en
     est et candidats.tsv s'allonge. On peut donc revenir combler un aspect manquant
     (--motcle flower) sans perdre les choix déjà faits sur les candidats précédents."""
@@ -429,7 +465,7 @@ def recolter(especes, n, largeur, motcle=None, categorie=None, vocabulaire="plan
         lignes, ajoutes = [], 0
         try:
             trouves = candidats(latin, n, largeur, motcle, deja, categorie, vocabulaire,
-                                planches)
+                                planches, aspect)
         except Exception as e:
             print("[%d/%d] %-12s ÉCHEC %s" % (i, len(especes), stem, e))
             continue
@@ -551,12 +587,17 @@ def main(argv=None):
         if a == "--categorie" and i + 1 < len(argv):
             categorie = argv[i + 1]
     vocabulaire = "faune" if "--faune" in argv else "plante"
+    aspect = None
+    for i, a in enumerate(argv):
+        if a == "--aspect" and i + 1 < len(argv):
+            aspect = argv[i + 1]
     planches = "--planches" in argv
     especes = [(s, latin_court(l)) for s, l in especes_du_lot(argv)]
-    print("%d espèce(s), jusqu'à %d candidats chacune%s → candidats/"
-          % (len(especes), n, (" (titres contenant « %s »)" % motcle) if motcle else ""))
+    print("%d espèce(s), jusqu'à %d candidats chacune%s%s → candidats/"
+          % (len(especes), n, (" (titres contenant « %s »)" % motcle) if motcle else "",
+             (" (aspect « %s » prioritaire)" % aspect) if aspect else ""))
     recolter(especes, n, images.largeur_demandee(argv), motcle, categorie, vocabulaire,
-             planches)
+             planches, aspect)
 
 
 if __name__ == "__main__":
