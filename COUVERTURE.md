@@ -7,8 +7,8 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **50** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 50 · Rameau 28
+- …dont **64** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 32 · Rameau 28
 
 ## Ligneux (77)
 
@@ -101,7 +101,7 @@
 | Ail | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
 | Ail des ours | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Ail rocambole | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Alliaire | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Alliaire | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Amarante | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Aneth | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Artichaut / Cardon | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
@@ -115,7 +115,7 @@
 | Berce commune | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Betterave / Épinard | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Blette (poirée) | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
-| Bourrache | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Bourrache | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Camomille (matricaire) | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Capucine | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Cardamine des prés | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
@@ -126,12 +126,12 @@
 | Chou Daubenton | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Chénopode blanc | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Ciboulette | 6 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Claytone de Cuba | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Claytone de Cuba | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Colchique | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Concombre / Cornichon | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Consoude | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Coriandre | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
-| Courge | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Courge | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Courgette | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Cresson de fontaine | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Crosne du Japon | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
@@ -139,27 +139,27 @@
 | Digitale pourpre | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Estragon | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Fenouil | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
-| Fraisier des bois | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Fraisier des bois | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Féverole / Fève | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Grande ciguë | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Guimauve | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Haricot | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Hysope | 4 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
-| Laitue | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Laitue | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Lamier blanc | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Lavande | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Livèche | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Lotier corniculé | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
-| Lupin | 6 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
-| Luzerne | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Lotier corniculé | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Lupin | 7 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Luzerne | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Marjolaine | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Mauve | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Maïs | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Menthe | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Millepertuis | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Moutarde blanche | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Muguet | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
-| Mâche | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Muguet | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Mâche | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Mélilot | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
 | Mélisse | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Navet | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
@@ -172,18 +172,18 @@
 | Panais | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Patate douce | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Persil | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
-| Phacélie | 4 | ✗ | · | ✓ | ✓ | ✗ | · | Feuille, Port |
-| Pissenlit | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Phacélie | 5 | ✗ | · | ✓ | ✓ | ✓ | · | Feuille |
+| Pissenlit | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Plantain | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
 | Poire de terre (yacon) | 3 | ✗ | · | ✗ | ✓ | ✗ | · | Feuille, Fruit, Port |
 | Poireau | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Poireau perpétuel | 4 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
 | Pois | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Poivron / Piment | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
-| Pomme de terre | 6 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Pomme de terre | 7 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Pourpier | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Primevère | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Pâquerette | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Pâquerette | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Radis | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Raifort | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Rhubarbe | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
@@ -193,9 +193,9 @@
 | Sarrasin (blé noir) | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Sarriette | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Sauge officinale | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Scorsonère | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Scorsonère | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Seigle | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
-| Souci (calendula) | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Souci (calendula) | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Stellaire (mouron blanc) | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Tanaisie | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Thym | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
@@ -203,9 +203,9 @@
 | Topinambour | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Trèfle blanc | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Trèfle violet | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Valériane officinale | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Valériane officinale | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Verveine citronnelle | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Vesce commune | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Vesce commune | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Violette odorante | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Échalote | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Égopode (herbe aux goutteux) | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |

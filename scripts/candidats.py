@@ -138,7 +138,11 @@ MOTS = {
     # silhouettes. Le tri à l'œil fera le reste.
     "port": ("habit", "=plant", "=plants", "=port", "habitus", "whole", "pflanze",
              "stand", "population", "growing", "=stem", "=tige", "stengel", "silhouette",
-             "arbre", "tree", "baum", "shrub", "strauch", "buisson"),
+             # « tree » habite « beentree », le pseudonyme d'un contributeur prolifique
+             # de Commons : au lot 19 ses macros d'anthères de lamier remontaient en port.
+             # « baum » reste un préfixe : en allemand il vit à la FIN des composés
+             # (Haselbaum, Zürgelbaum), et c'est justement là qu'on le veut.
+             "arbre", "=tree", "=trees", "baum", "shrub", "strauch", "buisson"),
 }
 ORDRE = ("rameau", "ecorce", "feuille", "fleur", "fruit", "port")
 

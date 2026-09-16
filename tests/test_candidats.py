@@ -143,6 +143,12 @@ def test_le_port_ne_se_laisse_plus_prendre_par_plantation(cd):
     assert cd.aspect_devine("File:Robinia pseudoacacia root system.JPG") != "port"
     # « habit » reste un préfixe : la sous-catégorie « (habitat) » est un bon gisement
     assert cd.aspect_devine("File:Prunus habitat in Provence.jpg") == "port"
+    # « tree » habite « beentree », pseudonyme d'un contributeur prolifique (lot 19)
+    assert cd.aspect_devine("File:Lamium album 2 beentree.jpg") != "port"
+    assert cd.aspect_devine("File:Nettle Tree (Celtis australis).jpg") == "port"
+    assert cd.aspect_devine("File:Malus domestica - Apple Trees - Kullu.jpg") == "port"
+    # mais « baum » reste un préfixe : en allemand il vit à la fin des composés
+    assert cd.aspect_devine("File:Corylus avellana - Haselbaum.jpg") == "port"
     # ce qu'on veut vraiment reste pris, singulier comme pluriel
     assert cd.aspect_devine("File:Malus domestica whole plant.jpg") == "port"
     assert cd.aspect_devine("File:Young plants of Corylus.jpg") == "port"
