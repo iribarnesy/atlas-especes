@@ -7,8 +7,8 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **73** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 59 · Fleur 10 · Port 32 · Rameau 28
+- …dont **75** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 7 · Écorce 14 · Fruit 59 · Fleur 10 · Port 32 · Rameau 28
 
 ## Ligneux (77)
 
@@ -38,14 +38,14 @@
 | Châtaignier | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Chèvrefeuille comestible (camérisier) | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
 | Chêne pubescent | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Chêne pédonculé | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | Écorce |
+| Chêne pédonculé | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Chêne sessile | 6 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
 | Chêne vert | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
 | Chêne-liège | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | · | Fleur |
 | Cognassier | 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Cormier | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Cornouiller mâle | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
-| Feijoa (goyavier du Brésil) | 5 | ✗ | ✓ | ✓ | ✓ | ✓ | · | Feuille |
+| Feijoa (goyavier du Brésil) | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
 | Figuier | 6 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Framboisier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Frêne commun | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
@@ -54,7 +54,7 @@
 | Genévrier commun | 4 | ✓ | ✗ | ✓ | ✗ | ✓ | ✓ | Écorce, Fleur |
 | Genêt à balais | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Goji (lyciet) | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
-| Grenadier | 5 | ✗ | ✓ | ✓ | ✓ | ✓ | ✗ | Feuille, Rameau |
+| Grenadier | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Houx | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Hêtre | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | If commun | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
@@ -174,8 +174,8 @@
 | Persil | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Phacélie | 5 | ✗ | · | ✓ | ✓ | ✓ | · | Feuille |
 | Pissenlit | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
-| Plantain | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
-| Poire de terre (yacon) | 3 | ✗ | · | ✗ | ✓ | ✗ | · | Feuille, Fruit, Port |
+| Plantain | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Poire de terre (yacon) | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Poireau | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Poireau perpétuel | 4 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
 | Pois | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
