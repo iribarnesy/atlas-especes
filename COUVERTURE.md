@@ -7,14 +7,14 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **64** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 32 · Rameau 28
+- …dont **73** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 59 · Fleur 10 · Port 32 · Rameau 28
 
 ## Ligneux (77)
 
 | Espèce | 📷 | Feuille | Écorce | Fruit | Fleur | Port | Rameau | À compléter |
 |---|--:|:-:|:-:|:-:|:-:|:-:|:-:|---|
-| Abricotier | 5 | ✓ | ✓ | ✗ | ✓ | ✓ | ✗ | Fruit, Rameau |
+| Abricotier | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Ajonc d'Europe | 4 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Alisier torminal | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Amandier | 7 | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | Feuille |
@@ -45,7 +45,7 @@
 | Cognassier | 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Cormier | 5 | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ | Fleur, Rameau |
 | Cornouiller mâle | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
-| Feijoa (goyavier du Brésil) | 4 | ✗ | ✓ | ✗ | ✓ | ✓ | · | Feuille, Fruit |
+| Feijoa (goyavier du Brésil) | 5 | ✗ | ✓ | ✓ | ✓ | ✓ | · | Feuille |
 | Figuier | 6 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
 | Framboisier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Frêne commun | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
@@ -104,11 +104,11 @@
 | Alliaire | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Amarante | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Aneth | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
-| Artichaut / Cardon | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Artichaut / Cardon | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Arum tacheté (gouet) | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Asperge | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Aspérule odorante | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Aubergine | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
+| Aspérule odorante | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Aubergine | 4 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Avoine | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Bardane | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Basilic | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
@@ -153,11 +153,11 @@
 | Lupin | 7 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Luzerne | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Marjolaine | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
-| Mauve | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Mauve | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Maïs | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Menthe | 4 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Millepertuis | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
-| Moutarde blanche | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Moutarde blanche | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Muguet | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Mâche | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Mélilot | 3 | ✗ | · | ✗ | ✓ | ✓ | · | Feuille, Fruit |
@@ -181,16 +181,16 @@
 | Pois | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Poivron / Piment | 3 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Pomme de terre | 7 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
-| Pourpier | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Primevère | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Pourpier | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Primevère | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Pâquerette | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Radis | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Raifort | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Rhubarbe | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Rhubarbe | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Romarin | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Roquette | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Sainfoin | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Sarrasin (blé noir) | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Sarrasin (blé noir) | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Sarriette | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Sauge officinale | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Scorsonère | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
@@ -202,7 +202,7 @@
 | Tomate | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Topinambour | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Trèfle blanc | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
-| Trèfle violet | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Trèfle violet | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Valériane officinale | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Verveine citronnelle | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Vesce commune | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
