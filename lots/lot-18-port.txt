@@ -1,0 +1,74 @@
+# Lot 18 — LE PORT DES LIGNEUX, en entier : les vingt qui manquent.
+#
+#   python3 scripts/candidats.py --lot lots/lot-18-port.txt --aspect port --par-espece 5 --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ ON REVIENT SUR UN ÉCHEC, ET ON SAIT MAINTENANT POURQUOI. Le lot 14 a visé le port de
+# vingt ligneux ; onze d'entre eux n'ont toujours pas de port, et onze sont dans ce lot.
+# On en avait conclu que Commons était pauvre en silhouettes d'arbres fruitiers. C'est
+# peut-être vrai, mais ce n'était pas vérifié : _repartir sert un candidat par aspect et
+# par tour, DANS L'ORDRE, et le port est le dernier de la liste. Au réglage par défaut il
+# obtient un créneau sur sept ; à cinq candidats par espèce, AUCUN. Un lot qui visait le
+# port dépensait ses créneaux sur cinq aspects qu'il ne cherchait pas.
+#
+# D'où --aspect port, ajouté juste avant ce lot dans un commit séparé : l'aspect visé
+# passe en tête de la répartition. C'est le même genre de découverte qu'au lot 16 avec le
+# chaton — une partie du manque venait de nous.
+#
+# ⚠ CE QU'EST UN BON PORT, et c'est exigeant : la SILHOUETTE ENTIÈRE d'un individu isolé,
+# lisible de loin. Ni un tronc vu de près, ni une branche, ni un massif où l'on ne
+# distingue aucun sujet. C'est l'aspect qu'on regarde en premier sur le terrain et celui
+# qu'on photographie le plus mal.
+#
+# ⚠ CE QU'IL FAUT VISER, espèce par espèce :
+#   - TREMBLE : houppier léger, tronc clair verdâtre, branches montantes ; il tremble ;
+#   - NOISETIER : en CÉPÉE — plusieurs tiges partant du sol, jamais un tronc unique. La
+#     silhouette est le caractère ;
+#   - NOYER : houppier large et arrondi, très ramifié, souvent isolé dans un pré ;
+#   - ROBINIER : port irrégulier, branches tortueuses, souvent en drageons serrés ;
+#   - SORBIER DES OISELEURS : petit, élancé, houppier ovale ; à opposer au CORMIER ;
+#   - CHÂTAIGNIER : tronc massif, houppier large, souvent têtard ou taillis ;
+#   - MICOCOULIER : port en boule très régulier, planté sur les places du Midi ;
+#   - MÛRIER NOIR : bas, tortueux, largement étalé — souvent plus large que haut ;
+#   - HOUX : conique, dense, sombre ;
+#   - POMMIER / POIRIER / PRUNIER : le poirier est DRESSÉ et pyramidal, le pommier ÉTALÉ
+#     et arrondi. C'est la différence qui se voit de loin, et elle vaut le lot ;
+#   - TROÈNE, CAMÉRISIER, ARONIA : arbustes de haie, buisson dense ;
+#   - MYRTILLE, CALLUNE : sous-arbrisseaux — viser le TAPIS, la lande, pas un brin ;
+#   - RONCE et FRAMBOISIER : le buisson de cannes arquées, pas une feuille ;
+#   - KIWAÏ : liane, donc le port est celui de son support — le dire plutôt que forcer.
+#
+# ⚠ LES PIÈGES, dont deux hérités :
+#   - L'ARBRE DE VERGER EN RANG : une allée de pommiers taillés ne montre aucun port
+#     naturel. Vérifié trois fois (lots 9, 13, 14) ;
+#   - LES VERGERS ENNEIGÉS vus de loin, trouvés au lot 17 avec le mot « winter » : très
+#     beaux, illisibles ;
+#   - LE SUJET D'ARBORETUM avec son étiquette, acceptable si la silhouette est nette ;
+#   - « plant » et « habit » attrapent aussi des plantules en pot : regarder l'échelle.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# les onze que le lot 14 a visés et manqués — le test direct de --aspect
+chataignier            # tronc massif, houppier large
+noyer                  # houppier large et arrondi, souvent isolé
+noisetier              # en CÉPÉE : plusieurs tiges du sol
+robinier               # tortueux, drageonnant
+micocoulier            # boule régulière des places du Midi
+poirier                # DRESSÉ et pyramidal
+pommier                # ÉTALÉ et arrondi — la paire avec le poirier
+prunier                # petit, ramifié bas
+aronia                 # buisson de haie
+houx                   # conique, dense, sombre
+chevrefeuille_com      # arbuste bas
+
+# les neuf jamais visés pour leur port
+tremble                # houppier léger, tronc clair
+sorbier                # élancé, houppier ovale ; à opposer au cormier
+murier                 # bas, tortueux, plus large que haut
+troene                 # buisson de haie dense
+framboisier            # buisson de cannes
+ronce                  # fruticée arquée
+myrtille               # le TAPIS de lande, pas un brin
+callune                # idem
+kiwai                  # liane : port du support, ou rien

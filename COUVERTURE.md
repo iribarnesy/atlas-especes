@@ -7,8 +7,8 @@
 
 ## En bref
 - Plantes (ligneux + herbacées) : **191**
-- …dont **46** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 58 · Rameau 28
+- …dont **50** avec les 6 aspects, **0** sans aucun aspect taggé.
+- Manques par aspect : Feuille 11 · Écorce 15 · Fruit 71 · Fleur 10 · Port 50 · Rameau 28
 
 ## Ligneux (77)
 
@@ -22,14 +22,14 @@
 | Arbousier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
 | Arbre de Judée | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Argousier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
-| Aronia | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
+| Aronia | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Aubépine | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Aulne glutineux | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Bouleau verruqueux | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Bruyère cendrée | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Bruyère à quatre angles | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Buis | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
-| Callune | 5 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
+| Callune | 7 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Caragana (arbre à pois) | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Cassissier / Groseillier | 7 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | Écorce, Rameau |
 | Cerisier | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
@@ -47,7 +47,7 @@
 | Cornouiller mâle | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Feijoa (goyavier du Brésil) | 4 | ✗ | ✓ | ✗ | ✓ | ✓ | · | Feuille, Fruit |
 | Figuier | 6 | ✓ | ✗ | ✓ | ✗ | ✓ | ✗ | Écorce, Fleur, Rameau |
-| Framboisier | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
+| Framboisier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Frêne commun | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Fusain d'Europe | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Févier d'Amérique | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
@@ -62,11 +62,11 @@
 | Kiwaï | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Laurier-sauce | 5 | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | Écorce |
 | Merisier | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
-| Micocoulier | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
-| Myrtille | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | · | Port |
+| Micocoulier | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
+| Myrtille | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
 | Mélèze | 7 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Fleur |
-| Mûrier noir | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | Port, Rameau |
-| Noisetier | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
+| Mûrier noir | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
+| Noisetier | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Noyer commun | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Néflier commun | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | Rameau |
 | Olivier | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
@@ -85,8 +85,8 @@
 | Sorbier des oiseleurs | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
 | Sureau noir | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Tilleul à petites feuilles | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
-| Tremble | 7 | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | Port |
-| Troène commun | 3 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | Écorce, Port |
+| Tremble | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
+| Troène commun | 4 | ✓ | ✗ | ✓ | ✓ | ✗ | ✓ | Écorce, Port |
 | Vigne | 5 | ✓ | ✓ | ✓ | ✓ | ✓ | · | — (complet) |
 | Épicéa | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Érable champêtre | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
