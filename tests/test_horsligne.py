@@ -94,9 +94,13 @@ def test_sans_pillow_l_icone_svg_suffit(sw, tmp_path, monkeypatch):
 # -------------------------------------------------------- poids annoncés par catégorie
 
 def test_le_poids_par_categorie_compte_original_et_vignette(repo, monkeypatch, tmp_path):
+    # Pillow est une dépendance OPTIONNELLE (cf. requirements-dev.txt) : sans elle ce test
+    # se sautait, comme ceux de test_derives et test_images — il échouait à l'import.
+    pytest.importorskip("PIL", reason="Pillow absent : poids par catégorie non testé")
+    from PIL import Image  # noqa: E402  (après importorskip)
+
     build_web = load_module("build_web")
     monkeypatch.setattr(build_web, "BASE", repo.root)
-    from PIL import Image
     Image.new("RGB", (600, 400), (80, 120, 60)).save(os.path.join(repo.img, "chene.jpg"))
     out = str(tmp_path / "site")
     os.makedirs(os.path.join(out, "img", "thumb"))

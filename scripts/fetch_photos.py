@@ -2,18 +2,20 @@
 # -*- coding: utf-8 -*-
 """
 Télécharge des photos supplémentaires (iNaturalist) pour chaque espèce des atlas,
-les réduit (≤420 px, JPEG q70) et les range dans img/quiz-extra/<stem>-N.jpg.
+les réduit (cf. scripts/images.py) et les range dans img/quiz-extra/<stem>-N.jpg.
 Chaque image téléchargée est créditée dans img/CREDITS.tsv (auteur, licence, page).
 Idempotent : saute les espèces qui ont déjà des extras. Relancer le générateur ensuite.
 
   python3 scripts/fetch_photos.py                        tout l'atlas
   python3 scripts/fetch_photos.py --lot lots/lot-1.txt   un lot (cf. #17)
   python3 scripts/fetch_photos.py --especes cigue,arum   quelques espèces
+  --largeur 900                                          borne le plus grand côté (déf. 1000)
 """
-import re, os, sys, json, time, glob, subprocess, urllib.request, urllib.parse
+import re, os, sys, json, time, glob, urllib.request, urllib.parse
 
 import atlas_data
 import credits
+import images
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG = os.path.join(BASE, "img", "especes")
@@ -66,22 +68,20 @@ def taxon_photos(latin):
     urls = []
     for tp in r2[0].get("taxon_photos", []):
         p = tp.get("photo", {})
-        u = p.get("medium_url") or p.get("url")
+        # medium_url plafonne à ~500 px : trop juste pour une fiche, qui montre l'original
+        u = p.get("original_url") or p.get("large_url") or p.get("medium_url") or p.get("url")
         if u:
             # le crédit accompagne l'URL : iNaturalist est surtout du CC-BY / CC-BY-NC
             urls.append((u, credits.credit_inaturalist(p)))
     return urls
 
-def dl(url, dest):
+def dl(url, dest, largeur=images.LARGEUR):
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=30) as r:
         buf = r.read()
     if len(buf) < 1500:
         raise IOError("too small")
-    open(dest + ".orig", "wb").write(buf)
-    subprocess.run(["sips", "-Z", "420", "-s", "format", "jpeg", "-s", "formatOptions", "70",
-                    dest + ".orig", "--out", dest], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    os.remove(dest + ".orig")
+    images.reduire(buf, dest, largeur)
 
 def choisir(sp, argv):
     """Restreint la liste au lot demandé par --lot / --especes (cf. atlas_data)."""
@@ -99,6 +99,7 @@ def choisir(sp, argv):
     return sorted([x for x in sp if x[0] in ordre], key=lambda x: ordre[x[0]])
 
 def main():
+    largeur = images.largeur_demandee(sys.argv[1:])
     sp = choisir(species_list(), sys.argv[1:])
     ok = skip = fail = 0
     for i, (stem, latin) in enumerate(sp):
@@ -110,7 +111,7 @@ def main():
             for j, (u, credit) in enumerate(urls, 1):
                 try:
                     dest = os.path.join(EXTRA, "%s-%d.jpg" % (stem, j))
-                    dl(u, dest); credits.noter(dest, **credit); n += 1
+                    dl(u, dest, largeur); credits.noter(dest, **credit); n += 1
                     time.sleep(0.5)
                 except Exception as e:
                     print("   img fail %s-%d: %s" % (stem, j, e))

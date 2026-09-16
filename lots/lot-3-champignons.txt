@@ -1,0 +1,50 @@
+# Lot 3 — 20 champignons, dont six mortels, n'ayant qu'une seule photo
+#
+#   python3 scripts/candidats.py --lot lots/lot-3-champignons.txt
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ ATTENTION, ce lot ne se tague pas comme les précédents. Le vocabulaire d'aspects de
+# l'atlas (feuille, écorce, fruit, fleur, port, rameau) décrit des PLANTES : rien n'y
+# correspond chez un champignon. Les photos entrent donc sans aspect, en <stem>-N.jpg.
+# Ce qu'il faut viser à la place, c'est la VARIÉTÉ des vues — et surtout, pour les
+# espèces dangereuses, une photo qui montre LA BASE DU PIED : c'est là que se voit la
+# volve de l'amanite phalloïde, et c'est ce qui tue quand on cueille sans déterrer.
+#
+# ⚠ Le piège n'est plus celui des lots 1 et 2. Ici :
+#   - les catégories Commons de champignons mélangent facilement les espèces d'un même
+#     genre (Amanita, Clitocybe, Cortinarius, Agaricus) ;
+#   - un sujet jeune ne ressemble pas à un sujet mûr (l'amanite phalloïde jeune est un
+#     œuf blanc) — les deux stades valent la peine, mais il faut le savoir ;
+#   - beaucoup de photos sont prises en cuisine, sur une table ou dans un panier : le
+#     substrat et le port disparaissent, alors qu'ils déterminent.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# mortels — priorité absolue, chacun a un sosie comestible dans Confusions
+amanite_phalloide      # volve + anneau + lames blanches ; sosie du rosé et de la russule
+amanite_vireuse        # entièrement blanche, sosie de la coulemelle jeune
+cortinaire             # Cortinarius orellanus, mortel à retardement
+galere_marginee        # petite, sur bois mort, sosie de la pholiote changeante
+
+# toxiques du même groupe de confusion
+entolome_livide        # lames jaunes puis saumon, sosie du rosé des prés
+clitocybe_blanc        # lames blanches décurrentes, même groupe
+amanite_panthere       # chapeau brun-beige, anneau lisse
+amanite_tue_mouches    # chapeau rouge à flocons — le repère du groupe
+bolet_satan            # pied rouge, chair bleuissante
+
+# les comestibles qu'on leur oppose : sans eux le critère ne se joue pas
+coulemelle             # anneau coulissant, pied chiné, pas de volve
+rose_des_pres          # lames roses puis brunes
+russule_charbonniere   # lames blanches cassantes
+cepe
+bolet_bai
+
+# comestibles très courants, une seule photo chacun
+girolle
+morille
+pleurote
+trompette
+pied_de_mouton
+vesse_de_loup

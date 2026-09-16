@@ -1,0 +1,99 @@
+# Lot 17 — LE RAMEAU D'HIVER, reprise. Vingt-quatre espèces sur les trente-six qui manquent.
+#
+#   python3 scripts/candidats.py --lot lots/lot-17-rameau.txt --par-espece 5 --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# LE LOT 8 avait pris les vingt feuillus de forêt : frêne à bourgeons noirs, hêtre
+# fusiforme, noyer à moelle cloisonnée. Restent trente-six espèces d'une tout autre
+# population — des FRUITIERS DE VERGER et des ARBUSTES DE HAIE. Le vocabulaire change
+# avec elles : sur un fruitier, le rameau d'hiver n'est pas une curiosité de botaniste,
+# c'est ce que regarde quelqu'un qui taille.
+#
+# ⚠ CE QU'IL FAUT VOIR, et qui doit être VISIBLE sur la photo :
+#
+#   LES ROSACÉES DE VERGER — toutes des Prunus ou proches, qu'on ne sépare qu'au détail :
+#   - PÊCHER : bourgeons PAR TROIS à chaque nœud, deux floraux duveteux et globuleux
+#     encadrant un végétatif pointu. Aucun autre fruitier ne fait ça ;
+#   - CERISIER : bourgeons groupés au bout de DARDS (rameaux courts et trapus) ;
+#   - ABRICOTIER : rameaux rouge brillant, bourgeons à fleurs isolés ou par deux-trois ;
+#   - AMANDIER : très proche de l'abricotier — c'est bien le problème ;
+#   - PRUNIER : bourgeons petits et APPLIQUÉS ;
+#   - COGNASSIER et NÉFLIER : rameaux TOMENTEUX, laineux au toucher ;
+#   - CORMIER : bourgeons VERTS ET GLUANTS. C'est le caractère qui le sépare du sorbier
+#     des oiseleurs, dont les bourgeons sont tomenteux ;
+#   - ALISIER TORMINAL : bourgeons GLOBULEUX, vert vif, luisants.
+#
+#   LES ÉPINEUX, où l'épine elle-même est le caractère :
+#   - FÉVIER D'AMÉRIQUE : épines RAMIFIÉES, en bouquets, sur le tronc comme sur les
+#     rameaux. Spectaculaire et sans équivalent ;
+#   - JUJUBIER : rameaux en ZIGZAG, épines stipulaires par paires — une droite, une
+#     recourbée ;
+#   - CARAGANA : stipules transformées en épines ;
+#   - GRENADIER : rameaux à quatre angles, terminés en pointe épineuse ;
+#   - ARGOUSIER et CHALEF, le couple « Argentés » : tous deux à rameaux couverts
+#     d'écailles argentées, mais l'argousier est FRANCHEMENT ÉPINEUX et le chalef
+#     presque pas. Le rameau nu est le meilleur endroit pour le montrer.
+#
+#   LES AUTRES, chacun avec son anomalie :
+#   - FIGUIER : rameaux épais, moelle large, GROSSES cicatrices foliaires rondes, latex ;
+#   - ARBRE DE JUDÉE : rameaux en zigzag, gousses de l'an passé souvent encore là ;
+#   - CHÊNE PUBESCENT : jeunes rameaux PUBESCENTS — le critère du groupe pubescent /
+#     vert se lit aussi sur le rameau d'hiver, pas seulement sur la feuille ;
+#   - MÛRIER : latex, bourgeons alternes appliqués ;
+#   - MICOCOULIER, PLAQUEMINIER, ARONIA, AMÉLANCHIER, CAMÉRISIER : rien de spectaculaire,
+#     on prend ce qu'on trouve.
+#
+# ⚠ LES PIÈGES, ceux du lot 8 plus un nouveau :
+#   - LES BOURGEONS QUI DÉBOURRENT au printemps sont jolis mais ce n'est plus l'état où
+#     l'on doit identifier l'arbre ;
+#   - UN GROS PLAN DE BOURGEON SANS LE RAMEAU perd la disposition (opposée ou alterne),
+#     qui est le premier caractère qu'on regarde ;
+#   - « twig » désigne aussi des rameaux feuillés d'été : vérifier l'absence de feuilles ;
+#   - NOUVEAU, ET C'EST L'HYPOTHÈSE DE CE LOT : un fruitier de verger est photographié en
+#     fleur ou en fruit, presque jamais NU. Si la récolte le confirme, c'est un résultat
+#     à écrire, pas un échec à cacher ;
+#   - MÉFIANCE AUSSI sur les photos de TAILLE et de GREFFE : rameaux coupés posés sur un
+#     établi, sécateur dans le cadre. Le rameau doit être sur l'arbre ;
+#   - les planches anciennes montrent souvent le rameau d'hiver en médaillon (--planches).
+#
+# ⚠ DOUZE ESPÈCES SONT ÉCARTÉES DE CE LOT, et pour deux raisons distinctes :
+#   - SIX PERSISTANTS — chêne vert, chêne-liège, olivier, arbousier, feijoa, pin maritime.
+#     Un persistant n'a pas de rameau d'hiver : il n'est JAMAIS nu. L'aspect n'a pas
+#     d'objet pour eux, comme l'écorce n'en a pas pour une ronce. C'est une décision de
+#     donnée, pas d'outillage : la poser reviendrait à faire tomber le manque de 36 à 30 ;
+#   - SIX CANNES ET RONCES — ajonc, genêt, ronce, framboisier, groseillier, goji. Ce sont
+#     les mêmes que le lot 11 avait trouvées sans écorce, et la question de leur TYPE dans
+#     l'atlas est ouverte depuis. On n'y retourne pas avant qu'elle soit tranchée.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# les rosacées de verger — le vocabulaire de la taille
+pecher                 # bourgeons PAR TROIS : le caractère le plus net du lot
+cerisier               # bourgeons groupés sur des dards
+abricotier             # rameaux rouge brillant
+amandier               # très proche de l'abricotier, c'est le problème
+prunier                # bourgeons petits et appliqués
+cognassier             # rameaux tomenteux
+neflier                # tomenteux aussi
+cormier                # bourgeons VERTS ET GLUANTS, contre le sorbier des oiseleurs
+alisier                # bourgeons globuleux vert vif
+
+# les épineux, où l'épine est le caractère
+fevier                 # épines RAMIFIÉES en bouquets
+jujubier               # zigzag + épines stipulaires par paires
+caragana               # stipules épineuses
+grenadier              # rameaux à 4 angles, pointe épineuse
+argousier              # ÉPINEUX ; groupe « Argentés »
+chalef                 # argenté mais PAS épineux — l'autre moitié du groupe
+
+# les autres
+figuier                # moelle large, grosses cicatrices foliaires, latex
+arbre_de_judee         # zigzag, gousses persistantes
+chene_pubescent        # jeunes rameaux PUBESCENTS ; groupe pubescent / vert
+murier                 # latex, bourgeons appliqués
+micocoulier            # rien de spectaculaire
+plaqueminier           # idem
+aronia                 # idem
+amelanchier            # idem
+chevrefeuille_com      # idem

@@ -1,0 +1,61 @@
+# Lot 6 — les 20 dernières espèces des atlas « Champignons » et « Espèces diverses ».
+# Ce lot termine DEUX atlas d'un coup : après lui, seules des herbacées restent à une
+# seule photo.
+#
+#   python3 scripts/candidats.py --lot lots/lot-6-cryptogames.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ TROIS RÉGIMES D'ASPECTS DANS UN MÊME LOT. Le menu d'aspects du site est piloté par
+# les données (il n'affiche que ce qui existe), donc on tague ce qui a du sens et on
+# laisse le reste sans aspect :
+#   - graminées et joncs : feuille, fleur (les épillets), fruit, port — tout s'applique ;
+#   - fougères : feuille (la fronde) et port ; PAS de fleur ni de fruit, ce sont des
+#     cryptogames. Leurs SORES, sous la fronde, sont le caractère qui les sépare, mais
+#     aucun aspect ne les nomme — ces photos entrent donc sans aspect ;
+#   - lichens, mousses et champignons : aucun aspect ne s'applique, <stem>-N.jpg.
+#
+# ⚠ Les pièges, encore nouveaux :
+#   - LES GENRES SONT ÉNORMES et se déterminent souvent au microscope. Cladonia,
+#     Sphagnum, Parmelia, Festuca, Hypnum comptent des dizaines d'espèces qu'une photo
+#     ne sépare pas. Sphaigne est d'ailleurs notée « Sphagnum sp. » dans l'atlas : on ne
+#     peut pas faire mieux qu'un sujet de genre, et il faut l'assumer.
+#   - LA TRUFFE est souterraine. Les photos montrent le tuber récolté, souvent sur une
+#     table ou en main : ici c'est inévitable, et une coupe montrant la marbrure blanche
+#     vaut mieux qu'une photo de terrain impossible.
+#   - LES POLYPORES poussent sur le tronc : le substrat fait partie de la détermination
+#     (l'amadouvier sur hêtre et bouleau, le polypore soufré sur feuillus blessés).
+#   - LES GRAMINÉES se reconnaissent à leur INFLORESCENCE, pas à leur feuille. Une photo
+#     de touffe verte ne distingue pas une fétuque d'une molinie.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# champignons — les 4 derniers de l'atlas
+amadouvier             # Fomes fomentarius, polypore en sabot sur hêtre et bouleau
+polypore_soufre        # Laetiporus sulphureus, jaune-orange en consoles
+lactaire_delicieux     # Lactarius deliciosus, lait ORANGE — le caractère du genre
+truffe                 # Tuber melanosporum, souterraine ; la coupe marbrée est le sujet
+
+# fougères — feuille et port seulement
+fougere-aigle          # Pteridium aquilinum
+osmonde                # Osmunda regalis, fronde fertile dressée distincte
+polypode               # Polypodium vulgare, sores ronds orange sans indusie
+scolopendre            # Asplenium scolopendrium, fronde ENTIÈRE en langue
+
+# lichens — sans aspect
+cladonie               # Cladonia portentosa
+parmelie               # Parmelia sulcata, thalle foliacé gris à crêtes
+usnee                  # Usnea filipendula, barbe pendante
+xanthorie              # Xanthoria parietina, jaune sur écorce nitrophile
+
+# mousses — sans aspect
+mousse_hypne           # Hypnum cupressiforme
+polytric               # Polytrichum commune
+sphaigne               # Sphagnum sp. — genre, pas espèce
+
+# graminées et joncs — l'inflorescence est le caractère
+dactyle                # Dactylis glomerata, panicule en glomérules d'un côté
+fetuque                # Festuca rubra
+molinie                # Molinia caerulea
+jonc                   # Juncus effusus, tige cylindrique lisse, moelle continue
+roseau                 # Phragmites australis, panicule plumeuse

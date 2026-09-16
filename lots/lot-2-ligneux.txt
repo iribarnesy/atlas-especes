@@ -1,0 +1,46 @@
+# Lot 2 — 20 ligneux dont il manque l'écorce et le port (issue à ouvrir après #17)
+#
+#   python3 scripts/candidats.py --lot lots/lot-2-ligneux.txt
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# Un stem par ligne. Priorité : les deux aspects les plus déficitaires du dépôt,
+# l'écorce (158 manques) et le port (135) — donc des ligneux, l'écorce ne s'appliquant
+# pas aux herbacées.
+#
+# ⚠ Après téléchargement, REGARDER chaque photo. Le piège n'est plus le même qu'au lot 1 :
+# ici ce sont les CULTIVARS (un pêcher à fleurs doubles, un olivier d'ornement) et les
+# espèces voisines du même genre (Prunus, Salix, Erica) qu'il faut écarter. Une écorce
+# photographiée sur un sujet jeune ne ressemble pas à celle d'un vieil arbre : préciser
+# l'âge quand la légende le dit. Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# fruitiers de verger — aucun n'a autre chose que sa vignette
+abricotier
+cerisier
+pecher
+prunier         # a déjà 2 extras, mais ni écorce ni port
+neflier
+figuier
+grenadier
+jujubier
+plaqueminier
+feijoa
+
+# arbustes à petits fruits
+chevrefeuille_com
+goji
+groseillier     # a déjà 2 extras, mais ni écorce ni port
+vigne
+
+# méditerranéens et aromatiques ligneux
+olivier
+laurier_sauce
+
+# bruyères — les deux se ressemblent, cf. le groupe de confusion ajouté en #7
+bruyere_cendree
+bruyere_quatre_angles
+
+# forestiers dont l'écorce et la silhouette sont le critère d'hiver
+charme          # tronc cannelé, très reconnaissable
+prunellier      # épines, confusion avec l'aubépine

@@ -24,7 +24,7 @@ def aspects_du_tableau(species):
     return [(a.id, a.label) for a in atlas_data.ASPECTS if a.cible or a.id in utilises]
 CATLABEL = {"ligneux": "Ligneux", "herbace": "Herbacées", "champignon": "Champignons",
             "faune": "Faune", "divers": "Espèces diverses"}
-PLANT_CATS = ("ligneux", "herbace")  # seules catégories où les aspects ont du sens
+PLANT_CATS = atlas_data.CATS_A_ASPECTS  # source unique : cf. atlas_data
 
 def aspects_present(sp):
     got = set()
@@ -47,19 +47,32 @@ def main():
 
     lines = ["# Couverture photo par espèce", "",
              "> Généré par `scripts/couverture.py` — **ne pas éditer à la main**.",
-             "> ✓ = au moins une photo de cet aspect · ✗ = manquant. Pour ajouter une photo,",
+             "> ✓ = au moins une photo de cet aspect · ✗ = manquant · · = sans objet",
+             "> (l'écorce et le rameau ne concernent que les ligneux). Pour ajouter une photo,",
              "> voir [CONTRIBUTING.md](CONTRIBUTING.md).", ""]
 
     # résumé rapide (plantes seulement)
     plants = [sp for c in PLANT_CATS for sp in by_cat.get(c, [])]
-    full = sum(1 for sp in plants if len(aspects_present(sp) & {k for k, _ in aspects}) == len(aspects))
+    def applicable(aspect, sp):
+        """L'écorce et le rameau ne concernent que les ligneux — et parmi eux, ni les
+        sous-arbrisseaux ni les lianes ; le rameau d'hiver, pas non plus les persistants."""
+        return atlas_data.aspect_applicable(aspect, sp["cat"],
+                                            (sp.get("fields") or {}).get("type", ""),
+                                            sp["stem"])
+
+    def vises(sp):
+        return {k for k, _ in aspects if applicable(k, sp)}
+
+    full = sum(1 for sp in plants if vises(sp) <= aspects_present(sp))
     none = sum(1 for sp in plants if not aspects_present(sp))
     lines += ["## En bref",
               "- Plantes (ligneux + herbacées) : **%d**" % len(plants),
               "- …dont **%d** avec les %d aspects, **%d** sans aucun aspect taggé."
               % (full, len(aspects), none),
               "- Manques par aspect : " + " · ".join(
-                  "%s %d" % (lab, sum(1 for sp in plants if k not in aspects_present(sp)))
+                  "%s %d" % (lab, sum(1 for sp in plants
+                                      if applicable(k, sp)
+                                      and k not in aspects_present(sp)))
                   for k, lab in aspects),
               ""]
 
@@ -74,8 +87,10 @@ def main():
             lines.append("|---|--:|" + "|".join([":-:"] * len(aspects)) + "|---|")
             for sp in sps:
                 got = aspects_present(sp)
-                cells = ["✓" if k in got else "✗" for k, _ in aspects]
-                manque = ", ".join(lab for k, lab in aspects if k not in got) or "— (complet)"
+                att = vises(sp)
+                cells = ["✓" if k in got else "✗" if k in att else "·" for k, _ in aspects]
+                manque = ", ".join(lab for k, lab in aspects
+                                   if k in att and k not in got) or "— (complet)"
                 lines.append("| %s | %d | %s | %s |" % (sp["name"], len(sp["paths"]), " | ".join(cells), manque))
         else:
             lines.append("_Aspects non applicables (une photo « l'organisme »)._")

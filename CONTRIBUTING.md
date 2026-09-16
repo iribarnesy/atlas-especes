@@ -48,6 +48,12 @@ format du tableau (mêmes colonnes, séparées par `|`).
    `stem-aspect-n.jpg` — où *aspect* ∈ `feuille`, `ecorce`, `fruit`, `fleur`, `port`,
    `rameau` (rameau d'hiver / bourgeons, comme on identifie un ligneux hors saison).
    Plusieurs aspects possibles avec `_`, ex. `sauge-feuille_fleur-1.jpg`.
+
+   **Cas particulier : les planches anciennes.** Une gravure ou une flore illustrée se
+   nomme `stem-planche-n.jpg`. Elle n'entre dans aucun filtre d'aspect — elle apparaît
+   dans « Divers » et dans « Tout » — parce qu'elle montre les organes *idéalisés* : on y
+   reconnaît une plante qu'on connaît déjà, on n'y apprend pas ce qu'on verra sur le
+   terrain. La fiche l'annonce comme telle.
    Synonymes acceptés : `feuilles`, `fruits`, `fleurs`, `rameaux`, `bourgeon`, `hiver`,
    `silhouette`. La liste fait foi dans `scripts/atlas_data.py` (constante `ASPECTS`).
    Exemple : `sauge-fleur-2.jpg`.

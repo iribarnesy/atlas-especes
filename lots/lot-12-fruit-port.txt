@@ -1,0 +1,63 @@
+# Lot 12 — FRUIT et PORT, les deux plus gros manques du dépôt (87 et 89) et les seuls
+# qu'aucun lot n'ait jamais visés. Vingt espèces qui manquent des DEUX.
+#
+#   python3 scripts/candidats.py --lot lots/lot-12-fruit-port.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ ONZE DE CES ESPÈCES COMPLÈTENT DES GROUPES DE CONFUSION encore à moitié illustrés.
+# C'est le critère qui a le mieux servi depuis le lot 1, et il reste du travail :
+#   - AIL DES OURS, dans « Ail des ours & sosies de printemps » avec le muguet MORTEL,
+#     l'arum et le colchique. Son fruit (capsule à trois loges) et son port en tapis
+#     manquent tous les deux ;
+#   - PERSIL, CAROTTE, ÉGOPODE, dans « Ombellifères : ciguë mortelle ». Chez une apiacée
+#     le fruit est l'ombelle SÈCHE, et c'est un caractère de détermination à part entière ;
+#   - LAMIER, dans « Ortie / Lamier blanc » ;
+#   - CONSOUDE, dans « Rosettes velues : digitale toxique » ET « Grandes feuilles en
+#     rosette » — deux groupes d'un coup ;
+#   - ACHILLÉE et PÂQUERETTE, dans « Astéracées à fleurs blanches » avec la camomille ;
+#   - TANAISIE, dans « Astéracées amères » avec l'absinthe et l'estragon ;
+#   - MENTHE et MÉLISSE, dans « Lamiacées odorantes ».
+#
+# ⚠ LE PIÈGE PRINCIPAL, et il est spécifique à ces deux aspects :
+#   - LE PORT d'une herbacée, c'est la PLANTE ENTIÈRE EN PLACE : hauteur, silhouette,
+#     façon de couvrir le sol. Un gros plan de feuille ou de fleur n'est pas un port,
+#     même s'il est beau. C'est l'aspect le plus facile à mal taguer.
+#   - LE FRUIT d'une aromatique (menthe, mélisse, marjolaine) est un akène minuscule que
+#     personne ne photographie : ne pas s'acharner, le dire.
+#   - LA POMME DE TERRE est le cas d'école : son fruit est une BAIE VERTE TOXIQUE que
+#     presque personne ne connaît, et Commons est plein de TUBERCULES. Le tubercule est
+#     une tige, pas un fruit. C'est exactement le genre d'erreur que ce dépôt existe pour
+#     ne pas commettre.
+#   - « Mentha sp. » est un GENRE : la catégorie Commons ramènera d'autres menthes.
+#     Utiliser --categorie si besoin, comme pour le groseillier au lot 5.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# groupes de confusion à finir — priorité
+ail_des_ours           # capsule à 3 loges ; tapis en sous-bois. Groupe du MUGUET MORTEL
+persil                 # ombelle sèche. Groupe de la CIGUË
+carotte                # ombelle en nid d'oiseau à maturité — très caractéristique
+egopode                # ombelle sèche ; tapis envahissant
+lamier                 # groupe ortie / lamier blanc
+consoude               # deux groupes : rosettes velues, et grandes feuilles en rosette
+achillee               # groupe des astéracées à fleurs blanches
+paquerette             # idem
+tanaisie               # groupe des astéracées amères
+menthe                 # groupe des lamiacées odorantes (⚠ Mentha sp. = un genre)
+melisse                # idem
+
+# fourragères et engrais verts — gousses et port en couvert
+trefle_blanc           # Trifolium repens
+trefle_violet          # Trifolium pratense
+luzerne                # Medicago sativa — gousse en spirale, très reconnaissable
+phacelie               # Phacelia tanacetifolia
+
+# crucifères — siliques bien visibles
+moutarde               # Sinapis alba — silique velue à bec
+roquette               # Eruca sativa
+
+# fruits qui surprennent
+pomme_de_terre         # ⚠ la BAIE VERTE, pas le tubercule
+oseille                # Rumex acetosa — fruits roux en panicule, très visibles
+onagre                 # Oenothera biennis — capsules dressées persistant l'hiver

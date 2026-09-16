@@ -37,18 +37,128 @@ ASPECTS = [
     Aspect("fleur", "Fleur", ("fleurs",), "🌸", True, "flower"),
     Aspect("port", "Port", ("silhouette",), "🌲", True, "habit"),
     # Rameau d'hiver / bourgeons : c'est ainsi qu'on identifie un ligneux hors saison, donc
-    # un aspect de plein droit — mais aucune photo ne l'utilise encore, et une colonne vide
-    # pour 187 plantes noierait les vrais manques. COUVERTURE.md l'ajoutera d'elle-même dès
-    # la première photo (cf. scripts/couverture.py).
-    Aspect("rameau", "Rameau", ("rameaux", "bourgeon", "hiver"), "❄️", False, "twig"),
+    # un aspect de plein droit. Il est resté hors objectif tant qu'aucune photo ne
+    # l'utilisait — le lot 8 a versé les premières, et COUVERTURE.md le compte depuis.
+    # Le drapeau suit : sans lui, la fiche du site annoncerait des manques différents de
+    # ceux du tableau, pour la seule raison qu'un commentaire n'avait pas été relu.
+    Aspect("rameau", "Rameau", ("rameaux", "bourgeon", "hiver"), "❄️", True, "twig"),
 ]
 DIVERS = "divers"        # photo sans aspect annoncé
 DIVERS_LABEL = "Divers"
 
+# Marqueur des PLANCHES anciennes — gravures, flores illustrées, dessins d'identification.
+# Ce n'est pas un aspect : une planche montre souvent tous les organes d'un coup, mais elle
+# les montre IDÉALISÉS (port redressé, couleurs franches). On y reconnaît une plante qu'on
+# connaît déjà ; on n'y apprend pas ce qu'on verra dans un fossé au mois d'août. Elle compte
+# donc dans « Divers » et dans « Tout », jamais dans un filtre d'aspect (cf. #30).
+PLANCHE = "planche"
+PLANCHE_KW = (PLANCHE, "planches", "gravure")
+# « ancienne » a été retiré : Commons héberge aussi des illustrations botaniques
+# MODERNES, et elles couvrent précisément des organes que la photo ne documente pas — les
+# bourgeons d'hiver du cormier ou du chêne pubescent, cherchés en vain au lot 17. Ce qui
+# doit être dit au lecteur n'est pas l'âge du document mais sa nature : c'est un dessin,
+# donc une synthèse idéalisée, pas un individu photographié sur le terrain.
+PLANCHE_LABEL = "Planche"
+
+# Aspects qui n'ont de sens que pour certaines catégories. Un rameau d'hiver ou une écorce
+# ne veulent rien dire pour une herbacée : sans cette restriction, COUVERTURE.md comptait
+# 190 manques de rameau et 149 d'écorce, dont 114 à chaque fois sur des plantes qui n'en
+# ont pas. Les vrais chiffres sont 76 et 35, tous des ligneux. Un aspect absent de ce
+# dictionnaire s'applique partout.
+ASPECT_CATS = {"ecorce": ("ligneux",), "rameau": ("ligneux",)}
+
+# Les aspects ne décrivent que des PLANTES. Un champignon, un animal ou un lichen n'a ni
+# feuille ni fruit au sens de l'atlas, et leur reprocher un manque n'aurait aucun sens.
+# La règle vivait dans couverture.py ; elle remonte ici pour que le tableau et la fiche du
+# site la partagent au lieu de la réinventer.
+CATS_A_ASPECTS = ("ligneux", "herbace")
+
+
+# Même raisonnement un cran plus fin, à l'intérieur des ligneux : un SOUS-ARBRISSEAU
+# (bruyère, callune, myrtille) et une LIANE (vigne, kiwaï) n'ont ni tronc ni rameau d'hiver
+# au sens usuel. Reprocher une écorce à une callune n'a pas plus de sens qu'à une herbacée.
+# Le type vient de la colonne « Type » de l'atlas : la règle se dérive de la donnée, elle
+# n'est pas une liste d'espèces à tenir à jour.
+TYPES_SANS_TRONC = ("sous-arbrisseau", "liane")
+ASPECTS_DU_TRONC = ("ecorce", "rameau")
+
+
+# Un cran plus fin encore, et pour le seul RAMEAU. L'aspect est défini comme le rameau
+# d'hiver : l'état où l'on identifie un ligneux SANS ses feuilles. Un arbre à feuillage
+# PERSISTANT n'est jamais dans cet état — on le reconnaît à son feuillage douze mois par
+# an, et c'est l'aspect « feuille » qui le dit. Le lot 17 a cherché en vain le rameau nu
+# du chêne vert, du chêne-liège, de l'olivier, de l'arbousier et du feijoa : Commons n'en
+# a pas parce qu'il n'y a rien à photographier.
+#
+# La liste est ÉCRITE plutôt que dérivée, parce que l'atlas ne porte pas la donnée : la
+# colonne « Notes » dit « persistant » pour le buis et le houx mais pas pour l'épicéa, et
+# une règle qui lirait ces notes changerait la couverture au premier mot réécrit.
+#
+# Deux exclusions volontaires, contre l'intuition :
+#   - le MÉLÈZE est un conifère CADUC — il perd ses aiguilles, son rameau d'hiver existe ;
+#   - l'AJONC et le GENÊT perdent leurs feuilles, et ce sont justement leurs rameaux verts
+#     — épineux chez l'un, anguleux chez l'autre — qu'on regarde en hiver ;
+#   - le TROÈNE est semi-persistant : il est nu par hiver froid, l'aspect garde un objet.
+PERSISTANTS = ("arbousier", "buis", "chene_liege", "chene_vert", "epicea", "feijoa",
+               "genevrier", "houx", "if", "laurier_sauce", "olivier", "pin_maritime",
+               "pin_sylvestre", "sapin")
+ASPECTS_SANS_OBJET_SI_PERSISTANT = ("rameau",)
+
+
+def aspect_applicable(aspect, cat, type_="", stem=""):
+    """L'aspect a-t-il un sens pour cette espèce ?
+
+    Trois filtres, du plus large au plus fin : la catégorie d'atlas (pas d'écorce sur une
+    herbacée), le type de ligneux (pas de tronc sur une callune), puis le feuillage
+    persistant (pas de rameau d'hiver sur un olivier).
+    """
+    if cat not in ASPECT_CATS.get(aspect, (cat,)):
+        return False
+    if aspect in ASPECTS_DU_TRONC and (type_ or "").strip().lower() in TYPES_SANS_TRONC:
+        return False
+    if aspect in ASPECTS_SANS_OBJET_SI_PERSISTANT and stem in PERSISTANTS:
+        return False
+    return True
+
+
+def aspects_presents(sp):
+    """Aspects effectivement documentés par les photos de l'espèce.
+
+    « divers » n'en est pas un : une photo sans aspect annoncé ne comble aucun manque.
+    """
+    got = set()
+    for p in sp.get("paths") or ():
+        got |= set(aspect_of(p, sp["stem"]))
+    got.discard(DIVERS)
+    return got
+
+
+def bilan_aspects(sp):
+    """(manquants, sans_objet) pour cette espèce, dans l'ordre de ASPECTS.
+
+    Source unique du même calcul pour COUVERTURE.md et pour la fiche du site : avant, le
+    tableau savait qu'il manquait un port au noyer et le site l'ignorait, si bien qu'un
+    lecteur ne pouvait pas voir où contribuer. Les deux dérivent maintenant d'ici.
+    """
+    cat, type_ = sp["cat"], (sp.get("fields") or {}).get("type", "")
+    if cat not in CATS_A_ASPECTS:
+        return [], []
+    got = aspects_presents(sp)
+    manquants, sans_objet = [], []
+    for a in ASPECTS:
+        if not a.cible:
+            continue
+        if not aspect_applicable(a.id, cat, type_, sp["stem"]):
+            sans_objet.append(a.id)
+        elif a.id not in got:
+            manquants.append(a.id)
+    return manquants, sans_objet
+
+
 ASPECT_KW = {kw: a.id for a in ASPECTS for kw in (a.id,) + a.synonymes}
 ASPECT_LABEL = dict([(a.id, a.label) for a in ASPECTS] + [(DIVERS, DIVERS_LABEL)])
 ASPECT_IDS = tuple(a.id for a in ASPECTS)
-ASPECTS_VALIDES = frozenset(ASPECT_IDS) | {DIVERS}   # ce qu'on accepte dans _aspects.tsv
+ASPECTS_VALIDES = frozenset(ASPECT_IDS) | {DIVERS, PLANCHE}  # accepté dans _aspects.tsv
 
 def load_corrections():
     """Actions de contribution (depuis l'app ou à la main) : img/quiz-extra/_corrections.tsv
@@ -153,14 +263,34 @@ def hkey(h):
         return "latin"
     return h
 
-def aspect_of(path, stem):
+def _jetons(path, stem):
+    """Mots du nom de fichier après le stem : « muguet-feuille_fleur-2.jpg » → feuille, fleur, 2."""
+    fn = os.path.splitext(os.path.basename(path).lower())[0]
+    suffix = fn[len(stem):] if fn.startswith(stem) else fn
+    return re.split(r"[-_ ]+", suffix)
+
+
+def est_planche(path, stem=""):
+    """La photo est-elle une planche ancienne ? (jeton du nom, ou ligne de _aspects.tsv)"""
     base = os.path.basename(path)
     if base in SIDE:
-        return SIDE[base] or [DIVERS]
-    fn = os.path.splitext(base.lower())[0]
-    suffix = fn[len(stem):] if fn.startswith(stem) else fn
+        return PLANCHE in (SIDE[base] or [])
+    return any(tok in PLANCHE_KW for tok in _jetons(path, stem))
+
+
+def aspect_of(path, stem):
+    """Aspects d'une photo. Une PLANCHE n'en a aucun : elle va dans « Divers » (cf. #30)."""
+    base = os.path.basename(path)
+    if base in SIDE:
+        marques = [a for a in (SIDE[base] or []) if a != PLANCHE]
+        if PLANCHE in (SIDE[base] or []):
+            return [DIVERS]
+        return marques or [DIVERS]
+    jetons = _jetons(path, stem)
+    if any(tok in PLANCHE_KW for tok in jetons):
+        return [DIVERS]
     found = []
-    for tok in re.split(r"[-_ ]+", suffix):
+    for tok in jetons:
         if tok in ASPECT_KW and ASPECT_KW[tok] not in found:
             found.append(ASPECT_KW[tok])
     return found or [DIVERS]

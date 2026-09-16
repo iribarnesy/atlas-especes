@@ -1,0 +1,536 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Récolte et promotion des candidats photo (scripts/candidats.py).
+
+L'outil sert à ne rien verser dans l'atlas sans l'avoir regardé : on teste donc surtout
+ce qui décide à ma place — le tri des titres, la répartition entre aspects — et les deux
+garanties de la promotion : le crédit est écrit, et rien n'est écrasé en silence.
+"""
+import os
+
+import pytest
+
+from conftest import load_module
+
+
+@pytest.fixture
+def cd(repo, monkeypatch):
+    """Le module, branché sur le faux dépôt."""
+    module = load_module("candidats")
+    cr = load_module("credits")
+    monkeypatch.setattr(cr, "BASE", repo.root)
+    monkeypatch.setattr(cr, "CREDITS", os.path.join(repo.root, "img", "CREDITS.tsv"))
+    monkeypatch.setattr(cr, "atlas_data", repo.atlas_data)
+    monkeypatch.setattr(module, "credits", cr)
+    monkeypatch.setattr(module, "BASE", repo.root)
+    monkeypatch.setattr(module, "EXTRA", repo.extra)
+    monkeypatch.setattr(module, "DEST", os.path.join(repo.root, "candidats"))
+    module.credits_module = cr
+    return module
+
+
+# --------------------------------------------------- ce qui se juge sur le titre
+
+def test_les_mots_d_organe_sont_reconnus_en_plusieurs_langues(cd):
+    assert cd.aspect_devine("File:Conium maculatum flowers.jpg") == "fleur"
+    assert cd.aspect_devine("File:Aronstab Blüte.jpg") == "fleur"
+    assert cd.aspect_devine("File:Alliaria petiolata leaves.jpg") == "feuille"
+    assert cd.aspect_devine("File:Kopr owoc.jpg") == "fruit"
+    assert cd.aspect_devine("File:Heracleum-sphondylium-habitus.jpg") == "port"
+
+
+def test_le_rameau_est_reconnu_et_prime(cd):
+    """Dernier aspect qu'aucun lot n'avait visé : faute d'être dans MOTS, tout bourgeon
+    tombait dans « divers » et la répartition ne le sortait jamais en tête."""
+    assert cd.aspect_devine("File:Fraxinus excelsior winter twig.jpg") == "rameau"
+    assert cd.aspect_devine("File:Fagus sylvatica buds.jpg") == "rameau"
+    assert cd.aspect_devine("File:Acer campestre Knospen im Winter.jpg") == "rameau"
+    assert cd.aspect_devine("File:Sambucus nigra pith.jpg") == "rameau"
+    assert cd.aspect_devine("File:Quercus robur leaf scar detail.jpg") == "rameau"
+    # il passe devant l'écorce quand les deux mots sont là
+    assert cd.aspect_devine("File:Tilia cordata twig and bark.jpg") == "rameau"
+
+
+def test_le_chaton_et_le_cone_male_sont_des_fleurs(cd):
+    """Un arbre anémophile ne fleurit pas sous le mot « flower ». Sans ces mots-là, la
+    fleur du chêne ou du mélèze tombait dans « divers » et la répartition ne la sortait
+    jamais — d'où une part des 28 fleurs manquantes avant le lot 16."""
+    assert cd.aspect_devine("File:Quercus robur male catkins.jpg") == "fleur"
+    assert cd.aspect_devine("File:Corylus avellana Kätzchen.jpg") == "fleur"
+    assert cd.aspect_devine("File:Carpinus betulus amentum.jpg") == "fleur"
+    assert cd.aspect_devine("File:Salix caprea staminate flowers.jpg") == "fleur"
+    assert cd.aspect_devine("File:Pinus sylvestris pollen cones.jpg") == "fleur"
+    assert cd.aspect_devine("File:Picea abies männliche Blüten.jpg") == "fleur"
+
+
+def test_un_cone_mur_reste_un_fruit(cd):
+    """On n'a délibérément PAS mis « cone » nu dans les mots de la fleur : chez un
+    conifère le cône mûr est la fructification, et l'atlas le compte déjà comme fruit."""
+    assert cd.aspect_devine("File:Picea abies cone.jpg") != "fleur"
+    assert cd.aspect_devine("File:Larix decidua cones and seeds.jpg") == "fruit"
+
+
+def test_un_cone_femelle_n_est_pas_un_cone_male(cd):
+    """« female cones » CONTIENT « male cone ». Sans neutraliser « female », les galbules
+    bleues du genévrier — son fruit — remontaient en fleur, et le mot-clé censé combler
+    l'aspect le remplissait de fructifications."""
+    assert cd.aspect_devine("File:Juniperus communis female cones.jpg") != "fleur"
+    assert cd.aspect_devine("File:Abies alba weibliche Zapfen.jpg") != "fleur"
+    # mais on ne jette pas le bébé : une fois « female » effacé, « flowers » reste
+    assert cd.aspect_devine("File:Morus nigra female flowers.jpg") == "fleur"
+    assert cd.aspect_devine("File:Pinus sylvestris male cones.jpg") == "fleur"
+
+
+def test_le_port_est_affame_par_le_round_robin(cd):
+    """Diagnostic du lot 18. _repartir sert un candidat par aspect et par tour, DANS
+    L'ORDRE, et le port est dernier. À cinq candidats par espèce il n'en obtient aucun ;
+    au réglage par défaut (sept) il en obtient un sur sept. Un lot qui vise le port
+    dépensait donc ses créneaux sur cinq aspects qu'il ne cherchait pas."""
+    titres = ["File:X twig.jpg", "File:X bark.jpg", "File:X leaf.jpg",
+              "File:X flower.jpg", "File:X fruit.jpg", "File:X habit.jpg"]
+    assert "port" not in [a for a, _ in cd._repartir(titres, 5, cle=lambda t: t)]
+    assert "port" in [a for a, _ in cd._repartir(titres, 6, cle=lambda t: t)]
+
+
+def test_aspect_prioritaire_sert_l_aspect_vise_en_premier(cd):
+    """--aspect remet l'aspect visé en tête de l'ordre : le lot le voit dès le premier
+    créneau, au lieu de ne jamais le voir."""
+    titres = ["File:X twig.jpg", "File:X bark.jpg", "File:X leaf.jpg",
+              "File:X flower.jpg", "File:X fruit.jpg", "File:X habit.jpg"]
+    aspects = [a for a, _ in cd._repartir(titres, 5, cle=lambda t: t, aspect="port")]
+    assert aspects[0] == "port"
+    # et on n'a pas perdu les autres, seulement changé l'ordre
+    assert set(cd.priorise("plante", "port")[0]) == set(cd.priorise("plante")[0])
+
+
+def test_aspect_inconnu_est_refuse(cd):
+    """Une faute de frappe sur --aspect doit arrêter la récolte, pas la fausser en
+    silence."""
+    import pytest as _pt
+    with _pt.raises(SystemExit):
+        cd.priorise("plante", "ecorse")
+
+
+def test_bud_dans_un_nom_propre_ou_vernaculaire_n_est_pas_un_bourgeon(cd):
+    """Suite du lot 17 : « bud » est court et vit dans des noms. « Red bud » est le nom
+    américain du Cercis, pas un bourgeon, et Budaörs est une ville hongroise — les deux
+    fichiers étaient des arbres entiers, l'un en fleur, l'autre en feuilles."""
+    assert cd.aspect_devine("File:Red bud 2009.jpg") != "rameau"
+    assert cd.aspect_devine("File:Downy oak, Tűzkő Hill trail, Budaörs.jpg") != "rameau"
+    # le vrai bourgeon reste reconnu
+    assert cd.aspect_devine("File:Prunus avium flowerbuds.jpg") == "rameau"
+
+
+def test_un_mot_marque_ne_compte_que_comme_mot_entier(cd):
+    """La règle qui a permis de RETIRER neuf noms propres de FAUX_AMIS au lieu d'en
+    ajouter : « =bud » et « =port » ne se trouvent plus à l'intérieur d'un autre mot."""
+    assert cd.aspect_devine("File:Sambucus nigra à Budapest.jpg") != "rameau"
+    assert cd.aspect_devine("File:Buddleja davidii.jpg") != "rameau"
+    assert cd.aspect_devine("File:Vue de Porto.jpg") != "port"
+    assert cd.aspect_devine("File:Portrait de Linné.jpg") != "port"
+    assert cd.aspect_devine("File:Important plant habit.jpg") == "port"
+    # et les mots entiers, eux, comptent toujours
+    assert cd.aspect_devine("File:Tilia bud scale.jpg") == "rameau"
+    assert cd.aspect_devine("File:Quercus robur port.jpg") == "port"
+
+
+def test_le_port_ne_se_laisse_plus_prendre_par_plantation(cd):
+    """Le port est l'aspect le plus exposé aux sous-chaînes, et le lot 18 y a perdu
+    quatre créneaux : « plant » habite plantation, Plantentuin et Aroniaplantage — trois
+    rangs d'arbustes, pas une silhouette — et « stem » habite « root system »."""
+    assert cd.aspect_devine("File:Aroniaplantage.jpg") != "port"
+    assert cd.aspect_devine("File:Juglans regia Meise Plantentuin.jpg") != "port"
+    assert cd.aspect_devine("File:Robinia pseudoacacia root system.JPG") != "port"
+    # « habit » reste un préfixe : la sous-catégorie « (habitat) » est un bon gisement
+    assert cd.aspect_devine("File:Prunus habitat in Provence.jpg") == "port"
+    # « tree » habite « beentree », pseudonyme d'un contributeur prolifique (lot 19)
+    assert cd.aspect_devine("File:Lamium album 2 beentree.jpg") != "port"
+    assert cd.aspect_devine("File:Nettle Tree (Celtis australis).jpg") == "port"
+    assert cd.aspect_devine("File:Malus domestica - Apple Trees - Kullu.jpg") == "port"
+    # mais « baum » reste un préfixe : en allemand il vit à la fin des composés
+    assert cd.aspect_devine("File:Corylus avellana - Haselbaum.jpg") == "port"
+    # ce qu'on veut vraiment reste pris, singulier comme pluriel
+    assert cd.aspect_devine("File:Malus domestica whole plant.jpg") == "port"
+    assert cd.aspect_devine("File:Young plants of Corylus.jpg") == "port"
+    assert cd.aspect_devine("File:Sorbus domestica tree habit.jpg") == "port"
+
+
+def test_bole_ne_transforme_pas_un_cepe_en_tronc(cd):
+    """Le plus coûteux des faux amis trouvés, découvert au lot 21 : « bole » vit dans
+    BOLETUS, si bien qu'un cèpe passait pour une écorce dans toute récolte de champignons.
+    Et « borke » vit dans Borken, une ville allemande qui a fait remonter une haie de
+    prunelliers en fleurs, comme dans Borkenkäfer — le scolyte, un insecte."""
+    assert cd.aspect_devine("File:Boletus edulis.jpg") != "ecorce"
+    assert cd.aspect_devine("File:Burlo-Vardingholter Venn, Borken.jpg") != "ecorce"
+    assert cd.aspect_devine("File:Borkenkäfer damage on spruce.jpg") != "ecorce"
+    assert cd.aspect_devine("File:Sebastian garden.jpg") != "ecorce"
+    # les vrais mots restent pris
+    assert cd.aspect_devine("File:Tilia cordata bole.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Fagus Borke Detail.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Quercus robur bark.jpg") == "ecorce"
+
+
+def test_les_racines_botaniques_restent_des_prefixes(cd):
+    """On ne passe PAS tout le vocabulaire en mot entier : « flor » doit attraper flores
+    et floración, « inflorescen » ses variantes, « rosett » rosette. C'est la raison pour
+    laquelle la frontière de mot est demandée mot par mot, avec « = »."""
+    assert cd.aspect_devine("File:Prunus flores.jpg") == "fleur"
+    assert cd.aspect_devine("File:Daucus inflorescencia.jpg") == "fleur"
+    assert cd.aspect_devine("File:Taraxacum rosette.jpg") == "feuille"
+
+
+def test_les_noms_de_lieux_ne_sont_pas_pris_pour_des_aspects(cd):
+    """Découvert dans le lot 8 : un sureau photographié à BUDAPEST passait pour un rameau
+    d'hiver (« bud »), et une vigne photographiée au PORTUGAL pour un port."""
+    assert cd.aspect_devine(
+        "File:Feketebodza (Sambucus nigra). - Budapest.JPG") == "divers"
+    assert cd.aspect_devine(
+        "File:Sambucus nigra leaves and bark, Ponte de Sor, Portugal.jpg") == "ecorce"
+    # le vrai mot-clé passe toujours
+    assert cd.aspect_devine("File:Sambucus nigra buds.jpg") == "rameau"
+
+
+def test_bud_ne_capture_pas_budapest(cd):
+    """« bud » nu attraperait Budapest et Buddleja : les mots-clés sont bornés."""
+    assert cd.aspect_devine("File:Budapest tree.jpg") == "port"
+    assert cd.aspect_devine("File:Buddleja davidii flowers.jpg") == "fleur"
+
+
+def test_l_ecorce_est_reconnue_et_prime_sur_le_port(cd):
+    """L'aspect le plus déficitaire du dépôt : sans ces mots, toute écorce tombait dans
+    « divers » et la répartition ne la sortait jamais en tête."""
+    assert cd.aspect_devine("File:Carpinus betulus bark.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Olea europaea tronc.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Prunus avium Rinde.jpg") == "ecorce"
+    # « trunk » parle du tronc, pas de la silhouette, même quand « tree » suit
+    assert cd.aspect_devine("File:Ficus carica trunk of an old tree.jpg") == "ecorce"
+    assert cd.aspect_devine("File:Ficus carica tree.jpg") == "port"
+
+
+def test_un_titre_muet_reste_a_trier_a_l_oeil(cd, repo):
+    assert cd.aspect_devine("File:Autumn flowers 01.jpg") == "fleur"
+    assert cd.aspect_devine("File:20170410Artemisia absinthium3.jpg") == repo.atlas_data.DIVERS
+
+
+@pytest.mark.parametrize("titre", [
+    "File:Prof. Dr. Thomé's Flora von Deutschland (Pl. 381).jpg",   # planche botanique
+    "File:Flora Danica Hft 27 Tab 1572.jpg",
+    "File:Applied and economic botany for students.jpg",
+    "File:Conium maculatum herbarium specimen.jpg",
+    "File:A bowl of dill seed.jpg",                                  # photo de cuisine
+    "File:Chilean salad ingredients cilantro tomatoes.jpg",
+    "File:Farmer's Market - Chervil.jpg",
+    "File:Erica tetralix - Pl0008 - FloraBatava-KB-v01.jpg",         # sans espace
+    "File:Edwards' botanical register ornamental flower-garden.jpg",
+    "File:Cyclopedia of American horticulture.jpg",
+    "File:Anethum graveolens - Distribuzione.PNG",                   # carte
+    "File:Anthriscus cerefolium distribution in Poland.svg",         # pas une photo
+])
+def test_titres_ecartes_avant_meme_le_telechargement(cd, titre):
+    assert not cd.titre_utilisable(titre)
+
+
+def test_une_photo_de_terrain_passe(cd):
+    assert cd.titre_utilisable("File:Conium maculatum fruit (01).jpg")
+    assert cd.titre_utilisable("File:Heracleum sphondylium flowering.JPEG")
+
+
+def test_les_planches_sont_ecartees_par_defaut_mais_gardables(cd):
+    """Une gravure n'apprend pas à reconnaître une plante sur le terrain, mais elle montre
+    tous les organes d'un coup : --planches la garde plutôt que de la jeter (cf. #30)."""
+    planche = "File:Convallaria majalis - Köhler-Medizinal-Pflanzen.jpg"
+    assert not cd.titre_utilisable(planche)
+    assert cd.titre_utilisable(planche, planches=True)
+
+
+def test_les_photos_d_etal_restent_ecartees_meme_avec_planches(cd):
+    """--planches ne rouvre QUE les recueils anciens : le sujet reste la plante."""
+    assert not cd.titre_utilisable("File:Garlic bowl at the market.jpg", planches=True)
+    assert not cd.titre_utilisable("File:Allium sativum distribution map.png", planches=True)
+
+
+def test_les_sous_categories_qui_nomment_un_aspect_passent_devant(cd, monkeypatch):
+    """« Famous Fraxinus excelsior » prenait une des quatre places explorées, et
+    « (buds) » pouvait tomber en dehors."""
+    scs = ["Category:X - Famous", "Category:X by country", "Category:X cultivars",
+           "Category:X (bark)", "Category:X (buds)"]
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
+    monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("X", 3, 1000)
+    # les places servent d'abord aux aspects ; les génériques ne prennent que le reste
+    assert vues[:2] == ["Category:X (bark)", "Category:X (buds)"]
+
+
+def test_avec_planches_les_gravures_passent_devant_les_generiques(cd, monkeypatch):
+    """Commons range les gravures dans une sous-catégorie dédiée. Sans priorité elle
+    tombait derrière (buds), (flowers), (fruit)… et n'était jamais explorée."""
+    scs = ["Category:X (buds)", "Category:X (flowers)", "Category:X (fruit)",
+           "Category:X (habitat)", "Category:X - botanical illustrations",
+           "Category:X by country", "Category:X - Famous", "Category:X in music"]
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
+    monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("X", 3, 1000, planches=True)
+    gravures = vues.index("Category:X - botanical illustrations")
+    assert all(vues.index(c) < gravures for c in vues if "(" in c), \
+        "les aspects passent d'abord"
+    assert gravures < vues.index("Category:X by country"), \
+        "mais les gravures passent avant les génériques"
+
+
+def test_les_planches_ne_passent_pas_devant_un_aspect(cd, monkeypatch):
+    """La régression qui a fait rentrer le lot 8 sans un seul rameau de charme :
+    « - botanical illustrations » prenait la première place et éjectait « buds »."""
+    scs = ["Category:X - botanical illustrations", "Category:X (bark)",
+           "Category:X (fruit)", "Category:X (leaves)", "Category:X buds",
+           "Category:X by country", "Category:X - Famous"]
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie", lambda t: ([], t))
+    monkeypatch.setattr(cd, "sous_categories", lambda t: list(scs))
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: vues.append(t) or [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("X", 3, 1000, planches=True)
+    assert "Category:X buds" in vues, "l'aspect visé doit être exploré"
+    assert "Category:X - botanical illustrations" in vues
+    assert "Category:X - Famous" not in vues
+
+
+def test_on_demande_une_largeur_mise_en_cache_par_wikimedia(cd):
+    """Demander 1000 px force Wikimedia à rendre une vignette à chaque appel, et l'API
+    finit par répondre 429 en renvoyant à la liste des tailles servies depuis le cache.
+    On demande donc la première largeur standard au-dessus."""
+    assert cd.largeur_cachee(1000) == 1024
+    assert cd.largeur_cachee(420) == 640
+    assert cd.largeur_cachee(1024) == 1024
+    # au-delà de la plus grande, on ne demande pas plus
+    assert cd.largeur_cachee(9999) == 2560
+
+
+# ------------------------------------------------- vocabulaire de la faune
+
+def test_les_aspects_de_l_atlas_ne_disent_rien_d_un_animal(cd):
+    """Le constat qui motive un second vocabulaire : sans lui tout tombe dans « divers »
+    et la répartition ne diversifie plus rien."""
+    assert cd.aspect_devine("File:Coccinella septempunctata larva.jpg") == "divers"
+    assert cd.aspect_devine("File:Apis mellifera in flight.jpg") == "divers"
+
+
+def test_le_vocabulaire_faune_separe_larve_degats_et_detail(cd):
+    ordre, mots = cd.VOCABULAIRES["faune"]
+    devine = lambda t: cd.aspect_devine(t, ordre, mots)
+    assert devine("File:Coccinella septempunctata larva.jpg") == "jeune"
+    assert devine("File:Ips typographus galleries in bark.jpg") == "degats"
+    assert devine("File:Sciurus vulgaris head.jpg") == "detail"
+    assert devine("File:Apis mellifera in flight.jpg") == "action"
+    assert devine("File:Bombus terrestris.jpg") == "divers"
+
+
+def test_la_larve_et_les_degats_passent_devant(cd):
+    """Ce sont eux qu'on rencontre : d'un scolyte on voit les galeries avant l'insecte."""
+    titres = _titres(*["File:X %d.jpg" % i for i in range(6)],
+                     "File:X larva.jpg", "File:X galleries.jpg")
+    pris = cd._repartir(titres, 2, cle=lambda t: t, vocabulaire="faune")
+    assert [a for a, _ in pris] == ["jeune", "degats"]
+
+
+def test_le_vocabulaire_faune_n_est_pas_un_aspect_de_l_atlas(cd, atlas_data):
+    """Garde-fou : ces mots ne doivent jamais entrer dans les noms de fichiers."""
+    ordre, _ = cd.VOCABULAIRES["faune"]
+    assert not set(ordre) & set(atlas_data.ASPECTS_VALIDES)
+
+
+def test_api_reessaie_apres_une_coupure_reseau(cd, monkeypatch):
+    """Une panne DNS de trente secondes a fait perdre 19 espèces sur 20 au lot 12 : chaque
+    espèce imprimait un « ÉCHEC » laconique et le lot continuait pour rien."""
+    import urllib.error
+    appels = []
+
+    def urlopen(req, timeout=None):
+        appels.append(1)
+        if len(appels) < 3:
+            raise urllib.error.URLError("nodename nor servname provided")
+        raise AssertionError("succès simulé")   # on vérifie juste qu'on a réessayé
+
+    monkeypatch.setattr(cd.time, "sleep", lambda s: None)
+    monkeypatch.setattr(cd.urllib.request, "urlopen", urlopen)
+    with pytest.raises(AssertionError, match="succès simulé"):
+        cd.api(action="query")
+    assert len(appels) == 3, "api() doit réessayer après une coupure réseau"
+
+
+def test_api_ne_reessaie_pas_une_vraie_erreur_http(cd, monkeypatch):
+    """Un 404 ou un 403 est définitif : réessayer quatre fois ne ferait que perdre du temps."""
+    import urllib.error
+    appels = []
+
+    def urlopen(req, timeout=None):
+        appels.append(1)
+        raise urllib.error.HTTPError("u", 404, "Not Found", {}, None)
+
+    monkeypatch.setattr(cd.time, "sleep", lambda s: None)
+    monkeypatch.setattr(cd.urllib.request, "urlopen", urlopen)
+    with pytest.raises(urllib.error.HTTPError):
+        cd.api(action="query")
+    assert len(appels) == 1
+
+
+# ------------------------------------------------------ renvois de catégorie
+
+def test_le_renvoi_de_categorie_est_lu(cd):
+    """Commons range souvent sous l'ancien nom : Acca sellowiana renvoie à Feijoa
+    sellowiana. Sans suivre le renvoi, l'espèce revient sans candidat et sans message."""
+    assert cd.redirection_categorie.__doc__  # présente
+    txt = "{{Category redirect|Crataegus germanica}}"
+    import re
+    m = cd._REDIRECT.search(txt)
+    assert m and m.group(1).strip() == "Crataegus germanica"
+
+
+def test_le_renvoi_accepte_le_prefixe_explicite(cd, monkeypatch):
+    monkeypatch.setattr(cd, "api", lambda **kw: {"query": {"pages": {"1": {"revisions": [
+        {"slots": {"main": {"*": "{{category redirect|Category:Feijoa sellowiana}}"}}}]}}}})
+    assert cd.redirection_categorie("Category:Acca sellowiana") == "Category:Feijoa sellowiana"
+
+
+def test_sans_renvoi_on_ne_boucle_pas(cd, monkeypatch):
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: [])
+    monkeypatch.setattr(cd, "redirection_categorie", lambda t: None)
+    trouves, cat = cd.titres_categorie_suivie("Category:X")
+    assert trouves == [] and cat == "Category:X"
+
+
+def test_une_categorie_pleine_n_est_pas_suivie(cd, monkeypatch):
+    appels = []
+    monkeypatch.setattr(cd, "titres_categorie", lambda t: (appels.append(t), ["File:a.jpg"])[1])
+    monkeypatch.setattr(cd, "redirection_categorie",
+                        lambda t: pytest.fail("ne devrait pas être appelée"))
+    trouves, cat = cd.titres_categorie_suivie("Category:X")
+    assert trouves == ["File:a.jpg"] and cat == "Category:X" and appels == ["Category:X"]
+
+
+def test_une_categorie_forcee_l_emporte_sur_le_nom_latin(cd, monkeypatch):
+    """Une entrée d'atlas au nom de genre (« Ribes sp. ») ramènerait tout le genre :
+    groseilliers américains et asiatiques compris. --categorie vise l'espèce."""
+    vues = []
+    monkeypatch.setattr(cd, "titres_categorie_suivie",
+                        lambda t: (vues.append(t), ([], t))[1])
+    monkeypatch.setattr(cd, "sous_categories", lambda t: [])
+    monkeypatch.setattr(cd, "imageinfo_par_lots", lambda titres, largeur: [])
+    cd.candidats("Ribes", 3, 1000, categorie="Ribes rubrum")
+    assert vues == ["Category:Ribes rubrum"]
+
+
+# ------------------------------------------------------- répartition des aspects
+
+def _titres(*noms):
+    return list(noms)
+
+
+def test_la_repartition_alterne_les_aspects(cd):
+    """Neuf fleurs et une feuille ne font pas un lot exploitable : on veut de la variété."""
+    titres = _titres(*["File:X flower %d.jpg" % i for i in range(9)],
+                     "File:X leaf.jpg", "File:X fruit.jpg")
+    pris = cd._repartir(titres, 4, cle=lambda t: t)
+    assert sorted(a for a, _ in pris) == ["feuille", "fleur", "fleur", "fruit"]
+
+
+def test_l_ecorce_passe_avant_le_reste_dans_la_repartition(cd):
+    """Sur un lot de ligneux, une seule écorce disponible doit être prise au premier tour."""
+    titres = _titres(*["File:X flower %d.jpg" % i for i in range(5)], "File:X bark.jpg")
+    pris = cd._repartir(titres, 2, cle=lambda t: t)
+    assert pris[0][0] == "ecorce"
+
+
+def test_la_repartition_ne_reclame_pas_plus_que_disponible(cd):
+    pris = cd._repartir(_titres("File:X leaf.jpg"), 5, cle=lambda t: t)
+    assert len(pris) == 1
+
+
+# -------------------------------------------------------- lecture des choix
+
+def test_les_commentaires_et_les_lignes_vides_sont_ignores(cd, repo):
+    p = repo.write("choix.tsv", "# un commentaire\n\ncandidats/cigue/01.jpg\tcigue-fleur-1.jpg\n")
+    assert cd.lire_choix(p) == [("candidats/cigue/01.jpg", "cigue-fleur-1.jpg")]
+
+
+def test_une_ligne_mal_formee_arrete_tout(cd, repo):
+    p = repo.write("choix.tsv", "candidats/cigue/01.jpg cigue-fleur-1.jpg\n")
+    with pytest.raises(SystemExit):
+        cd.lire_choix(p)
+
+
+# ------------------------------------------------------------------ promotion
+
+def _candidat(repo, stem, nom, octets=b"\xff\xd8photo\xff\xd9", auteur="Alice Dupont"):
+    d = os.path.join(repo.root, "candidats", stem)
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, nom), "wb") as fh:
+        fh.write(octets)
+    with open(os.path.join(d, "candidats.tsv"), "w", encoding="utf-8") as fh:
+        fh.write("fichier\taspect_devine\ttitre_commons\tauteur\tlicence\turl\n")
+        fh.write("\t".join([nom, "fleur", "File:X.jpg", auteur, "CC BY-SA 4.0",
+                            "https://commons.wikimedia.org/wiki/File:X.jpg"]) + "\n")
+    return "candidats/%s/%s" % (stem, nom)
+
+
+def test_la_promotion_ecrit_la_photo_et_son_credit(cd, repo):
+    src = _candidat(repo, "cigue", "01.jpg")
+    p = repo.write("choix.tsv", "%s\tcigue-fleur-1.jpg\n" % src)
+    cd.promouvoir(p)
+    assert os.path.exists(os.path.join(repo.extra, "cigue-fleur-1.jpg"))
+    entree = cd.credits_module.charger()["cigue-fleur-1.jpg"]
+    assert entree["auteur"] == "Alice Dupont"
+    assert entree["licence"] == "CC BY-SA 4.0"
+    assert cd.credits_module.connu(entree)
+
+
+def test_une_photo_sans_credit_n_entre_pas_dans_l_atlas(cd, repo):
+    src = _candidat(repo, "cigue", "01.jpg")
+    # la fiche de crédits ne mentionne pas ce fichier-là
+    open(os.path.join(repo.root, "candidats", "cigue", "candidats.tsv"), "w",
+         encoding="utf-8").write("fichier\taspect_devine\ttitre_commons\tauteur\tlicence\turl\n")
+    p = repo.write("choix.tsv", "%s\tcigue-fleur-1.jpg\n" % src)
+    with pytest.raises(SystemExit):
+        cd.promouvoir(p)
+    assert not os.path.exists(os.path.join(repo.extra, "cigue-fleur-1.jpg"))
+
+
+def test_rejouer_le_meme_fichier_de_choix_est_sans_effet(cd, repo):
+    src = _candidat(repo, "cigue", "01.jpg")
+    p = repo.write("choix.tsv", "%s\tcigue-fleur-1.jpg\n" % src)
+    cd.promouvoir(p)
+    cd.promouvoir(p)
+    assert open(os.path.join(repo.extra, "cigue-fleur-1.jpg"), "rb").read() == b"\xff\xd8photo\xff\xd9"
+
+
+def test_on_n_ecrase_pas_une_autre_photo_en_silence(cd, repo, monkeypatch):
+    """Le piège du dossier à 300 fichiers : un nom déjà pris passerait inaperçu."""
+    repo.extra_photo("cigue-fleur-1.jpg")
+    src = _candidat(repo, "cigue", "01.jpg")
+    p = repo.write("choix.tsv", "%s\tcigue-fleur-1.jpg\n" % src)
+    monkeypatch.setattr(cd.sys, "argv", ["candidats.py"])
+    with pytest.raises(SystemExit, match="existe déjà"):
+        cd.promouvoir(p)
+    assert open(os.path.join(repo.extra, "cigue-fleur-1.jpg"), "rb").read() == b"\xff\xd8\xff\xd9"
+
+
+def test_remplacer_assume_l_ecrasement(cd, repo, monkeypatch):
+    repo.extra_photo("cigue-fleur-1.jpg")
+    src = _candidat(repo, "cigue", "01.jpg")
+    p = repo.write("choix.tsv", "%s\tcigue-fleur-1.jpg\n" % src)
+    monkeypatch.setattr(cd.sys, "argv", ["candidats.py", "--remplacer"])
+    cd.promouvoir(p)
+    assert open(os.path.join(repo.extra, "cigue-fleur-1.jpg"), "rb").read() == b"\xff\xd8photo\xff\xd9"
+
+
+def test_un_chemin_complet_sort_de_quiz_extra(cd, repo):
+    """Les vignettes vivent dans img/especes/ : le remplacement doit pouvoir les viser."""
+    src = _candidat(repo, "oseille", "02.jpg")
+    p = repo.write("choix.tsv", "%s\timg/especes/oseille.jpg\n" % src)
+    cd.promouvoir(p)
+    assert os.path.exists(os.path.join(repo.img, "oseille.jpg"))

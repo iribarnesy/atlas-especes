@@ -52,6 +52,10 @@ def to_web_data(species, deriveur=None):
         for p in s["paths"]:
             rel = enc_web(p)
             im = {"u": rel, "a": atlas_data.aspect_of(p, s["stem"])}
+            # une planche ancienne se dit : le lecteur doit savoir qu'il regarde un dessin
+            # idéalisé et non ce qu'il verra sur le terrain (cf. #30)
+            if atlas_data.est_planche(p, s["stem"]):
+                im["p"] = 1
             if deriveur is not None:
                 thumb = deriveur.thumb(p, rel)
                 if thumb != rel:
@@ -76,6 +80,15 @@ def to_web_data(species, deriveur=None):
         }
         if "comestible" in s["fields"]:  # verdict du mode Oui/Non, calculé ici (cf. atlas_data.is_edible)
             d["edible"] = atlas_data.is_edible(s["fields"]["comestible"])
+        # Manques de couverture : ce que COUVERTURE.md sait depuis toujours et que la fiche
+        # ignorait. Sans eux, un lecteur ne pouvait pas voir qu'il manque un port au noyer,
+        # donc pas savoir où une photo serait utile. « no » = sans objet, affiché à part :
+        # une callune n'aura jamais d'écorce, ce n'est pas un trou à combler.
+        manquants, sans_objet = atlas_data.bilan_aspects(s)
+        if manquants:
+            d["gaps"] = manquants
+        if sans_objet:
+            d["no"] = sans_objet
         out.append(d)
     return out
 

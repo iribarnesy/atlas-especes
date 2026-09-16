@@ -1,0 +1,95 @@
+# Lot 21 — LES DEUX DERNIÈRES REPRISES : l'écorce (15) et la feuille (11).
+#
+#   python3 scripts/candidats.py --lot lots/lot-21-ecorce-feuille.txt --aspect ecorce --par-espece 4 --planches
+#   python3 scripts/candidats.py --lot lots/lot-21-ecorce-feuille.txt --aspect feuille --par-espece 4 --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ DEUX ASPECTS DANS UN LOT, ET C'EST VOULU : ce sont les deux SEULS qui n'aient jamais
+# été repris depuis que --aspect existe. Après ce lot, tout le dépôt aura été repassé au
+# même crible, et les manques restants seront établis plutôt que supposés. Vingt-six
+# espèces en tout, donc deux récoltes courtes : une par aspect, chacune avec son drapeau.
+#
+# CE QU'ON SAIT DÉJÀ DU RÉSULTAT PROBABLE. Les lots 18 et 19 ont renversé leur conclusion
+# de départ ; le lot 20 l'a confirmée. Les deux cas existent, il n'y a donc rien à
+# préjuger — sauf pour cinq espèces, voir plus bas.
+#
+# ⚠ L'ÉCORCE — ce qu'il faut voir :
+#   - FIGUIER : écorce LISSE, gris clair presque blanche. Rien d'autre ne lui ressemble ;
+#   - GENÉVRIER : écorce se détachant en LANIÈRES fibreuses — caractère des Cupressacées ;
+#   - POIRIER : écorce en petites plaques presque carrées, écailleuse. À opposer au
+#     pommier, dont l'écorce s'exfolie en lambeaux plus larges ;
+#   - PLAQUEMINIER : plaques rectangulaires régulières, façon Diospyros ;
+#   - CHÊNE PÉDONCULÉ : crevasses en réseau régulier ; il manque au groupe pédonculé /
+#     sessile, dont le sessile a déjà la sienne ;
+#   - PRUNELLIER : écorce noirâtre, et les rameaux épineux dans le champ ;
+#   - AMÉLANCHIER et LAURIER-SAUCE : écorces LISSES, l'une grise, l'autre vert-noirâtre ;
+#   - TROÈNE et JUJUBIER : grise à lenticelles pour l'un, crevassée en long pour l'autre.
+#
+# ⚠ CINQ ESPÈCES SONT ICI POUR ÊTRE DOCUMENTÉES, PAS COMBLÉES : AJONC, GENÊT, RONCE, GOJI
+# et GROSEILLIER. Le lot 11 avait déjà trouvé zéro écorce pour toutes les cinq. Ce sont
+# des CANNES ou des tiges vertes, pas des troncs — la question de leur `type` dans l'atlas
+# est ouverte depuis. Si cette récolte confirme le zéro avec le drapeau, on aura deux
+# passes indépendantes et de quoi proposer la même règle que pour les persistants, qui
+# ferait tomber le manque d'écorce de 15 à 10 sans récolter une image.
+#
+# ⚠ LA FEUILLE — ce qu'il faut voir :
+#   - AMANDIER : feuille ÉTROITE et lancéolée, finement dentée. C'est le critère contre le
+#     pêcher, dont la feuille est plus large. ⚠ DEUX ERREURS DÉJÀ COMMISES SUR CET ARBRE :
+#     sa catégorie est « Prunus amygdalus » et non « dulcis » (lot 14), et le lot 17 a
+#     trouvé un NOYER — feuilles larges, cuivrées, à chatons — vendu comme feuille
+#     d'amandier. Regarder cette espèce deux fois plutôt qu'une ;
+#   - PLANTAIN : rosette à CINQ nervures parallèles saillantes — le caractère du genre ;
+#   - FEIJOA : feuilles opposées, coriaces, BLANC-argenté dessous ;
+#   - GRENADIER : feuilles opposées, luisantes, oblongues, rougeâtres au débourrement ;
+#   - PHACÉLIE : feuilles pennatiséquées, découpées comme celles de la tanaisie — c'est
+#     ce que dit son nom d'espèce, tanacetifolia ;
+#   - MÉLILOT : trifoliolées, folioles dentées, stipules soudées ;
+#   - AIL et POIREAU PERPÉTUEL : feuilles planes et engainantes, pliées en gouttière ;
+#   - SEIGLE : feuille de graminée — viser la LIGULE et les auricules, pas le champ ;
+#   - HYSOPE : linéaires, opposées, presque des aiguilles ;
+#   - POIRE DE TERRE : grandes feuilles opposées, triangulaires, veloutées.
+#
+# ⚠ LES PIÈGES, différents pour chaque aspect :
+#   - ÉCORCE : le tronc couvert de LIERRE ou de MOUSSE, qui ne montre plus rien ; le gros
+#     plan sans contexte où l'on ne sait plus quelle est l'échelle ; le tronc d'une autre
+#     espèce rangé par erreur — c'est ainsi qu'un « Medlar trunk » s'est révélé être un
+#     néflier du Japon au lot 9 ;
+#   - FEUILLE : les CULTIVARS panachés ou pourpres, dont les catégories de jardin sont
+#     pleines — le lot 17 a déjà écarté un châtaignier « Aureomarginata » ; les feuilles
+#     MALADES photographiées pour la phytopathologie (la livèche du lot 20 avait sa
+#     tache d'Ascochyta) ; et les planches d'herbier.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# ÉCORCE — les dix qui peuvent réellement en avoir une
+figuier                # LISSE, gris clair presque blanche
+genevrier              # lanières fibreuses
+poirier                # petites plaques carrées ; à opposer au pommier
+plaqueminier           # plaques rectangulaires régulières
+chene_pedoncule        # réseau régulier ; complète le groupe pédonculé / sessile
+prunellier             # noirâtre, rameaux épineux
+amelanchier            # lisse, grise
+laurier_sauce          # lisse, vert-noirâtre
+troene                 # grise à lenticelles
+jujubier               # crevassée en long
+
+# ÉCORCE — les cinq à documenter, pas à combler (cannes et tiges vertes)
+ajonc                  # ⚠ lot 11 : zéro écorce
+genet                  # ⚠ idem
+ronce                  # ⚠ idem
+goji                   # ⚠ idem
+groseillier            # ⚠ idem
+
+# FEUILLE
+amandier               # ⚠ étroite et lancéolée ; DEUX erreurs déjà commises ici
+plantain               # cinq nervures parallèles saillantes
+feijoa                 # blanc-argenté dessous
+grenadier              # opposées, luisantes
+phacelie               # pennatiséquées, d'où tanacetifolia
+melilot                # trifoliolées à stipules soudées
+ail                    # planes et engainantes
+poireau_perpetuel      # idem
+seigle                 # viser la ligule, pas le champ
+hysope                 # linéaires, opposées
+poire_de_terre         # grandes, opposées, veloutées

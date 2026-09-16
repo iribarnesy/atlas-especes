@@ -1,0 +1,65 @@
+# Lot 15 — LE FRUIT, devenu le plus gros manque (76). Vingt espèces.
+#
+#   python3 scripts/candidats.py --lot lots/lot-15-fruit.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ONZE DE CES ESPÈCES SONT DANS UN GROUPE DE CONFUSION, et pour plusieurs le FRUIT EST
+# LE CRITÈRE — pas un complément, le critère lui-même :
+#   - SUREAU, dans « Baies noires de haie : sureau / troène ». Le groupe est défini par
+#     le fruit. Ses baies sont noires, en ombelles RETOMBANTES à maturité — celles du
+#     troène sont en grappes DRESSÉES. Et l'yèble (Sambucus ebulus, toxique) les porte
+#     dressées aussi : c'est exactement ce qu'il faut pouvoir comparer ;
+#   - CAMOMILLE, dans « Astéracées à fleurs blanches ». Le caractère qui la sépare de
+#     l'achillée est son réceptacle CREUX et conique, qu'on ne voit qu'en coupe ou à la
+#     fructification ;
+#   - GUIMAUVE, dans « Malvacées : mauve / guimauve ». Les « fromageons » en rosette ;
+#   - CHÉNOPODE et AMARANTE, dans « Épinards sauvages » ;
+#   - DIGITALE (MORTELLE) et CONSOUDE, dans « Rosettes velues » ;
+#   - ARMOISE et ESTRAGON, dans « Astéracées amères » ;
+#   - CÉLERI, dans « Apiacées aromatiques du potager » ;
+#   - CHÊNE PUBESCENT, dans « Chêne pubescent / vert » — le gland et sa cupule.
+#
+# ⚠ CE QU'IL FAUT VISER AILLEURS :
+#   - BOULEAU : chatons fructifères pendants qui se désarticulent en samares ailées ;
+#   - ASPERGE : baies ROUGES, toxiques, sur le plumet d'été ;
+#   - ASPÉRULE : fruits couverts de CROCHETS — le caractère du genre Galium ;
+#   - ARTICHAUT : capitule sec ouvert, aigrettes soyeuses ;
+#   - LIVÈCHE : méricarpes ailés, très gros pour une apiacée.
+#
+# ⚠ LES PIÈGES, ceux qui reviennent depuis le lot 12 :
+#   - LE FRUIT D'UNE AROMATIQUE (armoise, estragon) est un akène minuscule que personne
+#     ne photographie. Ne pas s'acharner, le dire ;
+#   - LES PHOTOS DE CUISINE : abricots en cageot, artichauts sur un étal, feijoas coupés
+#     en deux. Le fruit doit être SUR LA PLANTE ;
+#   - LES GRAINES EN TAS sur fond neutre ne sont pas un fruit — sauf quand l'organe ne
+#     se photographie pas autrement, et alors on l'assume, comme les akènes de tanaisie
+#     au lot 12.
+#   - RÉFLEXE DU LOT 14 : une espèce qui revient à ZÉRO candidat est presque toujours un
+#     problème de CATÉGORIE, pas une absence de photos. Vérifier le nom avant de conclure.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# le fruit comme critère de confusion
+sureau                 # baies noires en ombelles RETOMBANTES — le critère du groupe
+camomille              # réceptacle CREUX et conique, contre l'achillée
+guimauve               # « fromageons » en rosette
+chenopode              # groupe des épinards sauvages
+amarante               # idem
+digitale               # MORTELLE — capsules ovoïdes en épi
+consoude               # quatre akènes luisants
+armoise                # akène minuscule, ne pas s'acharner
+estragon               # idem
+celeri                 # schizocarpe des apiacées
+chene_pubescent        # gland court à cupule pubescente
+
+# fruits remarquables
+bouleau                # chatons pendants se désarticulant en samares
+asperge                # baies ROUGES toxiques sur le plumet
+asperule               # fruits à CROCHETS, caractère du genre Galium
+artichaut              # capitule sec, aigrettes soyeuses
+liveche                # méricarpes ailés
+abricotier             # ⚠ sur l'arbre, pas en cageot
+feijoa                 # ⚠ sur l'arbuste, pas coupé en deux
+laurier_sauce          # baies noires luisantes
+chicoree               # akènes

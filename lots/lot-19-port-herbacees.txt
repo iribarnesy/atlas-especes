@@ -1,0 +1,93 @@
+# Lot 19 — LE PORT DES HERBACÉES, en entier : les trente-huit qui manquent.
+#
+#   python3 scripts/candidats.py --lot lots/lot-19-port-herbacees.txt --aspect port --par-espece 5 --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# ⚠ ON REPART DU MÊME CONSTAT QUE LE LOT 18, et il vaut d'autant plus ici : quatorze de
+# ces trente-huit espèces ont DÉJÀ été visées pour leur port, par les lots 12 et 13, avant
+# que --aspect existe. Le port étant le dernier de ORDRE, il n'obtenait alors qu'un
+# créneau sur sept — voire aucun. Le lot 18 a fait passer dix-neuf ligneux sur vingt de
+# « aucun candidat de port » à « un candidat à regarder » rien qu'en le remettant en tête.
+#
+# ⚠ CE QU'EST LE PORT D'UNE HERBACÉE, et ce n'est pas la même exigence qu'un arbre : le
+# PIED ENTIER, de la base au sommet, assez isolé pour qu'on voie sa structure — rosette
+# plaquée ou dressée, tige simple ou ramifiée, port étalé, grimpant ou en touffe. Ni un
+# gros plan de fleur, ni un rang de potager, ni un champ.
+#
+# ⚠ CELLES OÙ LE PORT EST LE CRITÈRE, pas un complément :
+#   - PISSENLIT : rosette PLAQUÉE au sol + hampes CREUSES et nues. C'est ce qui le sépare
+#     de la porcelle et du laiteron, tous confondus de loin ;
+#   - MUGUET, dans « Muguet / ail des ours / colchique » : deux feuilles engainantes et
+#     une hampe arquée d'un seul côté. ⚠ BAIES MORTELLES ;
+#   - COLCHIQUE : ⚠ MORTEL, et son port est double — fleurs NUES en automne, sans une
+#     feuille, puis feuilles seules au printemps. Les deux états valent d'être montrés ;
+#   - LAMIER BLANC, dans « Ortie / lamier » : tige CARRÉE, feuilles opposées décussées,
+#     colonie dressée. De loin c'est une ortie ; de près il ne pique pas ;
+#   - FRAISIER DES BOIS : les STOLONS. C'est le caractère contre le faux-fraisier ;
+#   - CERFEUIL et ÉGOPODE, apiacées : tout ce qui range une apiacée à côté de la ciguë
+#     mérite une silhouette. L'égopode fait des colonies denses à tige creuse ;
+#   - ONAGRE : bisannuelle, donc ROSETTE la première année et hampe de 1,5 m la seconde ;
+#   - VALÉRIANE : haute, jusqu'à 1,5 m, à corymbe terminal ;
+#   - LOTIER, LUZERNE, VESCE : légumineuses prostrées ou grimpantes — le port dit lequel.
+#
+# ⚠ LES PIÈGES, dont trois propres aux herbacées :
+#   - LE RANG DE POTAGER. Tomates, haricots, laitues, mâche, blette : Commons les montre
+#     en planches entières, en serre ou en cageot. On veut UN PIED ;
+#   - LE PORT D'UNE ANNUELLE DE POTAGER DÉPEND DE SA CONDUITE : une tomate tuteurée et
+#     une tomate en buisson n'ont pas la même silhouette. Prendre la forme la plus
+#     courante et le dire, plutôt que de faire passer une conduite pour l'espèce ;
+#   - LA PLANTE EN POT sur un rebord de fenêtre : c'est un port, mais contraint ;
+#   - RÉFLEXE DES LOTS 14/16 : zéro candidat = presque toujours un problème de NOM DE
+#     CATÉGORIE. Trois sont connus d'avance : la ROQUETTE est sous « Eruca vesicaria »
+#     et non « Eruca sativa », la MENTHE et le LUPIN sont des entrées de GENRE dans
+#     l'atlas (« Mentha sp. », « Lupinus sp. ») et ramèneront tout le genre.
+#   - ⚠ LA MENTHE reste bloquée tant que la question « quelle menthe représente
+#     Mentha sp. ? » n'est pas tranchée. On récolte, on regarde, mais on ne verse pas
+#     une menthe au hasard sous une entrée de genre.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# celles où le port est le critère
+pissenlit              # rosette plaquée + hampes creuses
+muguet                 # ⚠ MORTEL — deux feuilles engainantes, hampe arquée
+colchique              # ⚠ MORTEL — fleurs nues en automne, feuilles au printemps
+lamier                 # tige carrée, colonie dressée ; groupe « Ortie / lamier »
+fraisier_des_bois      # les STOLONS, contre le faux-fraisier
+cerfeuil               # apiacée grêle
+egopode                # apiacée en colonies denses
+onagre                 # bisannuelle : rosette puis hampe
+valeriane              # haute, corymbe terminal
+lotier                 # légumineuse prostrée
+luzerne                # dressée
+vesce                  # grimpante à vrilles
+
+# les aromatiques et les fleurs
+lavande                # touffe ligneuse à la base
+origan                 # touffe dressée
+marjolaine             # plus grêle que l'origan
+melisse                # touffe
+menthe                 # ⚠ entrée de GENRE, question non tranchée
+bourrache              # velue, port étalé
+alliaire               # dressée, odeur d'ail au froissement
+capucine               # rampante ou grimpante
+souci                  # touffe ramifiée
+phacelie               # engrais vert, souvent en masse — viser un pied
+paquerette             # rosette minuscule
+persil                 # touffe dense
+
+# le potager — ⚠ un pied, pas un rang
+tomate                 # conduite tuteurée ou buisson : le dire
+aubergine              # buisson
+pomme_de_terre         # touffe
+haricot                # nain ou à rames : deux ports distincts
+pois                   # grimpant à vrilles
+courge                 # ⚠ entrée de GENRE ; coureuse au sol
+laitue                 # rosette
+mache                  # rosette minuscule
+roquette               # ⚠ catégorie « Eruca vesicaria »
+claytone               # feuilles perfoliées, port en touffe
+blette                 # grosses côtes dressées
+scorsonere             # longues feuilles dressées
+poire_de_terre         # 2 m, très grande
+lupin                  # ⚠ entrée de GENRE ; hampe dressée

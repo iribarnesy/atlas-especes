@@ -55,6 +55,7 @@
 | ![[figuier.jpg\|200]] | Figuier | Ficus carica | arbre/arbuste | Moracées | non | AM | ☀ | pion | figues | chaleur ; drageonne ; sec | pourtour méditerranéen ; cultivé en climat doux | [🔍](https://www.google.com/search?tbm=isch&q=Ficus+carica) |
 | ![[framboisier.jpg\|200]]       | Framboisier                | Rubus idaeus           | arbuste         | Rosacées        | non       | AM        | ◐    | pion  | framboises               | drageonne                                       | Europe et Asie tempérée ; montagnes | [🔍](https://www.google.com/search?tbm=isch&q=Rubus+idaeus)           |
 | ![[frene.jpg\|200]]             | Frêne commun               | Fraxinus excelsior     | arbre           | Oléacées        | non       | AM        | ◐    | int   | non                      | menacé (chalarose)                              | Europe ; très commun | [🔍](https://www.google.com/search?tbm=isch&q=Fraxinus+excelsior)     |
+| ![[fusain.jpg\|200]] | Fusain d'Europe | Euonymus europaeus | arbuste | Célastracées | non | AM | ◐☾ | int | fruits TOXIQUES | capsules roses à 4 lobes, arilles orange ; hôte d'hiver du puceron noir ; bois → fusains à dessin | Europe ; haies et lisières, surtout sur sol calcaire | [🔍](https://www.google.com/search?tbm=isch&q=Euonymus+europaeus) |
 | ![[genet.jpg\|200]]             | Genêt à balais             | Cytisus scoparius      | arbuste         | Fabacées        | Rhizobium | AM        | ☀    | pion  | non (toxique)            | landes acides, améliore le sol                  | Europe de l'Ouest, sols acides | [🔍](https://www.google.com/search?tbm=isch&q=Cytisus+scoparius)      |
 | ![[genevrier.jpg\|200]]         | Genévrier commun           | Juniperus communis     | arbuste         | Cupressacées    | non       | AM        | ☀    | pion  | baies (aromate)          | pelouses sèches (acide ou calcaire)             | hémisphère nord tempéré ; très large | [🔍](https://www.google.com/search?tbm=isch&q=Juniperus+communis)     |
 | ![[goji.jpg\|200]] | Goji (lyciet) | Lycium barbarum | arbuste | Solanacées | non | AM | ☀ | pion | baies | rustique ; drageonne ; sol pauvre OK | origine Chine ; cultivé | [🔍](https://www.google.com/search?tbm=isch&q=Lycium+barbarum) |
@@ -90,6 +91,7 @@
 | ![[sureau.jpg\|200]] | Sureau noir | Sambucus nigra | arbuste | Adoxacées | non | AM | ☀◐ | pion | fleurs, baies (cuites) | nitrophile, pousse vite ; baies crues toxiques | Europe, Afrique du Nord, Asie occidentale ; très commun | [🔍](https://www.google.com/search?tbm=isch&q=Sambucus+nigra) |
 | ![[tilleul.jpg\|200]]           | Tilleul à petites feuilles | Tilia cordata          | arbre           | Malvacées       | non       | ECTO      | ◐    | int   | fleurs, feuilles         | tisane                                          | Europe ; commun et planté | [🔍](https://www.google.com/search?tbm=isch&q=Tilia+cordata)          |
 | ![[tremble.jpg\|200]]           | Tremble                    | Populus tremula        | arbre           | Salicacées      | non       | Dual      | ☀    | pion  | non                      | drageonne                                       | Europe, Afrique du Nord, Asie ; très vaste | [🔍](https://www.google.com/search?tbm=isch&q=Populus+tremula)        |
+| ![[troene.jpg\|200]] | Troène commun | Ligustrum vulgare | arbuste | Oléacées | non | AM | ◐☾ | int | baies TOXIQUES | semi-persistant ; calcicole ; très mellifère (juin) ; supporte la taille → haies | Europe et Afrique du Nord ; ourlets et haies, surtout sur calcaire | [🔍](https://www.google.com/search?tbm=isch&q=Ligustrum+vulgare) |
 | ![[vigne.jpg\|200]] | Vigne | Vitis vinifera | liane | Vitacées | non | AM | ☀ | post | raisin | liane ligneuse ; palissage ; sec | origine Caucase/méditerranée ; cultivée en zone tempérée | [🔍](https://www.google.com/search?tbm=isch&q=Vitis+vinifera) |
 
 ## Nuanciers par gradient
@@ -99,27 +101,27 @@
 ### Lumière (héliophile → sciaphile)
 - **Très héliophile** : mélèze, pin sylvestre, pin maritime, bouleau, tremble, saule, peuplier, robinier, genêt, ajonc, argousier, callune, genévrier.
 - **Héliophile** : chêne pédonculé, chêne pubescent, chêne-liège, merisier, noyer, châtaignier, sorbier, cormier, amandier, micocoulier, mûrier, aubépine, prunellier, cognassier, poirier, pommier, prunier.
-- **Demi-ombre** : chêne sessile, érable champêtre, noisetier, tilleul, aulne, frêne, cornouiller, alisier, arbousier, myrtille, framboisier, ronce, chalef, aronia, kiwaï, sureau.
+- **Demi-ombre** : chêne sessile, érable champêtre, noisetier, tilleul, aulne, frêne, cornouiller, alisier, arbousier, myrtille, framboisier, ronce, chalef, aronia, kiwaï, sureau, fusain, troène.
 - **Sciaphile** : charme, hêtre, érable sycomore, cassissier/groseillier.
 - **Très sciaphile** : if, buis, houx.
 
 ### Eau (xérophile → hygrophile)
 - **Xérophile** : chêne pubescent, chêne vert, chêne-liège, pin sylvestre, pin maritime, genêt, ajonc, genévrier, buis, cormier, alisier, arbousier, amandier, micocoulier, callune, argousier.
-- **Mésoxérophile** : chêne sessile, châtaignier, merisier, robinier, tilleul, cornouiller, noyer, sorbier.
-- **Mésophile** : chêne pédonculé, hêtre, charme, érable champêtre, noisetier, myrtille, fruitiers, aronia, kiwaï, sureau.
+- **Mésoxérophile** : chêne sessile, châtaignier, merisier, robinier, tilleul, cornouiller, noyer, sorbier, troène.
+- **Mésophile** : chêne pédonculé, hêtre, charme, érable champêtre, noisetier, myrtille, fruitiers, aronia, kiwaï, sureau, fusain.
 - **Hygrophile** : frêne, érable sycomore, tremble, sorbier des oiseleurs, groseillier.
 - **Très hygrophile** (tolère l'engorgement) : aulne, saule, peuplier.
 
 ### Sol / nutriments (oligotrophe → eutrophe)
 - **Oligotrophe** (tolère le pauvre) : pin sylvestre, pin maritime, bouleau, genêt, ajonc, callune, myrtille, châtaignier, chêne-liège, chêne sessile, sorbier, genévrier, arbousier.
-- **Mésotrophe** : chêne pédonculé, chêne pubescent, charme, tilleul, merisier, cormier, alisier, hêtre, amandier, micocoulier, cornouiller, aubépine, prunellier, fruitiers.
+- **Mésotrophe** : chêne pédonculé, chêne pubescent, charme, tilleul, merisier, cormier, alisier, hêtre, amandier, micocoulier, cornouiller, aubépine, prunellier, fruitiers, fusain, troène.
 - **Eutrophe** (exige le riche) : frêne, érable sycomore, aulne, noyer, saule, peuplier, tremble.
 - *Les légumineuses ligneuses (robinier, genêt, ajonc, caragana…) tolèrent le pauvre puisqu'elles fixent leur azote.*
 
 ### pH du sol (acidiphile → calcicole)
 - **Acidiphile** (fuit le calcaire) : châtaignier, chêne-liège, pin maritime, bouleau, genêt, ajonc, callune, myrtille, arbousier, framboisier.
 - **Plutôt acide à neutre** : chêne sessile, pin sylvestre, sorbier.
-- **Calcicole** (aime le calcaire) : chêne pubescent, chêne vert, buis, cornouiller mâle, alisier, if, amandier, micocoulier, genévrier, cormier.
+- **Calcicole** (aime le calcaire) : chêne pubescent, chêne vert, buis, cornouiller mâle, alisier, if, amandier, micocoulier, genévrier, cormier, troène, fusain *(neutro-calcicole)*.
 - **Indifférent — tolère tout pH** : chêne pédonculé, charme, hêtre, noisetier, tilleul, érable champêtre & sycomore, frêne, merisier, saule, aulne, tremble, peuplier, robinier, ronce, la plupart des fruitiers.
 
 > [!tip] Aide-mémoire acide ⇄ calcaire (par logique d'habitat — pas par liste brute)
@@ -129,7 +131,7 @@
 
 ### Chaleur (froid/montagnard → thermophile)
 - **Montagnard / boréal** (fraîcheur) : épicéa, sapin, mélèze, bouleau pubescent, sorbier des oiseleurs, myrtille.
-- **Mésotherme** (plaine tempérée) : chêne pédonculé/sessile, hêtre, charme, merisier, tilleul, noyer, robinier, érable, noisetier, aulne, saule, fruitiers.
+- **Mésotherme** (plaine tempérée) : chêne pédonculé/sessile, hêtre, charme, merisier, tilleul, noyer, robinier, érable, noisetier, aulne, saule, fruitiers, fusain, troène.
 - **Thermophile** (chaleur, Sud) : chêne pubescent, chêne vert, chêne-liège, arbousier, amandier, micocoulier, cormier, alisier, olivier de Bohême, genévrier.
 - **Large amplitude thermique** : pin sylvestre, bouleau, tremble, genêt.
 
@@ -148,7 +150,7 @@
 
 ### Par mycorhize
 - **ECTO** : chênes (dont liège), hêtre, châtaignier, bouleau, charme, noisetier, tilleul, pins & résineux Pinacées.
-- **AM (endo)** : fruitiers Rosacées, érable, frêne, noyer, cornouiller, mûrier, **if & genévrier** (Taxacées/Cupressacées, ≠ autres conifères).
+- **AM (endo)** : fruitiers Rosacées, érable, frêne, noyer, cornouiller, mûrier, fusain, troène, **if & genévrier** (Taxacées/Cupressacées, ≠ autres conifères).
 - **Dual** : saule, peuplier/tremble, aulne.
 - **Éricoïde** : Éricacées (arbousier, callune, myrtille) — un type à part.
 - **Non mycorhizable** : Brassicacées (choux), Amaranthacées (betterave/épinard), lupin — *détail dans l'atlas herbacées*.
@@ -158,8 +160,8 @@
 *(Périodes indicatives, France ; utile pour nourrir les pollinisateurs toute l'année.)*
 - **Fin d'hiver (fév.–mars)** — les plus précieuses pour les premières abeilles : **noisetier, saule (marsault), aulne, cornouiller mâle**.
 - **Printemps (avril–mai)** : fruitiers (prunier, cerisier, poirier, pommier), **prunellier, aubépine**, merisier, érable, chêne.
-- **Fin de printemps (mai–juin)** : **robinier**, sorbier, argousier, **châtaignier** (juin).
-- **Été (juin–août)** : **tilleul** (top mellifère), ronce, framboisier *(fleurs herbacées mellifères : voir l'atlas herbacées)*.
+- **Fin de printemps (mai–juin)** : **robinier**, sorbier, argousier, fusain, **châtaignier** (juin).
+- **Été (juin–août)** : **tilleul** (top mellifère), **troène** (très parfumé), ronce, framboisier *(fleurs herbacées mellifères : voir l'atlas herbacées)*.
 - **Automne (sept.–oct.)** — dernière ressource avant l'hiver : **lierre**, arbousier.
 
 > [!tip] Les deux **périodes de soudure** à couvrir absolument sont la **fin d'hiver** (noisetier, saule) et l'**automne** (lierre) — c'est là que les pollinisateurs manquent le plus de ressources.

@@ -1,0 +1,79 @@
+# Lot 7 — les 31 dernières espèces à une seule photo. Ce sont toutes des herbacées, pour
+# l'essentiel du potager et de la haie d'aromatiques.
+#
+# CE LOT TERMINE LE PROGRAMME ouvert par #17 : après lui, plus une seule espèce du dépôt
+# n'est réduite à sa vignette, dans aucun atlas.
+#
+#   python3 scripts/candidats.py --lot lots/lot-7-potager.txt --planches
+#   # puis on REGARDE les images, on remplit candidats/choix.tsv, et :
+#   python3 scripts/candidats.py --promouvoir candidats/choix.tsv
+#
+# Les aspects de l'atlas s'appliquent : <stem>-<aspect>-<n>.jpg
+#
+# ⚠ DEUX ESPÈCES D'ABORD, parce qu'elles complètent des groupes de confusion créés au lot 1
+# et restés à moitié illustrés — le critère qui tranche ne se joue donc qu'à moitié :
+#   - PERSIL, dans « Ombellifères : ciguë mortelle » avec cigue, cerfeuil, carotte,
+#     egopode. C'est le groupe le plus dangereux du dépôt. Il faut le persil À PLAT
+#     (Petroselinum crispum var. neapolitanum) autant que frisé : c'est le plat qu'on
+#     confond avec la ciguë, jamais le frisé.
+#   - MÉLISSE, dans « Lamiacées odorantes » avec la menthe. Le critère est l'ODEUR, qu'une
+#     photo ne rend pas — d'où l'importance de montrer la feuille de près, gaufrée et en
+#     cœur, pour ce que l'œil peut faire.
+#
+# ⚠ LE PIÈGE DE CE LOT est nouveau et massif : ce sont des LÉGUMES. Commons en est plein,
+# mais presque toujours en cuisine, sur un étal, en cagette, coupés sur une planche, ou en
+# gros plan de produit sur fond blanc. Ce qu'il faut, c'est la plante SUR PIED au jardin :
+# le port, la feuille, la fleur. Un poivron dans une assiette n'apprend rien.
+#   - Les CULTIVARS sont partout : tomates, poivrons, courges et laitues ont des centaines
+#     de variétés. Rester sur le type quand c'est possible.
+#   - Les CÉRÉALES se déterminent à l'épi : avoine (panicule lâche à épillets pendants),
+#     seigle (épi dense barbu), maïs (panicule mâle au sommet, épis à l'aisselle).
+#   - Le SARRASIN n'est pas une céréale mais une polygonacée : fleurs blanc-rosé en grappes,
+#     akène triangulaire. Rien à voir avec un épi.
+# Puis relancer :
+#   python3 scripts/verifier_atlas.py && python3 scripts/couverture.py
+
+# priorité : partenaires de confusion restés en plan
+persil                 # Petroselinum crispum — groupe de la ciguë. À plat ET frisé.
+melisse                # Melissa officinalis — feuille gaufrée en cœur, odeur citronnée
+
+# alliacées et proches
+ail                    # Allium sativum
+echalote               # Allium cepa Aggregatum
+poireau                # Allium porrum
+asperge                # Asparagus officinalis — turions au printemps, plumet en été
+
+# lamiacées aromatiques de la haie sèche
+thym                   # Thymus vulgaris
+romarin                # Salvia rosmarinus
+sauge                  # Salvia officinalis
+lavande                # Lavandula angustifolia
+hysope                 # Hyssopus officinalis
+sarriette              # Satureja hortensis
+marjolaine             # Origanum majorana
+verveine_citron        # Aloysia citriodora — verbénacée, pas lamiacée
+
+# solanacées
+aubergine              # Solanum melongena
+poivron                # Capsicum annuum
+
+# cucurbitacées
+concombre              # Cucumis sativus
+courgette              # Cucurbita pepo
+
+# céréales et pseudo-céréale : l'épi est le caractère
+avoine                 # Avena sativa — panicule lâche, épillets pendants
+seigle                 # Secale cereale — épi dense et barbu
+mais                   # Zea mays
+sarrasin               # Fagopyrum esculentum — POLYGONACÉE, fleurs en grappes
+
+# racines et feuilles
+navet                  # Brassica rapa
+radis                  # Raphanus sativus
+crosne                 # Stachys affinis — tubercules en chapelet
+patate_douce           # Ipomoea batatas
+blette                 # Beta vulgaris
+epinard                # Spinacia oleracea
+mache                  # Valerianella locusta
+roquette               # Eruca sativa
+moutarde               # Sinapis alba

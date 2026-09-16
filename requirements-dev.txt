@@ -4,6 +4,8 @@ pytest>=8
 
 # Optionnelle, mais utilisée par le build du site pour produire les vignettes légères
 # (scripts/derives.py) : sans elle, le site est construit avec les images d'origine.
+# Les fetchers (scripts/images.py) s'en servent aussi pour réduire ce qu'ils téléchargent ;
+# à défaut ils retombent sur `sips`, qui n'existe que sur macOS.
 Pillow>=10
 
 # Optionnelle elle aussi : relit le fichier .ics du rappel quotidien avec un parseur tiers
