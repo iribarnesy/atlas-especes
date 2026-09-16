@@ -24,7 +24,7 @@ def aspects_du_tableau(species):
     return [(a.id, a.label) for a in atlas_data.ASPECTS if a.cible or a.id in utilises]
 CATLABEL = {"ligneux": "Ligneux", "herbace": "Herbacées", "champignon": "Champignons",
             "faune": "Faune", "divers": "Espèces diverses"}
-PLANT_CATS = ("ligneux", "herbace")  # seules catégories où les aspects ont du sens
+PLANT_CATS = atlas_data.CATS_A_ASPECTS  # source unique : cf. atlas_data
 
 def aspects_present(sp):
     got = set()

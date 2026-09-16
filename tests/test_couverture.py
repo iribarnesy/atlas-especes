@@ -85,3 +85,49 @@ def test_une_herbacee_sans_ecorce_n_est_pas_comptee_comme_incomplete(repo):
     attendus = {a for a in ("feuille", "ecorce", "fruit", "fleur", "port", "rameau")
                 if repo.atlas_data.aspect_applicable(a, "herbace")}
     assert attendus <= present, "une herbacée complète ne doit rien devoir à l'écorce"
+
+
+# ----------------------------------------- le même calcul pour le tableau ET pour la fiche
+
+def test_bilan_separe_les_manques_des_sans_objet(repo):
+    """Source unique du calcul : avant, COUVERTURE.md savait qu'il manquait un port au
+    noyer et la fiche du site l'ignorait — un lecteur ne pouvait donc pas voir où une
+    photo serait utile."""
+    repo.vignette("sauge.jpg")
+    for nom in ("sauge-feuille-1.jpg", "sauge-fleur-1.jpg"):
+        repo.extra_photo(nom)
+    repo.write_atlas("Herbes - référence.md", [[vignette_cell("sauge.jpg"), "Sauge",
+                                                "Salvia officinalis", "vivace", "Lamiacées",
+                                                "oui", ""]])
+    repo.use_atlases("Herbes - référence.md", cat="herbace")
+    sp = repo.parse("Herbes - référence.md", cat="herbace")[0]
+
+    manquants, sans_objet = repo.atlas_data.bilan_aspects(sp)
+
+    assert manquants == ["fruit", "port"]          # dans l'ordre de ASPECTS
+    assert sans_objet == ["ecorce", "rameau"]      # une herbacée n'a ni l'un ni l'autre
+    assert "feuille" not in manquants and "fleur" not in manquants
+
+
+def test_une_photo_divers_ne_comble_aucun_manque(repo):
+    """« divers » n'est pas un aspect : une vue d'ensemble sans aspect annoncé ne doit pas
+    faire disparaître un manque de la fiche."""
+    repo.vignette("sauge.jpg")
+    repo.extra_photo("sauge-1.jpg")
+    repo.write_atlas("Herbes - référence.md", [[vignette_cell("sauge.jpg"), "Sauge",
+                                                "Salvia officinalis", "vivace", "Lamiacées",
+                                                "oui", ""]])
+    repo.use_atlases("Herbes - référence.md", cat="herbace")
+    sp = repo.parse("Herbes - référence.md", cat="herbace")[0]
+
+    manquants, _ = repo.atlas_data.bilan_aspects(sp)
+
+    assert manquants == ["feuille", "fruit", "fleur", "port"]
+
+
+def test_un_champignon_ne_se_voit_reprocher_aucun_manque(atlas_data):
+    """Les aspects ne décrivent que des plantes. Reprocher une feuille à un cèpe afficherait
+    sur sa fiche un manque que personne ne pourra jamais combler."""
+    for cat in ("champignon", "faune", "divers"):
+        sp = {"stem": "x", "cat": cat, "fields": {}, "paths": []}
+        assert atlas_data.bilan_aspects(sp) == ([], [])

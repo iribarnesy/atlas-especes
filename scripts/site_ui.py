@@ -846,6 +846,10 @@ class App{
         go:()=>this.setState({fimg:i})})),
       fFields:this.fieldRows(fiche,false),
       fHasTips:!!(fiche&&fiche.conf&&fiche.conf.length),fTips:fiche&&fiche.conf?fiche.conf.map(g=>({txt:this.clean(g.tip)})):[],
+      fHasGaps:!!(fiche&&fiche.gaps&&fiche.gaps.length),
+      fGaps:fiche&&fiche.gaps?fiche.gaps.map(a=>this.label(this.ASP,a)).join(' · '):'',
+      fGapsN:fiche&&fiche.gaps?String(fiche.gaps.length):'0',
+      fNo:fiche&&fiche.no&&fiche.no.length?fiche.no.map(a=>this.label(this.ASP,a).toLowerCase()).join(', '):'',
       fPrev:this.moveFiche(-1),fNext:this.moveFiche(1),
       catChips:catList.map(c=>({label:c[1],on:cfg.cat===c[0]?'1':'0',go:this.setCfg('cat',c[0])})),
       criteria:this.CRIT.map(c=>({q:c.q,n:all.filter(s=>this.inCat(s,cfg.cat)&&c.has(s)).length,go:this.startCrit(c)})).filter(x=>x.n>=4),
@@ -944,6 +948,8 @@ JS += r"""
       +credit(V.fCredit,V.fCreditUrl)+'</div>'
       +'<div><div style="font:700 10px/1 var(--font-condensed);letter-spacing:.14em;text-transform:uppercase;color:var(--color-brand-red)">'+e(V.fCat)+'</div><div style="margin-top:10px;font:700 28px/1.12 var(--font-brand);letter-spacing:-.015em">'+e(V.fName)+'</div><div style="font:italic 400 15px/1.35 var(--font-body);color:var(--fg-3)">'+e(V.fLatin)+'</div>'
       +'<div style="margin-top:20px">'+this.fieldsHtml(V.fFields,'38%')+'</div>'
+      +(V.fHasGaps?'<div style="margin-top:18px;padding:14px;border-radius:8px;border:1px dashed var(--color-warning);background:var(--color-warning-soft)"><div style="font:700 9px/1 var(--font-condensed);letter-spacing:.14em;text-transform:uppercase;color:var(--color-warning)">Photo manquante</div><div style="margin-top:8px;font:600 13px/1.45 var(--font-body);color:var(--fg-1)">'+e(V.fGaps)+'</div><div style="margin-top:6px;font:400 12px/1.45 var(--font-body);color:var(--fg-3)">Aucune photo de cette espèce ne montre '+(V.fGapsN==='1'?'cet aspect':'ces aspects')+'. Voir CONTRIBUTING.md pour en proposer une.</div></div>':'')
+      +(V.fNo?'<div style="margin-top:10px;font:400 12px/1.45 var(--font-body);color:var(--fg-3)">Sans objet pour cette espèce : '+e(V.fNo)+'.</div>':'')
       +(V.fHasTips?'<div style="margin-top:18px;padding:14px;border-radius:8px;background:var(--color-warning-soft)"><div style="font:700 9px/1 var(--font-condensed);letter-spacing:.14em;text-transform:uppercase;color:var(--color-warning)">Confusions fréquentes</div>'+V.fTips.map(t=>'<div style="margin-top:9px;font:400 13px/1.45 var(--font-body)">'+e(t.txt)+'</div>').join('')+'</div>':'')
       +'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px"><button class="ib" data-h="'+h(V.fPrev)+'">Précédente</button><button class="ib" data-h="'+h(V.fNext)+'">Suivante</button><button class="ib" data-h="'+h(V.copierLien)+'">Copier le lien</button></div>'
       +(V.routeMsg?'<div role="status" style="margin-top:10px;padding:10px 12px;border-radius:8px;font:600 12px/1.45 var(--font-body);background:var(--color-success-soft);color:var(--color-success);overflow-wrap:anywhere">'+e(V.routeMsg)+'</div>':'')
