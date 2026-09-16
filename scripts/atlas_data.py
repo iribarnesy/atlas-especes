@@ -37,10 +37,11 @@ ASPECTS = [
     Aspect("fleur", "Fleur", ("fleurs",), "🌸", True, "flower"),
     Aspect("port", "Port", ("silhouette",), "🌲", True, "habit"),
     # Rameau d'hiver / bourgeons : c'est ainsi qu'on identifie un ligneux hors saison, donc
-    # un aspect de plein droit — mais aucune photo ne l'utilise encore, et une colonne vide
-    # pour 187 plantes noierait les vrais manques. COUVERTURE.md l'ajoutera d'elle-même dès
-    # la première photo (cf. scripts/couverture.py).
-    Aspect("rameau", "Rameau", ("rameaux", "bourgeon", "hiver"), "❄️", False, "twig"),
+    # un aspect de plein droit. Il est resté hors objectif tant qu'aucune photo ne
+    # l'utilisait — le lot 8 a versé les premières, et COUVERTURE.md le compte depuis.
+    # Le drapeau suit : sans lui, la fiche du site annoncerait des manques différents de
+    # ceux du tableau, pour la seule raison qu'un commentaire n'avait pas été relu.
+    Aspect("rameau", "Rameau", ("rameaux", "bourgeon", "hiver"), "❄️", True, "twig"),
 ]
 DIVERS = "divers"        # photo sans aspect annoncé
 DIVERS_LABEL = "Divers"
@@ -65,6 +66,12 @@ PLANCHE_LABEL = "Planche"
 # ont pas. Les vrais chiffres sont 76 et 35, tous des ligneux. Un aspect absent de ce
 # dictionnaire s'applique partout.
 ASPECT_CATS = {"ecorce": ("ligneux",), "rameau": ("ligneux",)}
+
+# Les aspects ne décrivent que des PLANTES. Un champignon, un animal ou un lichen n'a ni
+# feuille ni fruit au sens de l'atlas, et leur reprocher un manque n'aurait aucun sens.
+# La règle vivait dans couverture.py ; elle remonte ici pour que le tableau et la fiche du
+# site la partagent au lieu de la réinventer.
+CATS_A_ASPECTS = ("ligneux", "herbace")
 
 
 # Même raisonnement un cran plus fin, à l'intérieur des ligneux : un SOUS-ARBRISSEAU
@@ -112,6 +119,40 @@ def aspect_applicable(aspect, cat, type_="", stem=""):
     if aspect in ASPECTS_SANS_OBJET_SI_PERSISTANT and stem in PERSISTANTS:
         return False
     return True
+
+
+def aspects_presents(sp):
+    """Aspects effectivement documentés par les photos de l'espèce.
+
+    « divers » n'en est pas un : une photo sans aspect annoncé ne comble aucun manque.
+    """
+    got = set()
+    for p in sp.get("paths") or ():
+        got |= set(aspect_of(p, sp["stem"]))
+    got.discard(DIVERS)
+    return got
+
+
+def bilan_aspects(sp):
+    """(manquants, sans_objet) pour cette espèce, dans l'ordre de ASPECTS.
+
+    Source unique du même calcul pour COUVERTURE.md et pour la fiche du site : avant, le
+    tableau savait qu'il manquait un port au noyer et le site l'ignorait, si bien qu'un
+    lecteur ne pouvait pas voir où contribuer. Les deux dérivent maintenant d'ici.
+    """
+    cat, type_ = sp["cat"], (sp.get("fields") or {}).get("type", "")
+    if cat not in CATS_A_ASPECTS:
+        return [], []
+    got = aspects_presents(sp)
+    manquants, sans_objet = [], []
+    for a in ASPECTS:
+        if not a.cible:
+            continue
+        if not aspect_applicable(a.id, cat, type_, sp["stem"]):
+            sans_objet.append(a.id)
+        elif a.id not in got:
+            manquants.append(a.id)
+    return manquants, sans_objet
 
 
 ASPECT_KW = {kw: a.id for a in ASPECTS for kw in (a.id,) + a.synonymes}
