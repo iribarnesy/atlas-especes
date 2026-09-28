@@ -6,9 +6,9 @@
 > voir [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## En bref
-- Plantes (ligneux + herbacées) : **191**
+- Plantes (ligneux + herbacées) : **194**
 - …dont **75** avec les 6 aspects, **0** sans aucun aspect taggé.
-- Manques par aspect : Feuille 7 · Écorce 14 · Fruit 59 · Fleur 10 · Port 32 · Rameau 28
+- Manques par aspect : Feuille 8 · Écorce 14 · Fruit 62 · Fleur 11 · Port 33 · Rameau 28
 
 ## Ligneux (77)
 
@@ -92,7 +92,7 @@
 | Érable champêtre | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 | Érable sycomore | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — (complet) |
 
-## Herbacées (114)
+## Herbacées (117)
 
 | Espèce | 📷 | Feuille | Écorce | Fruit | Fleur | Port | Rameau | À compléter |
 |---|--:|:-:|:-:|:-:|:-:|:-:|:-:|---|
@@ -113,7 +113,7 @@
 | Bardane | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Basilic | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Berce commune | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
-| Betterave / Épinard | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Betterave | 1 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Blette (poirée) | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Bourrache | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Camomille (matricaire) | 6 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
@@ -202,14 +202,17 @@
 | Tomate | 3 | ✓ | · | ✓ | ✓ | ✗ | · | Port |
 | Topinambour | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Trèfle blanc | 5 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Trèfle incarnat | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Trèfle violet | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Valériane officinale | 5 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
 | Verveine citronnelle | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Vesce commune | 4 | ✓ | · | ✓ | ✓ | ✓ | · | — (complet) |
+| Vesce velue | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Violette odorante | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Échalote | 3 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
 | Égopode (herbe aux goutteux) | 3 | ✓ | · | ✗ | ✓ | ✗ | · | Fruit, Port |
 | Épinard | 4 | ✓ | · | ✗ | ✓ | ✓ | · | Fruit |
+| Œillet d'Inde | 2 | ✗ | · | ✗ | ✗ | ✓ | · | Feuille, Fruit, Fleur |
 
 ## Champignons (24)
 
